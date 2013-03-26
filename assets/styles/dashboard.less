@@ -1,0 +1,23 @@
+.graph{
+  height: 20px;
+  .bar{
+    height: 100%;
+    float: left;
+  }
+  &.graph-days-on{
+    margin: -7px;
+    .day{
+      float: left;
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      margin-top: 0px;
+      &.day-on{
+        background-color: @colorPrimary;
+      }
+      &.day-off{
+        background-color: @colorSecondary;
+      }
+    }
+  }
+}

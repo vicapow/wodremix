@@ -1,0 +1,72 @@
+include ../layout
+include ../includes/nav
+block blody
+    script(type="text/javascript")
+      if( typeof __pages !=='undefined' && __pages.dashboard) __pages.dashboard();
+  block nav
+  .container.page-container
+    .row-fluid
+      p.pull-right Tuesday 3 . 19 . 2013
+      .clear
+      h2 Stats 
+      h4  last 7 days
+      br
+      p.pull-right current streak 
+        span.badge.badge-info 3 days 
+      p.pull-right calories 
+        span.badge.badge-info 3000 
+      p.pull-right distance 
+        span.badge.badge-info 3 miles 
+      p.pull-right weight 
+        span.badge.badge-info  300 lbs
+      div(style="clear:both")
+      p.pull-left aerobic vs anaerobic
+      div(style="clear:both")
+      .graph.aerobic-vs-anaerobic
+      br
+      p.pull-left days on vs off
+      div(style="clear:both")
+      .graph.on-vs-off
+      br
+      p.pull-left days on
+      .graph.graph-days-on
+      br
+      h3 Recent PRs 
+      table.table.table-bordered.table-striped
+        tbody
+          tr
+            td
+              | Deadlift 
+              span.pull-right.badge.badge-info 405 lbs
+              | 
+              span.pull-right.badge.badge-info 1 RM
+          tr
+            td
+              | Back squat 
+              span.pull-right.badge.badge-info 350 lbs
+              | 
+              span.pull-right.badge.badge-info 2 RM
+      .pull-right 
+        a.btn.btn-primary
+          i.icon-plus
+        a.btn.btn-primary all
+      .clear
+      h3 Box Records
+      table.table.table-bordered.table-striped
+        tbody
+          tr
+            td
+              | Front squat
+              span.pull-right.badge.badge-info 350 lbs
+              | 
+              span.pull-right.badge.badge-info 1 RM
+          tr
+            td
+              | Shoulder to Overhead 
+              span.pull-right.badge.badge-info 155 lbs
+              | 
+              span.pull-right.badge.badge-info 1 RM
+      a.pull-right.btn.btn-primary all
+      br
+      br
+      br

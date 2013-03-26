@@ -1,0 +1,57 @@
+include ../layout
+block body
+  script(type="text/javascript")
+    if( typeof __pages !=='undefined' && __pages.box) __pages.box();
+  include ../includes/nav
+  block nav
+  .container.page-container
+    p.pull-right Tuesday 3 . 19 . 2013
+    h2 Grassroots Crossfit
+    .clear
+    a.btn.btn-primary.pull-right(href="/box/records") All Records
+    .clear
+    .row
+      .span4
+        h3.pull-left Recent PRs
+        table.table.table-bordered.table-striped
+          tbody
+            tr
+              td
+                a(href='/main/dashboard') Alice
+                |  Deadlift 
+                span.pull-right.badge.badge-info 405 lbs
+                span.pull-right.badge.badge-info 1 RM
+            tr
+              td
+                a(href='/main/dashboard') Bob
+                |  Back squat 
+                span.pull-right.badge.badge-info 350 lbs
+                span.pull-right.badge.badge-info 2 RM
+        a.pull-right.btn.btn-primary more
+      .span4
+        h3.pull-left Recent Broken Records
+        table.table.table-bordered.table-striped
+          tbody
+            tr
+              td
+                a(href='/main/dashboard') Catherine
+                |  Front squat
+                span.pull-right.badge.badge-info 405 lbs
+                span.pull-right.badge.badge-info 1 RM
+        a.pull-right.btn.btn-primary(href="/box/records") more
+      .span4
+        h3.pull-left Recent WODs
+        table.table.table-bordered.table-striped
+          tbody
+            tr
+              td
+                a(href='/main/wod') Clean + 3 front squat
+              td
+                span.pull-right 3.20.2013
+            tr
+              td
+                a(href='/main/wod') High hang squat cleans and push-ups
+              td
+                span.pull-right 3.19.2013
+        a.pull-right.btn.btn-primary more
+    br

@@ -1,0 +1,100 @@
+include ../layout
+include ../includes/nav
+block blody
+  script(type="text/javascript")
+    if( typeof __pages !=='undefined' && __pages.wodResults) __pages.wodResults();
+  block nav
+  .container.page-container
+    .row-fluid
+      p.pull-right Tuesday 3 . 19 . 2013
+      .clear
+      h2 WOD
+      p
+        span.badge.badge-info 2 rounds
+        |  for time of:
+      table.table.table-bordered.table-striped
+        tbody
+          tr
+            td
+              span.badge.badge-info 20
+              |  Double Unders
+          tr
+            td
+              span.badge.badge-info 20
+              span.pull-right.badge.badge-info 53 lbs
+              |  Kettlebell Goblet Squats 
+          tr
+            td
+              span.badge.badge-info 30 
+              |  Double Unders
+          tr
+            td
+              span.badge.badge-info 30
+              span.pull-right.badge.badge-info 53 lbs
+              |  Kettlebell Sumo Deadlift High Pulls 
+          tr
+            td
+              span.badge.badge-info 40
+              |  Double Unders
+          tr
+            td
+          
+              span.badge.badge-info 40
+              span.pull-right.badge.badge-info 53 lbs
+              |  Single Arm Kettlebell Swings
+      h3 Submit Your Time
+      .row-fluid
+        .span12
+          br
+          .form-horizontal
+            .control-group.pull-left
+              .control-label(for="minutes") minutes
+              .controls
+                input.input-mini(name="minutes",type="number",min="0",max="99")
+            .control-group.pull-right
+              .control-label(for="seconds") seconds
+              .controls
+                input.input-mini(name="seconds", type="number",min="0",max="60")
+
+          input.btn.btn-primary.btn-block(type="submit") submit
+          a.btn.btn-block(href="/main/dashboard") cancel
+        .clear
+        br
+      h3 Results
+      .graph.graph-results
+      table.table.table-bordered.table-striped
+        tbody
+          tr
+            td
+              a(href='#') Alice
+              |  @10:25
+              span.pull-right.badge.badge-info
+                | RX
+          tr
+            td
+              a(href='#') Catherine
+              |  @9:25
+              span.pull-right.badge.badge-info
+          tr
+            td
+              a(href='#') Bob
+              |  @13:25
+              span.pull-right.badge.badge-info
+                | RX
+          tr
+            td
+              a(href='#') Alice
+              |  @10:25
+              span.pull-right.badge.badge-info
+                | RX
+          tr
+            td
+              a(href='#') Catherine
+              |  @9:25
+              span.pull-right.badge.badge-info
+          tr
+            td
+              a(href='#') Bob
+              |  @13:25
+              span.pull-right.badge.badge-info
+                | RX

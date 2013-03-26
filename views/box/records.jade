@@ -1,0 +1,71 @@
+mixin record(type)
+  h4 !{type}
+  table.table.table-bordered.table-striped.table-condensed
+    tbody
+      tr
+        td #1. 
+          a(href='/main/dashboard') Alice
+          span.pull-right.badge.badge-info 405 lbs
+      tr
+        td #2. 
+          a(href='/main/dashboard') Bob
+          span.pull-right.badge.badge-info 350 lbs
+      tr
+        td #2. 
+          a(href='/main/dashboard') Catherine
+          span.pull-right.badge.badge-info 350 lbs
+      tr
+        td #4. 
+          a(href='/main/dashboard') Dan
+          span.pull-right.badge.badge-info 320 lbs
+      tr
+        td #5. 
+          a(href='/main/dashboard') Eric
+          span.pull-right.badge.badge-info 310 lbs
+
+script(type="text/javascript")
+  if( typeof __pages !=='undefined' && __pages.box) __pages.box();
+include ../includes/nav
+block nav
+.container.page-container
+  p.pull-right Tuesday 3 . 19 . 2013
+  h2 Box Records 
+  h4 Grassroots Crossfit
+  .row-fluid
+    .span4
+      mixin record("Back Squat")
+    .span4
+      mixin record("Bench Press")
+    .span4
+      mixin record("Clean & Jerk")
+  .row-fluid
+    .span4
+      mixin record("Deadlift")
+    .span4
+      mixin record("Dumbbell Snatch")
+    .span4
+      mixin record("Front Squat")
+  .row-fluid
+    .span4
+      mixin record("Hang Power Clean")
+    .span4
+      mixin record("Power Clean")
+    .span4
+      mixin record("Power Snatch")
+  .row-fluid
+    .span4
+      mixin record("Push Jerk")
+    .span4
+      mixin record("Push Press")
+    .span4
+      mixin record("Shoulder to Overhead")
+  .row-fluid
+    .span4
+      mixin record("Snatch")
+    .span4
+      mixin record("Squat Clean")
+    .span4
+      mixin record("Sumo Deadlift")
+  //a.pull-right.btn.btn-primary more
+  .clear
+  br

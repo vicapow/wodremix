@@ -1,0 +1,40 @@
+@import "../flatstrap/assets/less/bootstrap.less";
+@import "../flatstrap/assets/less/responsive.less";
+@import "dashboard.less";
+
+@colorPrimary: #006dcc;
+@colorSecondary: #ccc;
+@infoText: @colorPrimary;
+@navbarInverseBackground: #004685;
+@navbarInverseBackgroundHighlight: @colorPrimary;
+@navbarInverseBorder: none;
+
+h1, h2, h3, h4, h5, h6{
+  font-weight: 300;
+}
+
+.page-container{
+  padding: 60px 0 80px;
+}
+@media (max-width: 979px){
+  .page-container{
+    padding: 0px 0 0px;
+  }
+}
+
+ul.workout-list{
+  > li{
+    border: 1px solid #e5e5e5;
+    padding: 8px 14px;
+    margin: 0 0 -1px;
+  }
+}
+
+.clear{
+  clear: both;
+}
+
+.navbar-inverse .nav-collapse .nav > li > a{
+  color: white;
+}
+
