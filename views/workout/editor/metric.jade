@@ -1,0 +1,20 @@
+.metric(class=metric)
+  label(for=metric) !{metric}
+  if(metric === 'direction')
+    select.input-small
+      option(value="forward") forward
+      option(value="backward") backward
+  else
+    .input-append
+      - var value
+      if(metric === 'reps') 
+        - value = reps
+      else
+        - value = locals[metric].value
+      input.input-mini(name=metric, type="number", min="1", max="1000", value=value)
+      if(units)
+        .btn-group
+          button.btn.units(type="button") !{locals[metric].units}
+          select.units(data-metric=metric, style="opacity:0;width:0px;height:0px;position:absolute")
+            for unit in units
+              option(value=unit, selected = locals[metric].units === unit ? 'select' : null) !{unit}

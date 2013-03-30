@@ -1,9 +1,9 @@
 var should = require("should")
+var mongoose = require('mongoose')
+var User = require( __dirname + '/../models/user.js')
+if(mongoose.connection.readyState === 0) mongoose.connect('mongodb://localhost/test')
 
 describe('DB', function(){
-  var mongoose = require('mongoose')
-  mongoose.connect('mongodb://localhost/test')
-  var User = require( __dirname + '/../models/user.js')
   describe('User', function(){
     beforeEach(function(done){
       User.remove({},function(err){

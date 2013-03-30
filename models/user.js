@@ -34,7 +34,7 @@ UserSchema.statics.login = function(username, password, cb){
     if(err) return cb(err)
     if(!user) return cb(null, false)
     if(user.checkPassword(password)) return cb(null, user)
-    return cb(null, null)
+    return cb(null, false, { message : 'Invalid username or password.'})
   })
 }
 

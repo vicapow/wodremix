@@ -1,0 +1,9 @@
+{
+  "type" : "for weight"
+  , "name" : "1-1-1-1-1-1-1 Deadlift"
+  , "rounds" : 7
+  , "tasks" : [{
+    "type" : "deadlift"
+    , "reps" : 3
+  }]
+}

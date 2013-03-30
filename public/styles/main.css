@@ -8644,3 +8644,27 @@ ul.workout-list > li {
 .navbar-inverse .nav-collapse .nav > li > a {
   color: white;
 }
+.workout-editor table tr {
+  margin: 20px;
+}
+.workout-editor .metrics {
+  width: 100%;
+}
+.workout-editor .metrics .metrics-container .metric {
+  width: 50%;
+  float: left;
+}
+.buttons {
+  clear: both;
+}
+.buttons .button-container {
+  width: 50%;
+  float: left;
+}
+@media (max-width: 767px) {
+  body {
+    /*    padding-left: 10px;
+      padding-right: 10px;*/
+  
+  }
+}

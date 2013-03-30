@@ -1,0 +1,58 @@
+include ../layout
+include ../includes/nav
+block blody
+  //- script(type="text/javascript", src="/js/pages/wod.js")
+  block nav
+  .container.page-container
+    .row-fluid
+      .span12
+        p.pull-right Tuesday 3 . 19 . 2013
+        .clear
+        h2 Log a workout
+        label(for="type") Type
+        select(name="type")
+          option(value="rounds for time") For time
+          option(value="amrap") AMRAP
+          option(value="rounds for form") For form
+          option(value="rounds for weight") For weight
+        label(for="rounds") rounds
+        input.input-mini(name="rounds",type="number",min="1",max="99", value="1")
+        br
+        br
+        table.table.table-bordered.table-striped.table-condensed
+          tbody
+            tr
+              td
+                select.input-medium(name="movement")
+                  option(value="double under") Double Unders
+                  option(value="double under") Double Unders
+                .btn-group.pull-right
+                  a.btn
+                    i.icon-chevron-up
+                  a.btn
+                    i.icon-chevron-down
+                .clear
+                div(style="width:100%;")
+                  div(style="width:50%;float:left")
+                    label(for="reps") reps
+                    input.input-mini(name="reps",type="number", min="0", max="1000", value="20")
+                    a.btn.btn-danger.btn-block.pull-left remove 
+                  div(style="width:50%;float:right")
+                    label(for="weight") weight
+                    input.input-mini(name="weight",type="number", min="0", max="1000", value="0")
+                    a.btn.primary.pull-right.btn-block.pull-right done
+            tr
+              td
+                span.label.label-info 20
+                span.pull-right.label.label-info 53 lbs
+                |  Kettlebell Goblet Squats 
+            tr
+              td
+                span.label.label-info 30 
+                |  Double Unders
+        a.btn.btn-primary.pull-right 
+          i.icon-plus  add a movement
+        .clear
+        a.btn.btn-primary submit
+        br
+        br

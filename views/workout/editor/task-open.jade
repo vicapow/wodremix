@@ -1,0 +1,17 @@
+td
+  select.input-medium.movement(name="movement")
+    for m, key in movements
+      option(value=key, selected = (key === movement) ? 'selected' : null) !{m.label}
+  .btn-group.pull-right
+    button.btn.move-up
+      i.icon-chevron-up
+    button.btn.move-down
+      i.icon-chevron-down
+  .clear
+  .metrics
+    .metrics-container
+    .buttons
+      .button-container
+        button.btn-remove.btn.btn-danger.btn-block.pull-left remove 
+      .button-container
+        button.btn-done.btn.btn-primary.pull-right.btn-block.pull-right done

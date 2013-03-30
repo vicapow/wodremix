@@ -1,0 +1,31 @@
+{
+  "name" : "Abbate"
+  , "created" : "Tue Mar 26 2013 16:05:20 GMT-0700 (PDT)"
+  , "movements" : [{
+    "type": "rounds for time",
+    "rounds": 1,
+    "tasks": [{
+      "type": "run",
+      "distance": 1,
+      "units": "miles"
+    }, {
+      "type": "clean and jerk",
+      "reps": 21,
+      "weight": 155,
+      "units": "pounds"
+    }, {
+      "type": "run",
+      "distance": 800,
+      "units": "meters"
+    }, {
+      "type": "clean and jerk",
+      "reps": 21,
+      "weight": 155,
+      "units": "pounds"
+    }, {
+      "type": "run",
+      "distance": 1,
+      "units": "miles"
+    }]
+  }]
+}

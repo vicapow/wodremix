@@ -1,0 +1,12 @@
+include layout
+block blody
+  .container
+    h1 WOD ReMIX
+    .row-fluid
+      .span12
+        form(method="POST", action="/login")
+          label Username
+          input.input-block-level(type="text", name="username")
+          label Password
+          input.input-block-level(type="password", name="password")
+          input.btn.btn-primary.btn-block(type="submit", value="Login")
