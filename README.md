@@ -1,4 +1,4 @@
 
-## Express/Mongoose/Less/Jade all in one place
+## WOD ReMix
 
-yet another express boilerplate
+WOD tracking that doesn't suck
