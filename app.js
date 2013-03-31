@@ -13,8 +13,6 @@ var express = require('express')
 
 mongoose.connect(config.db.path)
 
-app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
-
 // auto compile and bundle the jade templates at `/js/templates.js`
 app.use(new rack.JadeAsset({
     url: '/js/templates.js',
@@ -27,19 +25,6 @@ app.set('views', __dirname + '/views')
 
 // compression is good
 app.use(express.compress())
-
-// browserify
-// cache the content only for the server since we have node-inspector running
-browserify.settings.development.cache = 'yes'
-app.get('/js/bin/common.js', browserify([
-  './assets/js/jquery/jquery-1.9.1.js'
-  , './assets/flatstrap/assets/js/bootstrap.js'
-  , './assets/js/underscore/underscore.js'
-  , './assets/js/backbone/backbone.js'
-  , './assets/js/init.js'
-  , './assets/components/ftlabs-fastclick/lib/fastclick.js'
-]))
-app.get('/js/bin/pages', browserify('./assets/js/pages'))
 
 // styles
 
@@ -58,6 +43,8 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.static(__dirname + '/assets'))
 
 app.use(express.bodyParser())
+app.use(express.methodOverride())
+
 app.use(express.cookieParser())
 app.use(express.session({
   secret : 'secret'
@@ -68,9 +55,11 @@ app.use(express.session({
 
 // passport
 
+app.use(passport.initialize())
+app.use(passport.session())
+
 passport.use(new LocalStrategy(function(username, password, done){
   User.login(username, password, function(err, user, msg){
-    if(user) console.log('user logged in!')
     done(err, user, msg)
   })
 }))
@@ -83,10 +72,24 @@ passport.deserializeUser(function(_id, done) {
   User.findById(_id, done)
 });
 
-app.use(passport.initialize())
-app.use(passport.session())
-
 require('./routes')(app)
+
+app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
+
+// browserify
+// cache the content only for the server since we have node-inspector running
+// TODO: debug how this is effecting middleware
+browserify.settings.development.cache = 'yes'
+app.get('/js/bin/common.js', browserify([
+  './assets/js/jquery/jquery-1.9.1.js'
+  , './assets/flatstrap/assets/js/bootstrap.js'
+  , './assets/js/underscore/underscore.js'
+  , './assets/js/backbone/backbone.js'
+  , './assets/js/init.js'
+  , './assets/components/ftlabs-fastclick/lib/fastclick.js'
+]))
+app.get('/js/bin/pages', browserify('./assets/js/pages'))
+
 
 // app.get('*', function(req, res, next){
 //   fs.exists(__dirname + '/views' + req.path + '.jade', function(exists){
