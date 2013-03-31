@@ -1,4 +1,4 @@
-block nav
+mixin nav(current)
   .navbar.navbar-inverse.navbar-fixed-top
     .navbar-inner
       .container
@@ -8,12 +8,9 @@ block nav
           span.icon-bar
         .nav-collapse.collapse
           ul.nav
-            li.active
-              a(href="/main/dashboard") Stats
+            for link, label in menu
+              li(class = (current === label) ? 'active' : null)
+                a(href=link) !{label}
             li
-              a(href="/box") Box
-            li
-              a(href="/main/wod") WOD
-            li.pull-right
-              a(href="/logout") logout
+              a.pull-right(href="/logout") logout
               

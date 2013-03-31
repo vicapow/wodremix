@@ -13,5 +13,11 @@ module.exports = function(app){
     , failureRedirect : '/'
   }))
   
+  app.get('/logout', function(req, res, next){
+    req.logout()
+    res.redirect('/')
+  })
+  
   require('./wod')(app)
+  require('./stats')(app)
 }

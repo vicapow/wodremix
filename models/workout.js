@@ -14,6 +14,12 @@ var WorkoutSchema = new Schema({
   , rounds : Number
   , tasks : [TaskSchema]
   , hash : String
+  // if not null, the gym that this workout is from, otherwise, indicates
+  // this workout didn't come from a gym
+  , gym : Schema.Types.ObjectId
+  // if not null, the user that created this workout, otherwise, 
+  // indicates that this workout didn't come from a user
+  , creator : Schema.Types.ObjectId
 },{ strict: true })
 
 WorkoutSchema.pre('save', function(next){

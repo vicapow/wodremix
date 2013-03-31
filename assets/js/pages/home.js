@@ -1,7 +1,7 @@
 var wodtypes = require('./../../data/wodtypes.js')
-var movements = require('./../../data/movements.js')
-var units = require('./../../data/units.js')
+var WorkoutEditor = require('../views/workout-editor.js')
 
 $(function(){
-  alert('hello!')
+  var editor = new WorkoutEditor({wodtypes:wodtypes})
+  $('.page-container').append(editor.$el)
 })

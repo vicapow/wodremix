@@ -48,4 +48,13 @@ module.exports = {
     , "label" : "Toes To Bar"
     , "type" : "monostructural"
   }
+  , "rest" : {
+    "metrics" : ["duration"]
+    , "label" : "Rest (timed)"
+    , "type" : null
+    , "duration" : {
+      "value" : 60
+      , "units" : "seconds"
+    }
+  }
 }

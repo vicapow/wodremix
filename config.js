@@ -1,5 +1,5 @@
 module.exports = {
-  "db" : {
-    path : "mongodb://localhost/test"
+  db : {
+    path : "mongodb://localhost/wodremix"
   }
 }

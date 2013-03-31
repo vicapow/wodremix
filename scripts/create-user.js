@@ -1,15 +1,31 @@
 var mongoose = require('mongoose')
   , User = require('../models/user')
-  , optimist = require('optimist')
-mongoose.connect('mongodb://localhost/test')
+  , Gym = require('../models/gym')
+  , argv = require('optimist')
+    .demand('username')
+    .demand('password')
+    .argv
 
-User.collection.drop()
+mongoose.connect(require('../config').db.path)
 
 var user = new User({
-  username : 'test'
-}).setPassword('test')
+  username : argv.username
+}).setPassword(argv.password)
 user.save(function(err){
   if(err) throw err
-  console.log('added user!')
-  mongoose.disconnect();
+  console.log('success!')
+  if(!argv.gym) return done()
+  Gym.findOne({}, function(err, gym){
+    if(err) throw err
+    if(!gym) throw new Error("no gyms exist!")
+    user.gym = gym.id
+    user.save(function(err){
+      if(err) throw err
+      return done()
+    })
+  })
 })
+
+function done(){
+  mongoose.disconnect();
+}

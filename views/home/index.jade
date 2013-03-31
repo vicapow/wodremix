@@ -1,10 +1,8 @@
 include ../layout
 block body
   include ../includes/nav
-  block nav
+  mixin nav('Home')
   script(type="application/javascript", src="/js/bin/pages/home.js")
   .container.page-container
     .row-fluid
       .clear
-      h2 Todays WOD 
-      

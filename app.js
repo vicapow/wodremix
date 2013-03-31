@@ -22,6 +22,10 @@ app.use(new rack.JadeAsset({
 // template
 app.set('view engine', 'jade')
 app.set('views', __dirname + '/views')
+app.locals.menu = {
+  "Home" : "/"
+  , "Stats" : "/stats"
+}
 
 // compression is good
 app.use(express.compress())
