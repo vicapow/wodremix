@@ -4,13 +4,13 @@ var mongoose = require('mongoose')
   , TaskSchema = require('./task.schema')
 
 var WorkoutResultSchema = new Schema({
-  , created : { type : Date, default : Date.now }
-  , type : String
+  type : String
   , rounds : Number
   , score : Number
   , time : Number
   , tasks : [TaskSchema]
   , workout : Schema.Types.ObjectId
+  , created : { type : Date, default : Date.now }
 },{ strict: true })
 
 module.exports = mongoose.model('WorkoutResult', WorkoutResultSchema)

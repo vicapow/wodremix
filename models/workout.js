@@ -6,6 +6,9 @@ var mongoose = require('mongoose')
 
 var WorkoutSchema = new Schema({
   name : String
+  // date the workout is assigned for
+  , date : { type : Date, default : Date.now }
+  // date this record was created
   , created : { type : Date, default : Date.now }
   , type : String
   , rounds : Number

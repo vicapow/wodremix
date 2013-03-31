@@ -88,7 +88,8 @@ app.get('/js/bin/common.js', browserify([
   , './assets/js/init.js'
   , './assets/components/ftlabs-fastclick/lib/fastclick.js'
 ]))
-app.get('/js/bin/pages', browserify('./assets/js/pages'))
+app.get('/js/bin/pages/wod.js', browserify('./assets/js/pages/wod.js'))
+app.get('/js/bin/pages/home.js', browserify('./assets/js/pages/home.js'))
 
 
 // app.get('*', function(req, res, next){

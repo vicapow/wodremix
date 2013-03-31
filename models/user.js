@@ -1,6 +1,7 @@
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
   , bcrypt = require('bcrypt')
+  , Gym = require('./gym')
 
 
 var UserSchema = new Schema({
@@ -16,6 +17,10 @@ var UserSchema = new Schema({
   , salt : {
     type : String
   }
+  // date this record was created
+  , created : { type : Date, default : Date.now }
+  // the gym this user is a member of
+  , gym : Schema.Types.ObjectId
 })
 
 UserSchema.methods.setPassword = function(password){
@@ -29,13 +34,27 @@ UserSchema.methods.checkPassword = function(password){
   return (hash === this.password)
 }
 
+UserSchema.methods.getTodaysWorkouts = function(cb){
+  if(!this.gym) return cb(null, null)
+  Gym.findOneById(this.gym, function(err, gym){
+    if(err) return cb(err)
+    if(!gym) return cb(null, null)
+    return gym.getTodaysWorkouts(cb)
+  })
+}
+
 UserSchema.statics.login = function(username, password, cb){
   User.findOne({username: username}, function(err, user){
     if(err) return cb(err)
-    if(!user) return cb(null, false)
+    if(!user) return cb(null, null)
     if(user.checkPassword(password)) return cb(null, user)
-    return cb(null, false, { message : 'Invalid username or password.'})
+    return cb(null, null, { message : 'Invalid username or password.'})
   })
+}
+
+UserSchema.methods.addGym = function(gym, cb){
+  this.gym = gym
+  return this.save(cb)
 }
 
 

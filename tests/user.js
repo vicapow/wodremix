@@ -6,7 +6,7 @@ if(mongoose.connection.readyState === 0) mongoose.connect('mongodb://localhost/t
 describe('DB', function(){
   describe('User', function(){
     beforeEach(function(done){
-      User.remove({},function(err){
+      User.remove({}, function(err){
         should.not.exist(err)
         done()
       })
