@@ -36,7 +36,7 @@ UserSchema.methods.checkPassword = function(password){
 
 UserSchema.methods.getTodaysWorkouts = function(cb){
   if(!this.gym) return cb(null, null)
-  Gym.findOneById(this.gym, function(err, gym){
+  Gym.findById(this.gym, function(err, gym){
     if(err) return cb(err)
     if(!gym) return cb(null, null)
     return gym.getTodaysWorkouts(cb)

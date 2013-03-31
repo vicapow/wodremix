@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
   , User = require('../models/user')
+  , optimist = require('optimist')
 mongoose.connect('mongodb://localhost/test')
 
 User.collection.drop()
