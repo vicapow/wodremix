@@ -8661,6 +8661,14 @@ ul.workout-list > li {
   width: 50%;
   float: left;
 }
+table.results .input-append {
+  margin-bottom: 0;
+}
+table.results td span {
+  margin-bottom: 25px;
+  line-height: 30px;
+  text-align: center;
+}
 @media (max-width: 767px) {
   body {
     /*    padding-left: 10px;

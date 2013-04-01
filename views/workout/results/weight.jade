@@ -1,0 +1,24 @@
+mixin single-weight(label, units, reps)
+  tr
+    td
+      span !{label}
+      .input-append.pull-right
+        input.input-mini(name="weight", type="number", min="1", max="1000", value="100")
+        .btn-group
+          if(units.length > 0)
+            - units = units.slice()
+            - var firstunit = units.shift()
+            button.btn.units(type="button") !{firstunit}
+          if(units.length > 0)
+            select.units(data-metric="weight", style="opacity:0;width:0px;height:0px;position:absolute")
+              for unit in units
+                option(value=unit, selected = firstunit === unit ? 'select' : null) !{unit}
+      .clear
+      .pull-right
+        label(for="reps") reps
+        input.input-mini(name="reps", type="number", min="1", max="500", value=reps)
+
+table.results.table.table-bordered.table-striped.table-condensed
+  tbody
+    for lift in lifts
+      mixin single-weight(lift.label, units, lift.reps)

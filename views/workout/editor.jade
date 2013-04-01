@@ -3,16 +3,30 @@ label(for="type") Type
 select(name="type", class="type")
   for type, key in wodtypes
     option(value=key) !{type.label}
-.rounds-control
+.duration-control(style="display:none")
+  label(for="duration") duration
+  include results/time
+.rounds-control(style="display:none")
   label(for="rounds") rounds
-  input.input-mini(name="rounds", type="number", min="1", max="99", value="1")
+  select.rounds.input-medium
+    for num in _.range(1,100)
+      option(value=num)
+        if(num !==1)
+          | !{num} rounds
+        else
+          | !{num} round
 br
 br
-table.table.table-bordered.table-striped.table-condensed
+table.table.table-bordered.table-striped.table-condensed.movements
   tbody
 a.btn.btn-primary.pull-right.add-movement
   i.icon-plus  add a movement
 .clear
+
+.results-container
+  //- include results/rounds
+  //- include results/timed
+  //- include results/weight
 a.btn.btn-primary submit
 br
 br

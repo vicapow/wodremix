@@ -1,0 +1,8 @@
+select(class="minutes")
+  for num in _.range(0,59)
+    option(value=num) !{num} minutes
+.clear
+select(class="seconds")
+  for num in _.range(1,59)
+    option(value=num) !{num} seconds
+

@@ -72,6 +72,10 @@ var TaskView = Backbone.View.extend({
       , units : this.$('select.units').val()
     })
   }
+  , setType : function(type){
+    this.type = type
+    this.renderMetrics()
+  }
   , render : function(){
     var template = this['template' + ((this.model.get('open')) ? 'Open' : 'Closed')]
     this.$el.html(template(_.extend(
@@ -87,6 +91,7 @@ var TaskView = Backbone.View.extend({
     var self = this
     this.$('.metrics-container').empty()
     _.each(this.model.get('metrics'), function(metric){
+      if(metric === this.type) return
       this.$('.metrics-container')
         .append(
           Templates['workout/editor/metric'](
