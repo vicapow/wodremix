@@ -1,16 +1,17 @@
 mixin metricBadge(m, pullRight)
-  span.label.label-info(class = pullRight ? 'pull-right' : 'pull-left') 
-    if(typeof(locals[m]) === 'object')
-      !{locals[m].value} !{locals[m].units}
-    else
-      !{locals[m]}
+  if(m !== workoutType)
+    span.label.label-info(class = pullRight ? 'pull-right' : 'pull-left') 
+      if(typeof(locals[m]) === 'object')
+        !{locals[m].value} !{locals[m].units}
+      else
+        !{locals[m]}
 td
   - metrics = metrics.slice(0)
   if(metrics.indexOf('reps') >= 0)
-    - metrics.splice(metrics.indexOf('reps'),1)
+    - metrics.splice(metrics.indexOf('reps'), 1)
     mixin metricBadge('reps')
   else if(metrics.length)
-    - var metric = metrics.splice(0,1)[0]
+    - var metric = metrics.splice(0, 1)[0]
     mixin metricBadge(metric)
   span(style="margin-left:4px")
     !{label}

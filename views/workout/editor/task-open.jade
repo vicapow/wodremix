@@ -1,7 +1,5 @@
 td
-  select.input-medium.movement(name="movement")
-    for m, key in movements
-      option(value=key, selected = (key === movement) ? 'selected' : null) !{m.label}
+  select.movement.input-medium(name="movement")
   .btn-group.pull-right
     button.btn.move-up
       i.icon-chevron-up

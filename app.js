@@ -15,8 +15,8 @@ mongoose.connect(config.db.path)
 
 // auto compile and bundle the jade templates at `/js/templates.js`
 app.use(new rack.JadeAsset({
-    url: '/js/templates.js',
-    dirname: './views'
+    url: '/js/templates.js'
+    , dirname: './views'
 }))
 
 // template
@@ -58,7 +58,6 @@ app.use(express.session({
 }))
 
 // passport
-
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -76,13 +75,13 @@ passport.deserializeUser(function(_id, done) {
   User.findById(_id, done)
 });
 
+// routes
 require('./routes')(app)
 
+// exception handling
 app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
 
 // browserify
-// cache the content only for the server since we have node-inspector running
-// TODO: debug how this is effecting middleware
 browserify.settings.development.cache = 'yes'
 app.get('/js/bin/common.js', browserify([
   './assets/js/jquery/jquery-1.9.1.js'
@@ -94,16 +93,5 @@ app.get('/js/bin/common.js', browserify([
 ]))
 app.get('/js/bin/pages/wod.js', browserify('./assets/js/pages/wod.js'))
 app.get('/js/bin/pages/home.js', browserify('./assets/js/pages/home.js'))
-
-
-// app.get('*', function(req, res, next){
-//   fs.exists(__dirname + '/views' + req.path + '.jade', function(exists){
-//     if(exists) return res.render(req.path.slice(1))
-//     fs.exists(__dirname + '/views' + req.path + '/index.jade', function(exists){
-//       if(exists) return res.render(req.path.slice(1))
-//       return next();
-//     })
-//   })
-// })
 
 app.listen(3000)

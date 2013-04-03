@@ -6,19 +6,31 @@ var TaskView = Backbone.View.extend({
   , templateOpen : Templates['workout/editor/task-open']
   , templateClosed : Templates['workout/editor/task-closed']
   , events : {
-    'click .move-up'          : 'onClickUp'
-    , 'click .move-down'      : 'onClickDown'
-    , 'click .btn-remove'     : 'onClickRemove'
-    , 'change .movement'      : 'onChangeMovement'
-    , 'click .btn-done'       : 'onClickDone'
-    , 'click'                 : 'onClick'
-    , 'click button.units'    : 'onClickUnits'
-    , 'change .metric input'  : 'onChangeMetricInput'
+    'click .move-up'            : 'onClickUp'
+    , 'click .move-down'        : 'onClickDown'
+    , 'click .btn-remove'       : 'onClickRemove'
+    , 'change .movement'        : 'onChangeMovement'
+    , 'click .btn-done'         : 'onClickDone'
+    , 'click'                   : 'onClick'
+    , 'click button.units'      : 'onClickUnits'
+    , 'click button.rep-type'   : 'onClickRepType'
+    , 'change .metric input'    : 'onChangeMetricInput'
+    , 'change select.rep-type'  : 'onChangeRepTypeSelect'
+    , 'change select.units'     : 'onChangeMetricUnitSelect'
   }
-  , initialize : function(){
+  , _prevReps : 1
+  , initialize : function(opts){
     this.listenTo(this.model, 'change:open', this.render)
-    this.listenTo(this.model, 'change:metrics', this.onChangeMetric)
+    this.listenTo(this.model, 'change:metrics', this.onChangeMetrics)
     this.listenTo(this.model, 'remove', this.remove)
+    this.listenTo(this.model, 'change:workoutType', this.onChangeWorkoutType)
+    this.listenTo(this.model, 'change:reps', this.onChangeRepType)
+    this.listenTo(this.model, 'all', function(eventName){
+      var metrics = this.model.get('metrics')
+      if(_.any(metrics, function(metric){
+        return eventName === 'change:' + metric
+      })) this.onChangeMetric(metric)
+    })
   }
   , onClickUp : function(e){
     var model = this.model
@@ -41,8 +53,9 @@ var TaskView = Backbone.View.extend({
   , onChangeMovement : function(){
     this.model.changeMovement($('.movement').val())
   }
-  , onChangeMetric : function(){
+  , onChangeMetrics : function(){
     this.renderMetrics()
+    this.updateClosedMetricBadge()
   }
   , onClick : function(){
     if(this.model.get('open')) return
@@ -59,9 +72,39 @@ var TaskView = Backbone.View.extend({
   , onClickUnits : function(){
     this.$('select.units').focus()
   }
+  , onClickRepType : function(){
+    this.$('select.rep-type').focus()
+  }
+  , onChangeRepTypeSelect : function(){
+    if(
+      this.$('select.rep-type').val() === 'max' 
+      && this.model.get('reps') !== 'max' 
+    ){
+      this._prevReps = this.model.get('reps')
+      this.model.set('reps','max')
+    }else if(this.model.get('reps') === 'max'){
+      this.model.set('reps', this._prevReps)
+    }
+  }
+  , onChangeMetricUnitSelect : function(){
+    var $el = $(this)
+    var metric = $el.data('metric')
+    var units = $el.val()
+    this.model.get('metric').units = units
+    this.model.trigger('change:' + metric)
+  }
+  , onChangeRepType : function(){
+    if(this.model.get('reps') === 'max'){
+      this.$('input[name=reps]').hide()
+      this.$('button.rep-type').text('max reps')
+    }else{
+      this.$('input[name=reps]').show()
+      this.$('button.rep-type').text('reps')
+    }
+      
+  }
   , onChangeMetricInput : function(e){
     var el = $(e.target)
-    __el = el
     var metric = el.attr('name')
     var val = el.val()
     if(!isNaN(Number(val))) val = Number(val)
@@ -69,49 +112,59 @@ var TaskView = Backbone.View.extend({
       this.model.set(metric, val)
     else this.model.set(metric, {
       value : val
-      , units : this.$('select.units').val()
+      , units : $el.parent().find('select.units').val()
     })
   }
-  , setType : function(type){
-    this.type = type
-    this.renderMetrics()
+  , onChangeWorkoutType : function(){
+    this.render()
   }
   , render : function(){
     var template = this['template' + ((this.model.get('open')) ? 'Open' : 'Closed')]
-    this.$el.html(template(_.extend(
-      {
-        movements : movements
-      }
-      , this.model.toJSON()
-    )))
+    this.$el.html(template(_.extend({
+      movements : movements
+    }, this.model.toJSON() )))
     this.renderMetrics()
+    this.updateOpenMetricInputOptions()
     return this
+  }
+  , updateClosedMetricBadge : function(metric){
+    if(this.model.get('open')) return
+    this.$('.metric.' + metric.units + ' button.units').text(metric.value)
+  }
+  , updateOpenMetricInputOptions : function(){
+    if(!this.model.get('open')) return
+    this.$('select.movement').empty()
+    var _movements = movements.filterForWorkout(this.model.get('workoutType'))
+    _.each(_movements, function(movement){
+      var $option = $('<option></option>').val(movement.name).text(movement.label)
+      if(movement.name === this.model.get('movement'))
+        $option.prop('selected', true)
+      this.$('select.movement').append($option)
+    }, this)
+    
+  }
+  /**
+    * given a string, return a metric object with default units
+    */
+  , toMetricObj : function(metric){
+    if(typeof metric !== 'string') 
+      throw new Error('metric is not string in TaskView.toMetricObject metric: '
+       + JSON.stringify(metric))
+    return {
+      metric : metric
+      , units : units[metric]
+    }
   }
   , renderMetrics : function(){
     var self = this
     this.$('.metrics-container').empty()
     _.each(this.model.get('metrics'), function(metric){
-      if(metric === this.type) return
+      if(this.model.get('workoutType') === metric) return
+      var locals = _.extend( this.model.toJSON()
+        , this.toMetricObj(metric))
       this.$('.metrics-container')
-        .append(
-          Templates['workout/editor/metric'](
-            _.extend({
-                metric : metric
-                , units : units[metric]
-              }
-              , this.model.toJSON()
-            )
-          )
-        )
+        .append(Templates['workout/editor/metric'](locals))
     }, this)
-    this.$('select.units').on('change', function(){
-      var metric = $(this).data('metric')
-      self.$('.metric.' + metric + ' button.units').text($(this).val())
-      self.model.set(metric,{
-        value : self.model.get(metric).value
-        , units : $(this).val()
-      })
-    })
   }
 })
 

@@ -7,14 +7,28 @@
   else
     .input-append
       - var value
+      - var m
       if(metric === 'reps') 
         - value = reps
       else
-        - value = locals[metric].value
-      input.input-mini(name=metric, type="number", min="1", max="1000", value=value)
-      if(units)
+        - m = locals[metric]
+        - value = m.value
+      input.metric-value.input-mini(name=metric, type="number", min="1", max="1000", value=value, style = (metric === 'reps' && value === 'max') ? 'display:none':'')
+      if(metric === 'reps')
         .btn-group
-          button.btn.units(type="button") !{locals[metric].units}
-          select.units(data-metric=metric, style="opacity:0;width:0px;height:0px;position:absolute")
+          button.btn.rep-type
+            if value === 'max'
+              | max reps
+            else
+              | reps
+          select.rep-type(name="rep-type", data-metric=metric, style="opacity:0;width:0px;height:0px;position:absolute")
+            // - NOTE: style tag
+            option(value="max", selected = value === 'max' ? 'selected' : null) max reps
+            option(value="reps", selected = value !== 'max' ? 'selected' : null) number of reps
+      if(m && m.units)
+        .btn-group
+          button.btn.units !{m.units}
+          select.units.metric-units(data-metric=metric, style="opacity:0;width:0px;height:0px;position:absolute")
+            // - NOTE: style tag
             for unit in units
-              option(value=unit, selected = locals[metric].units === unit ? 'select' : null) !{unit}
+              option(value=unit, selected = m.units === unit ? 'select' : null) !{unit}

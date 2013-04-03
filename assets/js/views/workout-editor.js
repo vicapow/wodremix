@@ -31,6 +31,7 @@ var WorkoutEditor = Backbone.View.extend({
     var self = this
     this.collection.add(new Task({
       order : self.collection.nextOrder()
+      , workoutType : this.model.get('type')
     }))
     _.last(this.taskViews).$('.movement').focus()
   }
@@ -61,10 +62,19 @@ var WorkoutEditor = Backbone.View.extend({
     if(type === 'rounds' ) $rounds.hide()
     else $rounds.show()
     var $duration = this.$('.duration-control')
-    if(type === 'time' || type === 'weight') $duration.hide()
+    if(type === 'duration' || type === 'weight') $duration.hide()
     else $duration.show()
-    _.each(this.taskViews, function(view){
-      view.setType(type)
+    var requiredMetrics = wodtypes[type].metrics.required
+    // remove tasks that don't contain at minimum the required metrics 
+    // for this workout type
+    this.collection.remove(this.collection.filter(function(task){
+      return _.intersection(
+        task.get('metrics')
+        , requiredMetrics
+      ).length < requiredMetrics.length
+    }))
+    this.collection.each(function(task){
+      task.set('workoutType', type)
     })
   }
   , addOne : function(task){
@@ -74,9 +84,6 @@ var WorkoutEditor = Backbone.View.extend({
     this.collection.each(function(model){
       if(model !== view.model) model.set('open', false)
     });
-    setTimeout(function(){
-      scroll(0, $(document).height())
-    })
   }
   , render : function(data){
     this.$el.html(this.template(_.extend({},data,{
