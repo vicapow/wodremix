@@ -1,13 +1,12 @@
-var TaskList = require('../models/task-list.js')
-  , TaskView = require('../views/task.js')
+var TaskView = require('../views/task.js')
   , ResultsView  = require('../views/results.js')
   , Task = require('../models/task.js')
+  , Workout = require('../models/workout.js')
   , wodtypes = require('./../../data/wodtypes.js')
 
 var WorkoutEditor = Backbone.View.extend({
   className : 'workout-editor'
-  , model : new Backbone.Model()
-  , collection : new TaskList()
+  , model : new Workout()
   , template : Templates['workout/editor']
   , taskViews : []
   , events : {

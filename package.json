@@ -4,7 +4,7 @@
   "description": "a basic starter framework for building apps with express, jade, less, and mongoose",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests",
+    "test": "mocha tests tests/db tests/models",
     "watch": "node-supervisor --extensions 'node|js|jade' views app"
   },
   "repository": "",
@@ -24,6 +24,7 @@
     "handlebar-rider": "~0.1.20",
     "asset-rack": "~2.1.5",
     "browserify-middleware": "~1.4.0",
-    "optimist": "~0.3.5"
+    "optimist": "~0.3.5",
+    "backbone": "~1.0.0"
   }
 }

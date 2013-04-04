@@ -1,6 +1,6 @@
 module.exports = {
-  "weight" : ["lbs","poods","kg"]
-  , "distance" : ["m","ft","miles","km"]
-  , "height" : ["m","ft","in","cm"]
+  "weight" : ["pounds","poods","kilograms"]
+  , "distance" : ["meters","feet","miles","kilometers"]
+  , "height" : ["meters","feet","inches","centimeters"]
   , "duration" : ["seconds", "minutes"]
 }

@@ -1,83 +1,105 @@
 var wodtypes = require('./wodtypes.js')
 if(typeof _ === 'undefined' ) var _ = require('underscore')
 
+// every movement has a fixed set of metric types but some movements
+// allow for a variable number of that metric. for example, rounds for weight
+// allows for a variable about of weight with each round so a `clean and jerk`
+// should not contain a `weight` metric in the workout builder
+
 var movements = {
   "clean and jerk" : {
-    "metrics" : ["reps", "weight"]
-    , "label" : "Clean and Jerk"
-    , "type" : "lifting"
-    , "defaults" : {
-      "weight" : { "value" : 135, "units" : "lbs" }
-      , "reps" : 1
-      , "duration" : { "value" : 60, "units" : "seconds" }
+    label : "Clean and Jerk"
+    , type : "lifting"
+    // the default metric values for this movement
+    , metrics : {
+      reps : { value : 1, units : null }
+      , weight : { value : 135, units : "pounds" }
     }
   }
   , "double under" : {
-    "metrics" : ["reps","duration"]
-    , "label" : "Double Under"
-    , "type" : "gymnastics"
-    , "reps" : 20
-    , "defaults" : { 
-      "reps" : 20
-      , "duration" : { "value" : 60, "units" : "seconds" }
+    label : "Double Under"
+    , type : "gymnastics"
+    , metrics : { 
+      reps : {
+        value : 1
+        , units : null
+      }
     }
   }
   , "run" : {
-    "metrics" : ["distance", "direction"]
-    , "label" : "Run"
-    , "type" : "monostructural"
-    , "defaults" : {
-      "distance" : { "value" : 100, "units" : "m" }
-      , 'direction' : 'forwards'
+    label : "Run"
+    , type : "monostructural"
+    , metrics : {
+      distance : { 
+        value : 100
+        , units : "meters"
+      }
+      , direction : "forwards"
     }
   }
   , "row" : {
-    "metrics" : ["distance"]
-    , "label" : "Row"
-    , "type" : "monostructural"
-    , "defaults" : {
-      "distance" : { "value" : 100, "units" : "m" }
+    label : "Row"
+    , type : "monostructural"
+    , metrics : {
+      distance : { 
+        value : 100
+        , units : "meters"
+      }
     }
   }
   , "box jump" : {
-    "metrics" : ["height", "reps"]
-    , "label" : "Box Jump"
-    , "type" : "monostructural"
-    , "defaults" : {
-      "height" : { "value" : 24, "units" : "in" }
+    label : "Box Jump"
+    , type : "monostructural"
+    , metrics : {
+      height : { 
+        value : 24
+        , units : "inches"
+      }
+      , reps : {
+        value : 10
+        , units : null
+      }
     }
   }
   , "toes to bar" : {
-    "metrics" : ["reps"]
-    , "label" : "Toe To Bar Pull Up"
-    , "type" : "monostructural"
-    , "default" : {
-      "reps" : 20
+    label : "Toe To Bar Pull Up"
+    , type : "monostructural"
+    , metrics : {
+      reps : {
+        value : 20
+        , units : null
+      }
     }
-    , "parent" : "pull up"
+    , parent : "pull up"
   }
   , "pull up" : {
-    "metrics" : ["reps"]
-    , "label" : "Pull Up"
-    , "type" : "monostructural"
-    , "default" : {
-      "reps" : 10
+    label : "Pull Up"
+    , type : "monostructural"
+    , metrics : {
+      reps : {
+        value : 20
+        , units : null
+      }
     }
   }
   , "chest to bar" : {
-    "metrics" : ["reps"]
-    , "label" : "Chest to Bar Pull Up"
-    , "type" : "monostructural"
-    , "default" : {
-      "reps" : 10
+    label : "Chest to Bar Pull Up"
+    , type : "monostructural"
+    , metrics : {
+      reps : {
+        value : 10
+        , units : null
+      }
     }
   }
   , "rest" : {
-    "metrics" : ["duration"]
-    , "label" : "Rest (timed)"
-    , "type" : null
-    , "default" : {
-      "duration" : { "value" : 60, "units" : "seconds" }
+    label : "Rest (timed)"
+    , type : null
+    , metrics : {
+      duration : { 
+        value : 60
+        , units : "seconds" 
+      }
     }
   }
 }
@@ -99,8 +121,8 @@ Movements.prototype.filterForWorkout = function(wodtype){
   var filters = this.__workoutTypeFilters
   if(filters[name]) return filters[name]
   return filters[name] = _.filter(this, function(movement, name){
-    var intersect = _.intersection(movement.metrics, wodtype.metrics.required)
-    return intersect.length >= wodtype.metrics.required.length
+    var intersect = _.intersection(movement.metrics, wodtype.required)
+    return intersect.length >= wodtype.required.length
   })
 }
 

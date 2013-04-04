@@ -1,8 +1,8 @@
 var should = require("should")
    , mongoose = require('mongoose')
-   , Gym = require( __dirname + '/../models/gym.js')
-   , User = require(__dirname + '/../models/user.js')
-   , userFixture = require('./fixtures/user')
+   , Gym = require( __dirname + '/../../models/gym.js')
+   , User = require(__dirname + '/../../models/user.js')
+   , userFixture = require('../fixtures/user')
 if(mongoose.connection.readyState === 0) mongoose.connect('mongodb://localhost/test')
 
 describe('DB', function(){

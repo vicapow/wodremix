@@ -1,7 +1,8 @@
 
 var Task = require('./task.js')
+var Backbone = require('backbone')
 
-var TaskList = Backbone.Collection.extend({
+var Tasks = Backbone.Collection.extend({
   model: Task
   , nextOrder : function() {
     if (!this.length) return 1;
@@ -12,4 +13,4 @@ var TaskList = Backbone.Collection.extend({
   }
 })
 
-module.exports = TaskList
+module.exports = Tasks
