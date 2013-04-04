@@ -1,5 +1,5 @@
 
-var WorkoutEditor = require('../views/workout-editor.js')
+var WorkoutEditor = require('../views/workout/editor')
 
 // views
 

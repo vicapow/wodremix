@@ -1,0 +1,14 @@
+mixin metricBadge(metric, pullRight)
+  span.label.label-info(class = pullRight ? 'pull-right' : 'pull-left') 
+    !{metric.value} !{metrics.units}
+td
+  if(metrics['reps'])
+    mixin metricBadge(metrics['reps'])
+    - metricNames.splice(metricNames.indexOf('reps'),1)
+  else if(metricNames.length)
+    mixin metricBadge(metrics[metricNames.shift()])
+  span(style="margin-left:4px")
+    !{label}
+  for name in metricNames
+    mixin metricBadge(metrics[name],true)
+    

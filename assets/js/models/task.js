@@ -3,16 +3,23 @@ var Backbone = require('backbone')
 var movements = require('./../../data/movements.js')
 var wodtypes = require('./../../data/wodtypes.js')
 var Metrics = require('./metrics.js')
+var Metric = require('./metric.js')
 
 /**
   * a task is an item in a workout description to be performed
   */
 
 var Task = Backbone.Model.extend({
-  constructor: function(attr){
-    if(typeof attr === 'string') attr = movements[attr]
-    Backbone.Model.apply(this, arguments)
-    this.setMetrics(attr.metrics)
+  metrics : null
+  , constructor: function(movement){
+    if(typeof movement === 'string') movement = movements[movement]
+    movement = _.extend({}, movement)
+    var metrics = movement.metrics
+    delete movement.metrics
+    Backbone.Model.call(this, movement)
+    this.metrics = new Metrics()
+    this.setMetrics(metrics)
+    this.listenTo(this, 'change:name', this.__onChangeName)
   }
   , defaults : {
     "workoutType" : 'rounds'
@@ -20,18 +27,27 @@ var Task = Backbone.Model.extend({
   , setMetrics : function(metrics){
     // adds a name property to each metric object that was the key on the
     // original `metrics` object but only if that metric did exist before
-    metrics = _.map(_.keys(metrics), function(metric){
+    var metricNames = _.keys(metrics)
+    metrics = _.map(metricNames, function(metric){
       var existingMetric = this.metrics && this.metrics.findWhere({name:metric})
       if(existingMetric) return existingMetric
-      return {
+      return new Metric({
         name : metric
         , value : metrics[metric].value
         , units : metrics[metric].units
-      }
+      })
     }, this)
-    this.metrics = new Metrics(metrics)
+    // remove the metric item if its not in the new set of metrics
+    var metricsToBeRemoved = []
+    this.metrics.each(function(metric){
+      if(!_.contains(metrics, metric)) metricsToBeRemoved.push(metric)
+    }, this)
+    this.metrics.remove(metricsToBeRemoved)
+    // add the new metric if its not already on the metrics collection
+    _.each(metrics, function(metric){
+      if(!this.metrics.contains(metric)) this.metrics.add(metric)
+    }, this)
     this.__unusedMetrics = new Metrics()
-    this.unset('metrics')
   }
   , toJSON : function(){
     var obj = Backbone.Model.prototype.toJSON.apply(this)
@@ -81,15 +97,11 @@ var Task = Backbone.Model.extend({
     this.metrics.add(metrics)
     this.__unusedMetrics.remove(metrics)
   }
-  // change this movement to a different type. this is useful incase a 
-  // user selected the wrong movement type (such as `deadlift` instead of 
-  // `front squat`) but allowing the metric inputs to remain the same
-  , changeType : function(type){
-    var movement
-    if(typeof type === 'string') movement = movements[type]
-    else movement = type
+  , __onChangeName : function(){
+    var name = this.get('name')
+    var movement = movements[name]
+    if(!movement) throw new Error("No movement found with name: " + name)
     this.set('label', movement.label)
-    this.set('name', movement.name)
     this.setMetrics(movement.metrics)
     this.set('type', movement.type)
   }

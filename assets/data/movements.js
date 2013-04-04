@@ -117,11 +117,11 @@ var Movements = function(){
 Movements.prototype.filterForWorkout = function(wodtype){
   if(typeof wodtype === 'string') wodtype = wodtypes[wodtype]
   if(typeof wodtype === 'undefined') return this
-  var name = wodtype.name
+  var type = wodtype.type
   var filters = this.__workoutTypeFilters
-  if(filters[name]) return filters[name]
-  return filters[name] = _.filter(this, function(movement, name){
-    var intersect = _.intersection(movement.metrics, wodtype.required)
+  if(filters[type]) return filters[type]
+  return filters[type] = _.filter(this, function(movement, name){
+    var intersect = _.intersection(_.keys(movement.metrics), wodtype.required)
     return intersect.length >= wodtype.required.length
   })
 }

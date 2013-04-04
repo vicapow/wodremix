@@ -20,18 +20,7 @@ var wodtypes = {
     , metric : {
       type : "duration"
       , value : 10
-      , untis : "minutes"
-    }
-  }
-  , "reps" : {
-    label : "AMREP"
-    , desc : "COmplete the workout with as many reps as possible."
-    , unused : ["duration"]
-    , required : []
-    , metric : {
-      type : "reps"
-      , value : 1
-      , units : null
+      , units : "minutes"
     }
   }
   , "weight" : {
@@ -49,9 +38,9 @@ var wodtypes = {
   }
 };
 
-// add the movement key name as an attribute for convience
-_.each(wodtypes, function(type, name){
-  type.name = name
+// add the workout type as an attribute for convience
+_.each(wodtypes, function(wod, type){
+  wod.type = type
 })
 
 module.exports = wodtypes

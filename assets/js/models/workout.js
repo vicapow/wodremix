@@ -6,6 +6,8 @@ var workouts = require('../../data/wodtypes')
 var Workout = Backbone.Model.extend({
   constructor : function(attr){
     if(typeof attr === 'string') attr = workouts[attr]
+    if(typeof attr === 'undefined') 
+      attr = workouts[_.chain(workouts).keys().first().value()]
     var metric = attr.metric
     Backbone.Model.call(this, attr)
     this.metric = new Backbone.Model(metric)
@@ -13,7 +15,7 @@ var Workout = Backbone.Model.extend({
     this.unset('metric')
     this.listenTo(this.tasks, 'add', this.onAddTask)
     this.listenTo(this, 'change:unused', this.__updateUnusedMetrics)
-    this.listenTo(this, 'change:name', this.__updateWorkoutFromNameChange)
+    this.listenTo(this, 'change:type', this.__updateWorkoutFromTypeChange)
     this.listenTo(this, 'change:required', this.__removeTasksWithoutRequiredMetrics)
   }
   , onAddTask : function(task){
@@ -38,9 +40,14 @@ var Workout = Backbone.Model.extend({
     }, this)
     this.tasks.remove(tasksToBeRemoved)
   }
-  // updating the workout name (type) should update other workout attributes
-  , __updateWorkoutFromNameChange : function(){
-    this.set(workouts[this.get('name')])
+  // updating the workout type should update other workout attributes
+  , __updateWorkoutFromTypeChange : function(){
+    var workout = workouts[this.get('type')]
+    workout  = _.extend({}, workout) // NOTE: shallow copy
+    var metric = workout.metric
+    delete workout.metric
+    this.set(workout)
+    this.metric.set(metric)
   }
   , toJSON : function(){
     var obj = Backbone.Model.prototype.toJSON.apply(this)

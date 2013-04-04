@@ -30,16 +30,17 @@ describe('Data', function(){
     it('should be able to change type', function(){
       var task, metric
       workout.tasks.add(new Task('box jump'))
-      workout.tasks.add(new Task('rest'))
+      var task = new Task('rest')
+      workout.tasks.add(task)
       workout.tasks.add(new Task('clean and jerk'))
-      workout.set('name','weight')
+      workout.set('type','weight')
       workout.tasks.length.should.be.equal(1, 'clean and jerk should be the '
         + 'only movement for this weighted workout')
       task = workout.tasks.findWhere({name:'clean and jerk'})
       should.exist(task)
       metric = task.metrics.findWhere({name:'weight'})
       should.not.exist(metric, 'unused workout metrics should ignored on tasks')
-      workout.set('name','rounds')
+      workout.set('type','rounds')
       task = workout.tasks.findWhere({name:'clean and jerk'})
       should.exist(task)
       metric = task.metrics.findWhere({name:'weight'}, 'previously unused '
