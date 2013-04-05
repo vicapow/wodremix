@@ -1,0 +1,3 @@
+
++ have tasks listen for changes to individual task.order property and sort when they change
++ have weight rounds listen and resort on changes to tasks.order
