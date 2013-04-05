@@ -13,19 +13,17 @@ var Result = Backbone.Model.extend({
     this.set('type', this.workout.get('type'))
     this.listenTo(this.workout.tasks, 'add', this.__onAddTask)
   }
-  , __onAddTask : function(task){
-    if(!this.get('type') === 'weight') return
-    this.get('metric').add({
-    })
-  }
   , __onWorkoutTypeChange : function(type){
     this.set('type', this.workout.get('type'))
   }
   , __onChangeType : function(){
     var type = this.get('type')
-    if(type === 'duration') this.set('metric', new DurationResult())
-    else if(type === 'rounds') this.set('metric', new RoundsResult())
-    else if(type === 'weight') this.set('metric', new WeightResult())
+    if(type === 'duration') 
+      this.set('metric', new DurationResult({workout:this.workout}))
+    else if(type === 'rounds') 
+      this.set('metric', new RoundsResult({workout:this.workout}))
+    else if(type === 'weight') 
+      this.set('metric', new WeightResult({workout:this.workout}))
     else throw new Error('unknown result type ' + type)
   }
   , toJSON : function(){
