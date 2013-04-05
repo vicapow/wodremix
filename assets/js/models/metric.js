@@ -1,7 +1,7 @@
 var _ = require('underscore')
 var Backbone = require('backbone')
-var movements = require('./../../data/movements.js')
-var wodtypes = require('./../../data/wodtypes.js')
+var movements = require('./../../data/movements')
+var wodtypes = require('./../../data/wodtypes')
 
 var Metric = Backbone.Model.extend({})
 

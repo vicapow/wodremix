@@ -1,6 +1,6 @@
 var _ = require('underscore')
 var Backbone = require('backbone')
-var Metric = require('./metric.js')
+var Metric = require('./metric')
 
 var Metrics = Backbone.Collection.extend({
   model: Metric

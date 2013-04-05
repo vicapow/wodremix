@@ -1,3 +1,5 @@
+var units = require('../../../data/units')
+
 var WorkoutMetricView = Backbone.View.extend({
   className : 'workout-metric'
   , template : Templates['workout/editor/metric']
@@ -9,7 +11,8 @@ var WorkoutMetricView = Backbone.View.extend({
     this.render()
   }
   , render : function(){
-    this.$el.html(this.template(this.workout.metric.toJSON()))
+    var locals = this.workout.metric.toJSON()
+    this.$el.html(this.template(locals))
   }
 })
 

@@ -59,20 +59,20 @@ var Task = Backbone.Model.extend({
     if(!this.collection) return
     var i = this.collection.indexOf(this)
     if(i <= 0) return
-    var tmp = this.get('order')
-    var other = this.collection.at(i - 1)
-    this.set('order', other.get('order'))
-    other.set('order', tmp)
+    var order = this.get('order')
+    var task = this.collection.at(i - 1)
+    this.set('order', task.get('order'))
+    task.set('order', order)
     this.collection.sort()
   }
   , moveDown : function(){
     if(!this.collection) return
     var i = this.collection.indexOf(this)
     if(i >= this.collection.length - 1) return
-    var tmp = this.get('order')
-    var other = this.collection.at(i + 1)
-    this.set('order', other.get('order'))
-    other.set('order', tmp)
+    var order = this.get('order')
+    var task = this.collection.at(i + 1)
+    this.set('order', task.get('order'))
+    task.set('order', order)
     this.collection.sort()
   }
   // move the unused metrics to the `unusedMetrics` collection

@@ -6,9 +6,9 @@ var TaskView = Backbone.View.extend({
   , templateOpen : Templates['workout/editor/task/open']
   , templateClosed : Templates['workout/editor/task/closed']
   , events : {
-  //   'click .move-up'            : 'onClickUp'
-  //   , 'click .move-down'        : 'onClickDown'
-    'click .btn-remove'       : 'onClickRemove'
+    'click .move-up'            : 'onClickUp'
+    , 'click .move-down'        : 'onClickDown'
+    , 'click .btn-remove'       : 'onClickRemove'
     , 'change .movement'        : 'onChangeMovement'
     , 'click .btn-done'         : 'onClickDone'
     , 'click'                   : 'onClick'
@@ -30,20 +30,13 @@ var TaskView = Backbone.View.extend({
     this.listenTo(this.workout, 'change:type', this.onChangeWorkoutType)
     this.render()
   }
-  // , onClickUp : function(e){
-  //   var model = this.model
-  //   var collection = model.collection
-  //   model.moveUp()
-  //   model.collection.sort()
-  //   var orders = collection.map(function(m){
-  //     return m.get('order')
-  //   })
-  //   return false
-  // }
-  // , onClickDown : function(e){
-  //   this.model.moveDown()
-  //   return false
-  // }
+  , onClickUp : function(e){
+    var model = this.model
+    model.moveUp()
+  }
+  , onClickDown : function(e){
+    this.model.moveDown()
+  }
   , onClickRemove : function(){
     // remove this model from its collection
     this.model.collection.remove(this.model)
@@ -150,7 +143,7 @@ var TaskView = Backbone.View.extend({
     this.$('.metrics-container').empty()
     this.model.metrics.each(function(metric){
       if(this.model.get('workoutType') === metric.get('name')) return
-      var locals = _.extend( this.model.toJSON(), metric.toJSON())
+      var locals = _.extend( {unitOpts: units}, this.model.toJSON(), metric.toJSON() )
       this.$('.metrics-container')
         .append(Templates['workout/editor/task/metric'](locals))
     }, this)

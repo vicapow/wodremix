@@ -34,7 +34,10 @@ var movements = {
         value : 100
         , units : "meters"
       }
-      , direction : "forwards"
+      , direction : {
+        value : "forwards"
+        , units : null
+      }
     }
   }
   , "row" : {

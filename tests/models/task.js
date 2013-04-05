@@ -1,6 +1,6 @@
 var should = require('should')
-  , Task = require('../../assets/js/models/task.js')
-  , movements = require('../../assets/data/movements.js')
+  , Task = require('../../assets/js/models/task')
+  , movements = require('../../assets/data/movements')
   , _ = require('underscore')
 
 describe('Data', function(){

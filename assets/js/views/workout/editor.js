@@ -19,8 +19,8 @@ var WorkoutEditor = Backbone.View.extend({
   , taskViews : []
   , initialize : function(){
     this.listenTo(this.workout.tasks, 'add', this.onTaskAdded)
-    // this.listenTo(this.collection, 'change:order', this.onChangeOrder)
-    // this.listenTo(this.collection, 'remove', this.onRemove)
+    this.listenTo(this.workout.tasks, 'change:order', this.onChangeOrder)
+    this.listenTo(this.workout.tasks, 'remove', this.onRemove)
     this.resultsView = new ResultsView({ workout : this.workout })
     this.metricView = new MetricView({ workout : this.workout })
     this.render()
@@ -32,21 +32,22 @@ var WorkoutEditor = Backbone.View.extend({
     var movement = movements.filterForWorkout(type)[0]
     this.workout.tasks.add(new Task(movement))
   }
-  // , onChangeOrder : function(task){
-  //   this.taskViews = _.sortBy(this.taskViews, function(view){
-  //     return view.model.get('order')
-  //   })
-  //   _.each(this.taskViews, function(view){
-  //     this.$('table.movements tbody').append(view.el)
-  //   })
-  // }
-  // , onRemove : function(child){
-  //   var view = _.find(this.taskViews, function(view){
-  //     return view.model === child
-  //   })
-  //   var i = this.taskViews.indexOf(view)
-  //   this.taskViews.splice(i,1)
-  // }
+  , onChangeOrder : function(task){
+    this.taskViews = _.sortBy(this.taskViews, function(view){
+      return view.model.get('order')
+    })
+    _.each(this.taskViews, function(view){
+      this.$('table.movements tbody').append(view.el)
+    }, this)
+  }
+  , onRemove : function(task){
+    var view = _.find(this.taskViews, function(view){
+      return view.model === task
+    })
+    var i = this.taskViews.indexOf(view)
+    this.taskViews.splice(i,1)
+    view.remove()
+  }
   , onTypeInputChange : function(){
     // change the model type
     var type = this.$('.type').val()

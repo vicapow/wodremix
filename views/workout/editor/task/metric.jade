@@ -1,3 +1,4 @@
+//- NOTE: this is a task metric, which is different from a workout metric
 .metric(class=name)
   label(for=name) !{name}
   if(name === 'direction')
@@ -11,7 +12,7 @@
         .btn-group
           button.btn.units !{units}
           select.units.metric-units(data-metric=name, style="opacity:0;width:0px;height:0px;position:absolute")
-            // - NOTE: style tag
-            for unit in units
+            //- NOTE: style tag
+            for unit in unitOpts[name]
               option(value=unit, selected = units === unit ? 'select' : null) !{unit}
 

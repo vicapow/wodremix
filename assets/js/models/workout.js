@@ -1,6 +1,7 @@
 var _ = require('underscore')
 var Backbone = require('backbone')
 var Tasks = require('./tasks')
+var Result = require('./result/result')
 var workouts = require('../../data/wodtypes')
 
 var Workout = Backbone.Model.extend({
@@ -12,6 +13,7 @@ var Workout = Backbone.Model.extend({
     Backbone.Model.call(this, attr)
     this.metric = new Backbone.Model(metric)
     this.tasks = new Tasks()
+    this.result = new Result({workout:this})
     this.unset('metric')
     this.listenTo(this.tasks, 'add', this.onAddTask)
     this.listenTo(this, 'change:unused', this.__updateUnusedMetrics)
@@ -53,6 +55,7 @@ var Workout = Backbone.Model.extend({
     var obj = Backbone.Model.prototype.toJSON.apply(this)
     obj.tasks = this.tasks.toJSON()
     obj.metric = this.metric.toJSON()
+    obj.result = this.result.toJSON()
     return obj
   }
 })

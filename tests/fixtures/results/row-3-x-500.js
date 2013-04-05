@@ -1,5 +1,6 @@
 module.exports = {
-  time : {
+  type : 'duration'
+  , time : {
     value : 105
     , units : "seconds"
   }

@@ -1,6 +1,6 @@
 mixin metricBadge(metric, pullRight)
   span.label.label-info(class = pullRight ? 'pull-right' : 'pull-left') 
-    !{metric.value} !{metrics.units}
+    !{metric.value} !{metric.units}
 td
   if(metrics['reps'])
     mixin metricBadge(metrics['reps'])
