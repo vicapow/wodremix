@@ -1,24 +1,24 @@
-mixin single-weight(lift, units)
+mixin single-weight(set, units)
   tr
     td
-      span !{lift.label}
+      span !{set.label}
       .input-append.pull-right
-        input.input-mini(name="weight", data-order = lift.order, type="number", min="1", max="1000", value="100")
+        input.input-mini(name="weight", data-order = set.order, type="number", min="1", max="1000", value="100")
         .btn-group
           if(units.length > 0)
             - units = units.slice()
             - var firstunit = units.shift()
             button.btn.units(type="button") !{firstunit}
           if(units.length > 0)
-            select.units(data-metric="weight", data-order = lift.order, style="opacity:0;width:0px;height:0px;position:absolute")
+            select.units(data-metric="weight", data-order = set.order, style="opacity:0;width:0px;height:0px;position:absolute")
               for unit in units
                 option(value=unit, selected = firstunit === unit ? 'select' : null) !{unit}
       .clear
       .pull-right
         label(for="reps") reps
-        input.reps.input-mini(data-order = lift.order, name="reps", type="number", min="0", max=lift.metrics.reps.value, value=lift.metrics.reps.value)
+        input.reps.input-mini(data-order = set.order, name="reps", type="number", min="0", max=set.reps.value, value=set.reps.value)
 
 table.results.table.table-bordered.table-striped.table-condensed
   tbody
-    for lift in lifts
-      mixin single-weight(lift, units)
+    for set in sets
+      mixin single-weight(set, units)

@@ -31,7 +31,7 @@ var wodtypes = {
     // but the weight metric should not be avaiable to set
     , unused : ["weight"]
     , metric : {
-      type : "rounds"
+      type : "weight"
       , value : 1
       , units : null
     }

@@ -1,33 +1,39 @@
 var Backbone = require('backbone')
 var Metric = require('../metric')
 
-var WeightRound = Backbone.Model.extend({
+var WeightSet = Backbone.Model.extend({
   defaults : {
-    weight : {
-      value : 0
-      , units : "lbs"
-    }
-    , reps : {
-      value : 0
-      , units : null
-    }
+    weight : { value : 0, units : "lbs" }
+    , reps : { value : 0, units : null }
+    , label : ''
   }
   , constructor : function(opts){
     this.task = opts.task
     Backbone.Model.call(this)
     this.listenTo(this.task, 'change:order', this.__changeTaskOrder)
+    this.listenTo(this.task, 'change:label', this.__changeLabel)
+    var repsMetric = this.task.metrics.findWhere({name:'reps'})
+    this.listenTo(repsMetric, 'change:value', this.__onChangeReps)
     this.set('order', this.task.get('order'))
+    this.get('reps').value = repsMetric.get('value')
+    this.set('label', this.task.get('label'))
+  }
+  , __changeLabel : function(task){
+    this.set('label', task.get('label'))
   }
   , __changeTaskOrder : function(task){
     this.set('order', task.get('order'))
   }
+  , __onChangeReps : function(metric){
+    this.get('reps').value = metric.get('value')
+  }
 })
 
-var Rounds = Backbone.Collection.extend({
-  model: WeightRound
+var WeightSets = Backbone.Collection.extend({
+  model: WeightSet
   , initialize : function(){
-    this.comparator = function(round){
-      return round.get('order')
+    this.comparator = function(set){
+      return set.get('order')
     }
     this.listenTo(this, 'change:order', this.sort)
   }
@@ -37,7 +43,7 @@ var Rounds = Backbone.Collection.extend({
 var WeightResult = Backbone.Model.extend({
   defaults : function(){
     return {
-      rounds : new Rounds
+      sets : new WeightSets
     }
   }
   , initialize : function(opts){
@@ -49,18 +55,18 @@ var WeightResult = Backbone.Model.extend({
     }, this)
   }
   , __onAddTask : function(task){
-    this.get('rounds').add(new WeightRound({task:task}))
+    this.get('sets').add(new WeightSet({task:task}))
   }
   , __onRemove : function(task){
-    var round = this.get('rounds').find(function(round){
-      return round.task === task
+    var set = this.get('sets').find(function(set){
+      return set.task === task
     })
-    this.get('rounds').remove(round)
+    this.get('sets').remove(set)
   }
   , toJSON : function(){
     return {
-      rounds : this.get('rounds').map(function(round){
-        return round.toJSON()
+      sets : this.get('sets').map(function(set){
+        return set.toJSON()
       })
     }
   }

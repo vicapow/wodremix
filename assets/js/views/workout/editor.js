@@ -8,7 +8,7 @@ var TaskView = require('./task')
 
 var WorkoutEditor = Backbone.View.extend({
   className : 'workout-editor'
-  , workout : new Workout()
+  , workout : null
   , template : Templates['workout/editor']
   , events : {
     'change .type' : 'onTypeInputChange'
@@ -18,6 +18,7 @@ var WorkoutEditor = Backbone.View.extend({
   , metricView : null
   , taskViews : []
   , initialize : function(){
+    __workout = this.workout = new Workout()
     this.listenTo(this.workout.tasks, 'add', this.onTaskAdded)
     this.listenTo(this.workout.tasks, 'change:order', this.onChangeOrder)
     this.listenTo(this.workout.tasks, 'remove', this.onRemove)

@@ -151,7 +151,7 @@ var TaskView = Backbone.View.extend({
   , renderMetrics : function(){
     this.$('.metrics-container').empty()
     this.model.metrics.each(function(metric){
-      if(this.model.get('workoutType') === metric.get('name')) return
+      if(this.workout.get('type') === metric.get('name')) return
       var locals = _.extend( {unitOpts: units}, this.model.toJSON(), metric.toJSON() )
       this.$('.metrics-container')
         .append(Templates['workout/editor/task/metric'](locals))

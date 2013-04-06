@@ -3,15 +3,14 @@ var units = require('./../../../data/units.js')
 var ResultsView = Backbone.View.extend({
   className : 'results'
   , template : Templates['workout/results']
-  , tasks : null
   , workout : null
-  , result : null
+  , resultMetric : null
+  , resultMetricSet : null
   , initialize : function(opts){
     this.workout = opts.workout
-    this.listenTo(this.workout.tasks, 'add', this.onAddTask)
-    this.listenTo(this.workout.tasks, 'remove', this.onRemoveTask)
+    this.listenTo(this.workout.result, 'change:metric', this.onResultMetricChange)
     this.listenTo(this.workout, 'change:type', this.render)
-    this.listenTo(this.workout, 'change:reps', this.onRepsChange)
+    this.listenTo(this.workout, 'change:reps', this.render)
     this.render()
     this.$el.hide()
   }
@@ -23,13 +22,27 @@ var ResultsView = Backbone.View.extend({
     , 'change .rounds select[name=rounds]' : 'onRoundsChange'
     , 'change .rounds select[name=reps]' : 'onRoundsChange'
   }
-  , onAddTask : function(task){
+  , onResultMetricChange : function(result){
+    if(this.resultMetric) {
+      this.stopListening(this.resultMetric)
+      if(this.resultMetricSet)
+        this.stopListening(this.resultMetricSet)
+    }
+    var metric = this.resultMetric = result.get('metric')
+    var set = metric.get('sets')
+    this.resultMetricSet = set
+    if(!set) return
+    this.listenTo(set, 'add', this.onResultSetChange)
+    this.listenTo(set, 'change', this.onResultSetChange)
+    this.listenTo(set, 'remove', this.onResultSetChange)
     this.render()
-    if(!this.$el.is(':visible')) this.$el.show()
   }
-  , onRemoveTask : function(task){
+  , onResultSetChange : function(){
+    if(!this.$el.is(':visible') && this.resultMetricSet.length) 
+      this.$el.show()
+    else if(!this.resultMetricSet.length && this.$el.is(':visible')) 
+      this.$el.hide()
     this.render()
-    if(this.$el.is(':visible') && !this.workout.tasks.length) this.$el.hide()
   }
   , onChangeReps : function(e){
     var $el = $(e.target)
@@ -58,7 +71,7 @@ var ResultsView = Backbone.View.extend({
     duration.value = total
     duration.units = "seconds"
   }
-  , onRepsChange : function(){
+  , updateSelectReps : function(){
     var select = this.$('select[name=reps]')
     var reps = this.workout.get('reps')
     var current = select.val()
@@ -91,11 +104,14 @@ var ResultsView = Backbone.View.extend({
     if(!type) return
     $el.html(this.template())
     var template = Templates['workout/results/' + type]
+    var sets = workout.result.get('metric').get('sets')
+    sets = sets && sets.toJSON() || []
+    // TODO: change class name from `.tasks` to `.sets`
     this.$('.tasks').html(template({
-      lifts : workout.tasks.toJSON()
+      sets : sets
       , units : units[type]
     }))
-    this.onRepsChange()
+    this.updateSelectReps()
   }
 })
 

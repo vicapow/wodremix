@@ -85,9 +85,7 @@ var Task = Backbone.Model.extend({
       if( metric.get('name') === 'duration' 
         && this.get('name') === 'rest' 
         && _.contains(unusedMetrics, 'duration') 
-      ){
-        return false
-      }
+      ) return false
       return _.contains(unusedMetrics, metric.get('name'))
     }, this)
     this.metrics.remove(metrics)

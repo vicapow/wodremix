@@ -16,6 +16,14 @@ var movements = {
       , weight : { value : 135, units : "pounds" }
     }
   }
+  , 'deadlift' : {
+    label : 'Deadlift'
+    , type : 'lifting'
+    , metrics : {
+      reps : { value : 1, units : null }
+      , weight : { value : 135, units : "pounds" }
+    }
+  }
   , "double under" : {
     label : "Double Under"
     , type : "gymnastics"
