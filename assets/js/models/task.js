@@ -64,6 +64,7 @@ var Task = Backbone.Model.extend({
     this.set('order', task.get('order'))
     task.set('order', order)
     this.collection.sort()
+    return this
   }
   , moveDown : function(){
     if(!this.collection) return
@@ -74,6 +75,7 @@ var Task = Backbone.Model.extend({
     this.set('order', task.get('order'))
     task.set('order', order)
     this.collection.sort()
+    return this
   }
   // move the unused metrics to the `unusedMetrics` collection
   // also, remove any now used metrics to the `metrics` collection

@@ -12,12 +12,14 @@ var WeightRound = Backbone.Model.extend({
       , units : null
     }
   }
-  , initialize : function(task){
-    this.task = task
+  , constructor : function(opts){
+    this.task = opts.task
+    Backbone.Model.call(this)
     this.listenTo(this.task, 'change:order', this.__changeTaskOrder)
-  }
-  , __changeTaskOrder : function(){
     this.set('order', this.task.get('order'))
+  }
+  , __changeTaskOrder : function(task){
+    this.set('order', task.get('order'))
   }
 })
 
@@ -27,6 +29,7 @@ var Rounds = Backbone.Collection.extend({
     this.comparator = function(round){
       return round.get('order')
     }
+    this.listenTo(this, 'change:order', this.sort)
   }
 })
 
@@ -46,7 +49,7 @@ var WeightResult = Backbone.Model.extend({
     }, this)
   }
   , __onAddTask : function(task){
-    this.get('rounds').add(new WeightRound(task))
+    this.get('rounds').add(new WeightRound({task:task}))
   }
   , __onRemove : function(task){
     var round = this.get('rounds').find(function(round){
@@ -62,5 +65,7 @@ var WeightResult = Backbone.Model.extend({
     }
   }
 })
+
+
 
 module.exports = WeightResult

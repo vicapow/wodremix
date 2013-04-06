@@ -1,11 +1,11 @@
 var Backbone = require('backbone')
 var Metric = require('../metric')
 
-var RoundsResult = Backbone.Model.extend({
+var RepsResult = Backbone.Model.extend({
   defaults : {
     value : 0
-    , units : 'rounds'
+    , units : 'reps'
   }
 })
 
-module.exports = RoundsResult
+module.exports = RepsResult

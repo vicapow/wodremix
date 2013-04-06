@@ -15,15 +15,35 @@ var Workout = Backbone.Model.extend({
     this.tasks = new Tasks()
     this.result = new Result({workout:this})
     this.unset('metric')
-    this.listenTo(this.tasks, 'add', this.onAddTask)
+    this.set('reps', 0)
+    this.listenTo(this.tasks, 'add', this.__onAddTask)
+    this.listenTo(this.tasks, 'remove', this.__onRemoveTask)
     this.listenTo(this, 'change:unused', this.__updateUnusedMetrics)
     this.listenTo(this, 'change:type', this.__updateWorkoutFromTypeChange)
     this.listenTo(this, 'change:required', this.__removeTasksWithoutRequiredMetrics)
   }
-  , onAddTask : function(task){
-    if(this.__hasTaskRequiredMetrics(task))
+  , __onAddTask : function(task){
+    if(this.__hasTaskRequiredMetrics(task)){
       task.setUnusedMetrics(this.get('unused'))
-    else this.tasks.remove(task)
+      this.listenTo(task.metrics, 'change:value', this.__onTaskMetricChange)
+      this.__updateReps()
+    }else this.tasks.remove(task)
+  }
+  , __onRemoveTask : function(task){
+    this.stopListening(task.metrics)
+    this.__updateReps()
+  }
+  , __onTaskMetricChange : function(metric){
+    if(metric.get('name') === 'reps') this.__updateReps()
+  }
+  , __updateReps : function(){
+    var num = 0
+    this.tasks.each(function(task){
+      var metric = task.metrics.findWhere({name:'reps'})
+      if(!metric) num += 1
+      else num += metric.get('value')
+    }, this)
+    this.set('reps', num)
   }
   , __updateUnusedMetrics : function(){
     this.tasks.each(function(task){

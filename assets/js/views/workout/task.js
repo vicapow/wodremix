@@ -1,5 +1,6 @@
 var units = require('./../../../data/units.js')
   , movements = require('./../../../data/movements.js')
+  , unitAbbr = require('./../../../data/units-abbr.js')
 
 var TaskView = Backbone.View.extend({
   tagName : 'tr'
@@ -12,17 +13,19 @@ var TaskView = Backbone.View.extend({
     , 'change .movement'        : 'onChangeMovement'
     , 'click .btn-done'         : 'onClickDone'
     , 'click'                   : 'onClick'
-  //   , 'click button.units'      : 'onClickUnits'
-  //   , 'click button.rep-type'   : 'onClickRepType'
-  , 'change .metric input'    : 'onChangeMetricInput'
-  //   , 'change select.rep-type'  : 'onChangeRepTypeSelect'
-  //   , 'change select.units'     : 'onChangeMetricUnitSelect'
+    , 'click button.units'      : 'onClickUnits'
+    , 'change .metric input'    : 'onChangeMetricInput'
+    , 'change select.units'     : 'onChangeMetricUnitSelect'
+    //   , 'click button.rep-type'   : 'onClickRepType'
+    //   , 'change select.rep-type'  : 'onChangeRepTypeSelect'
   }
   //, _prevReps : 1
   , initialize : function(opts){
     this.workout = opts.workout
     this.listenTo(this.model, 'change:open', this.render)
-    // this.listenTo(this.model, 'change:metrics', this.onChangeMetrics)
+    this.listenTo(this.model.metrics, 'add', this.onChangeMetrics)
+    this.listenTo(this.model.metrics, 'remove', this.onChangeMetrics)
+    this.listenTo(this.model.metrics, 'change:units', this.onUpdateUnits)
     this.listenTo(this.model, 'remove', this.remove)
     this.listenTo(this.model.metrics, 'add', this.onChangeMetrics)
     this.listenTo(this.model.metrics, 'remove', this.onChangeMetrics)
@@ -50,6 +53,11 @@ var TaskView = Backbone.View.extend({
     this.renderMetrics()
     //this.updateClosedMetricBadge()
   }
+  , onUpdateUnits : function(metric){
+    var $el = this.$('.metric.' + metric.get('name'))
+    $el.find('button.units').text(metric.get('units'))
+    $el.find('select.units').val(metric.get('units'))
+  }
   , onClick : function(){
     if(this.model.get('open')) return
     this.workout.tasks.each(function(task){
@@ -62,9 +70,9 @@ var TaskView = Backbone.View.extend({
     this.model.set('open', false)
     return false
   }
-  // , onClickUnits : function(){
-  //   this.$('select.units').focus()
-  // }
+  , onClickUnits : function(){
+    this.$('select.units').focus()
+  }
   // , onClickRepType : function(){
   //   this.$('select.rep-type').focus()
   // }
@@ -79,13 +87,12 @@ var TaskView = Backbone.View.extend({
   //     this.model.set('reps', this._prevReps)
   //   }
   // }
-  // , onChangeMetricUnitSelect : function(){
-  //   var $el = $(this)
-  //   var metric = $el.data('metric')
-  //   var units = $el.val()
-  //   this.model.get('metric').units = units
-  //   this.model.trigger('change:' + metric)
-  // }
+  , onChangeMetricUnitSelect : function(e){
+    var $el = this.$(e.target)
+    var metric = $el.data('metric')
+    metric = this.model.metrics.findWhere({name:metric})
+    metric.set('units', $el.val())
+  }
   // , onChangeRepType : function(){
   //   if(this.model.get('reps') === 'max'){
   //     this.$('input[name=reps]').hide()
@@ -94,7 +101,6 @@ var TaskView = Backbone.View.extend({
   //     this.$('input[name=reps]').show()
   //     this.$('button.rep-type').text('reps')
   //   }
-  //     
   // }
   , onChangeMetricInput : function(e){
     var $el = $(e.target)
@@ -113,9 +119,12 @@ var TaskView = Backbone.View.extend({
     var templateName = 'template' + ((this.model.get('open')) ? 'Open' : 'Closed')
     var template = this[templateName]
     this.$el.html(template(_.extend(
-      { movements : movements }
+      { 
+        movements : movements 
+        , metricNames : this.model.metrics.pluck('name')
+        , unitAbbr : unitAbbr
+      }
       , this.model.toJSON()
-      , { metricNames : this.model.metrics.pluck('name') }
     )))
     this.renderMetrics()
     this.updateOpenMetricInputOptions()

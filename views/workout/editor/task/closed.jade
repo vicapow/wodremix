@@ -1,6 +1,6 @@
 mixin metricBadge(metric, pullRight)
   span.label.label-info(class = pullRight ? 'pull-right' : 'pull-left') 
-    !{metric.value} !{metric.units}
+    !{metric.value} !{unitAbbr(metric.units)}
 td
   if(metrics['reps'])
     mixin metricBadge(metrics['reps'])
@@ -10,5 +10,5 @@ td
   span(style="margin-left:4px")
     !{label}
   for name in metricNames
-    mixin metricBadge(metrics[name],true)
+    mixin metricBadge(metrics[name], true)
     

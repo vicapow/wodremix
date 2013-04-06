@@ -2,7 +2,7 @@
 .metric(class=name)
   label(for=name) !{name}
   if(name === 'direction')
-    select.input-small
+    select.input-small.metric-value(name=name)
       option(value="forward") forward
       option(value="backward") backward
   else

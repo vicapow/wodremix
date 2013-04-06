@@ -1,8 +1,9 @@
 mixin duration(minutes, seconds)
-  select(class="minutes")
-    for num in _.range(0, 60)
-      option(value=num, selected = (minutes === num)) !{num} minutes
-  .clear
-  select(class="seconds")
-    for num in _.range(0, 60)
-      option(value=num, selected = (seconds === num))!{num} seconds
+  .duration
+    select(class="minutes")
+      for num in _.range(0, 60)
+        option(value=num, selected = (minutes === num)) !{num} minutes
+    .clear
+    select(class="seconds")
+      for num in _.range(0, 60)
+        option(value=num, selected = (seconds === num))!{num} seconds
