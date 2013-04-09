@@ -7,8 +7,8 @@ var WeightResult = require('./weight')
 
 var Result = Backbone.Model.extend({
   constructor : function(opts){
-    Backbone.Model.call(this)
     this.workout = opts.workout
+    Backbone.Model.call(this)
     this.listenTo(this, 'change:type', this.__onChangeType)
     this.listenTo(this.workout, 'change:type', this.__onWorkoutTypeChange)
     this.set('type', this.workout.get('type'))

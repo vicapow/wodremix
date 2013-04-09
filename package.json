@@ -25,6 +25,8 @@
     "asset-rack": "~2.1.5",
     "browserify-middleware": "~1.4.0",
     "optimist": "~0.3.5",
-    "backbone": "~1.0.0"
+    "backbone": "~1.0.0",
+    "post-to-url": "0.0.0",
+    "deepcopy": "~0.1.2"
   }
 }

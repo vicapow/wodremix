@@ -1,0 +1,13 @@
+include ../layout
+block body
+  include ../includes/nav
+  mixin nav('wod')
+  script(type="text/javascript")
+    var WorkoutEditor = require('./assets/js/views/workout/editor')
+    $(function(){
+      var editor = new WorkoutEditor()
+      $('.page-container').append(editor.$el)
+    })
+  .container.page-container
+    .row-fluid
+      .clear

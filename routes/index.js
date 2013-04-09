@@ -6,10 +6,10 @@ module.exports = function(app){
     if(!req.isAuthenticated()){
       return res.render('login')
     }
-    else return res.render('home/index')
+    else return res.redirect('/stats')
   })
   app.post('/login', passport.authenticate('local', {
-    successRedirect : '/'
+    successRedirect : '/stats'
     , failureRedirect : '/'
   }))
   
@@ -19,5 +19,6 @@ module.exports = function(app){
   })
   
   require('./wod')(app)
+  require('./wod-result')(app)
   require('./stats')(app)
 }

@@ -5,7 +5,9 @@ var mongoose = require('mongoose')
   , crypto = require('crypto')
 
 var WorkoutSchema = new Schema({
-  name : String
+  label : String
+  , desc : String
+  , type : String
   // date the workout is assigned for
   , date : { type : Date, default : Date.now }
   // date this record was created
@@ -13,7 +15,16 @@ var WorkoutSchema = new Schema({
   , type : String
   , rounds : Number
   , tasks : [TaskSchema]
+  , reps : Number
   , hash : String
+  , result : {
+    sets : [TaskSchema]
+    , duration : {
+      value : Number
+      , units : String // 'seconds', 'minutes' etc.
+      , base : Number // the result value in base metrics (ie., milliseconds for duration)
+    }
+  }
   // if not null, the gym that this workout is from, otherwise, indicates
   // this workout didn't come from a gym
   , gym : Schema.Types.ObjectId

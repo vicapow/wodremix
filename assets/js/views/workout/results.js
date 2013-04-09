@@ -16,32 +16,52 @@ var ResultsView = Backbone.View.extend({
   }
   , events : {
     'change input[name=reps]' : 'onChangeReps'
-    , 'change input[name=weight]' : 'onChangeWeight'
     , 'change .duration input[name=minutes]' : 'onTimeChange'
     , 'change .duration input[name=seconds]' : 'onTimeChange'
     , 'change .rounds select[name=rounds]' : 'onRoundsChange'
     , 'change .rounds select[name=reps]' : 'onRoundsChange'
+    , 'change .set input[name=weight]' : 'onChangeSetWeight'
+    , 'change .set select[name=units]' : 'onChangeSetWeightUnits'
+    , 'change .set input[name=reps]' : 'onChangeSetReps'
+  }
+  , __getSetMetric : function(order, metric){
+    var sets = this.workout.result.get('metric').get('sets')
+    var set = sets.findWhere({order:order})
+    return set.get(metric)
+  }
+  , onChangeSetWeight : function(e){
+    var $el = $(e.target)
+    var order = $el.data('order')
+    var metric = this.__getSetMetric(order, 'weight')
+    metric.value = $el.val()
+  }
+  , onChangeSetWeightUnits : function(e){
+    var $el = $(e.target)
+    var order = $el.data('order')
+    var metric = this.__getSetMetric(order, 'weight')
+    metric.units = $el.val()
+  }
+  , onChangeSetReps : function(e){
+    var $el = $(e.target)
+    var order = $el.data('order')
+    var metric = this.__getSetMetric(order, 'reps')
+    metric.value = $el.val()
   }
   , onResultMetricChange : function(result){
-    if(this.resultMetric) {
+    if(this.resultMetric)
       this.stopListening(this.resultMetric)
-      if(this.resultMetricSet)
-        this.stopListening(this.resultMetricSet)
-    }
+    if(this.resultMetricSet)
+      this.stopListening(this.resultMetricSet)
     var metric = this.resultMetric = result.get('metric')
-    var set = metric.get('sets')
-    this.resultMetricSet = set
-    if(!set) return
-    this.listenTo(set, 'add', this.onResultSetChange)
-    this.listenTo(set, 'change', this.onResultSetChange)
-    this.listenTo(set, 'remove', this.onResultSetChange)
+    var sets = metric.get('sets')
+    this.resultMetricSet = sets
+    if(!sets) return
+    this.listenTo(sets, 'change', this.render)
+    this.listenTo(sets, 'add', this.render)
+    this.listenTo(sets, 'remove', this.render)
     this.render()
   }
   , onResultSetChange : function(){
-    if(!this.$el.is(':visible') && this.resultMetricSet.length) 
-      this.$el.show()
-    else if(!this.resultMetricSet.length && this.$el.is(':visible')) 
-      this.$el.hide()
     this.render()
   }
   , onChangeReps : function(e){
@@ -93,10 +113,6 @@ var ResultsView = Backbone.View.extend({
     reps.value = total
     reps.units = "reps"
   }
-  , onChangeWeight : function(e){
-    var $el = $(e.target)
-    var order = $el.data('order')
-  }
   , render : function(){
     var $el = this.$el
     var type = this.workout.get('type')
@@ -112,6 +128,8 @@ var ResultsView = Backbone.View.extend({
       , units : units[type]
     }))
     this.updateSelectReps()
+    if(!this.$el.is(':visible') && sets.length)  this.$el.show()
+    else if(!sets.length && this.$el.is(':visible')) this.$el.hide()
   }
 })
 

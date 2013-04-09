@@ -8641,8 +8641,13 @@ ul.workout-list > li {
 .clear {
   clear: both;
 }
-.navbar-inverse .nav-collapse .nav > li > a {
-  color: white;
+.main-nav {
+  margin-top: 20px;
+  list-style: none;
+}
+.main-nav li {
+  display: inline;
+  margin: 10px;
 }
 .workout-editor table tr {
   margin: 20px;

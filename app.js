@@ -23,8 +23,8 @@ app.use(new rack.JadeAsset({
 app.set('view engine', 'jade')
 app.set('views', __dirname + '/views')
 app.locals.menu = {
-  "Home" : "/"
-  , "Stats" : "/stats"
+  "log" : "/wod/log"
+  , "stats" : "/stats"
 }
 
 // compression is good
@@ -84,14 +84,15 @@ app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
 // browserify
 browserify.settings.development.cache = 'yes'
 app.get('/js/bin/common.js', browserify([
-  './assets/js/jquery/jquery-1.9.1.js'
-  , './assets/flatstrap/assets/js/bootstrap.js'
-  , './assets/js/underscore/underscore.js'
-  , './assets/js/backbone/backbone.js'
-  , './assets/js/init.js'
-  , './assets/components/ftlabs-fastclick/lib/fastclick.js'
+  './assets/js/jquery/jquery-1.9.1'
+  , './assets/flatstrap/assets/js/bootstrap'
+  , './assets/js/underscore/underscore'
+  , './assets/js/backbone/backbone'
+  , './assets/js/init'
+  , './assets/components/ftlabs-fastclick/lib/fastclick'
+  , './node_modules/post-to-url'
+  , './assets/js/views/workout/editor'
 ]))
-app.get('/js/bin/pages/wod.js', browserify('./assets/js/pages/wod.js'))
 app.get('/js/bin/pages/home.js', browserify('./assets/js/pages/home.js'))
 
 app.listen(3000)

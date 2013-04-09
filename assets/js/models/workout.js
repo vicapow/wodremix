@@ -7,13 +7,12 @@ var workouts = require('../../data/wodtypes')
 var Workout = Backbone.Model.extend({
   constructor : function(attr){
     if(typeof attr === 'string') attr = workouts[attr]
-    if(typeof attr === 'undefined') 
+    if(typeof attr === 'undefined') // just get the first workout type
       attr = workouts[_.chain(workouts).keys().first().value()]
     var metric = attr.metric
     Backbone.Model.call(this, attr)
     this.metric = new Backbone.Model(metric)
     this.tasks = new Tasks()
-    this.result = new Result({workout:this})
     this.unset('metric')
     this.set('reps', 0)
     this.listenTo(this.tasks, 'add', this.__onAddTask)
@@ -21,6 +20,7 @@ var Workout = Backbone.Model.extend({
     this.listenTo(this, 'change:unused', this.__updateUnusedMetrics)
     this.listenTo(this, 'change:type', this.__updateWorkoutFromTypeChange)
     this.listenTo(this, 'change:required', this.__removeTasksWithoutRequiredMetrics)
+    this.result = new Result({workout:this})
   }
   , __onAddTask : function(task){
     if(this.__hasTaskRequiredMetrics(task)){

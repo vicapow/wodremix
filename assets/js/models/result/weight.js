@@ -1,5 +1,7 @@
 var Backbone = require('backbone')
 var Metric = require('../metric')
+var movements = require('../../../data/movements')
+var deepcopy = require('deepcopy')
 
 var WeightSet = Backbone.Model.extend({
   defaults : {
@@ -17,6 +19,11 @@ var WeightSet = Backbone.Model.extend({
     this.set('order', this.task.get('order'))
     this.get('reps').value = repsMetric.get('value')
     this.set('label', this.task.get('label'))
+    // set the sets default metrics to that of the movements
+    var attr = _.extend(
+      deepcopy(movements[this.task.get('name')].metrics)
+      , this.task.metrics.toJSON())
+    this.set(attr)
   }
   , __changeLabel : function(task){
     this.set('label', task.get('label'))
@@ -26,6 +33,16 @@ var WeightSet = Backbone.Model.extend({
   }
   , __onChangeReps : function(metric){
     this.get('reps').value = metric.get('value')
+  }
+  , toJSON : function(){
+    return {
+      label : this.get('label')
+      , metrics : {
+        weight : this.get('weight')
+        , reps : this.get('reps')
+      }
+      , order : this.get('order')
+    }
   }
 })
 
@@ -46,7 +63,8 @@ var WeightResult = Backbone.Model.extend({
       sets : new WeightSets
     }
   }
-  , initialize : function(opts){
+  , constructor : function(opts){
+    Backbone.Model.call(this)
     this.workout = opts.workout
     this.listenTo(this.workout.tasks, 'add', this.__onAddTask)
     this.listenTo(this.workout.tasks, 'remove', this.__onRemove)

@@ -5,6 +5,7 @@ var TaskView = require('./task')
   , Task = require('../../models/task')
   , wodtypes = require('./../../../data/wodtypes')
   , movements = require('./../../../data/movements')
+  , postToUrl = require('post-to-url')
 
 var WorkoutEditor = Backbone.View.extend({
   className : 'workout-editor'
@@ -13,20 +14,25 @@ var WorkoutEditor = Backbone.View.extend({
   , events : {
     'change .type' : 'onTypeInputChange'
     , 'click .add-movement' : 'onClickAddMovement'
+    , 'click button.submit' : 'onSubmit'
   }
   , resultsView : null
   , metricView : null
   , taskViews : []
   , initialize : function(){
-    __workout = this.workout = new Workout()
+    __workout = this.workout = new Workout() // NOTE: global
     this.listenTo(this.workout.tasks, 'add', this.onTaskAdded)
     this.listenTo(this.workout.tasks, 'change:order', this.onChangeOrder)
     this.listenTo(this.workout.tasks, 'remove', this.onRemove)
+    this.listenTo(this.workout,'change:reps', this.onRepCountChange)
     this.resultsView = new ResultsView({ workout : this.workout })
     this.metricView = new MetricView({ workout : this.workout })
     this.render()
-    // this.model.set('type', 'rounds')
-    // this.onTypeInputChange()
+    this.onRepCountChange()
+  }
+  , onRepCountChange : function(){
+    if(this.workout.get('reps')) this.$('button.submit').show()
+    else this.$('button.submit').hide()
   }
   , onClickAddMovement : function(){
     var type = this.workout.get('type')
@@ -62,9 +68,15 @@ var WorkoutEditor = Backbone.View.extend({
       if(model !== view.model) model.set('open', false)
     });
   }
+  , onSubmit : function(){
+    var workout = this.workout.toJSON()
+    postToUrl('/wod-result/create', {
+      workout : JSON.stringify(workout)
+    }, 'POST' )
+  }
   , render : function(){
     this.$el.html(this.template({
-      title : 'Log a wod'
+      title : 'Log A Wod'
       , wodtypes : wodtypes
     }))
     this.$('.results-container').html(this.resultsView.el)

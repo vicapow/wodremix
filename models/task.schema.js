@@ -3,15 +3,38 @@ var mongoose = require('mongoose')
 
 var TaskSchema = new Schema({
   type : String
-  , distance : Schema.Types.Mixed
-  , weight : Schema.Types.Mixed
-  , height : Schema.Types.Mixed
-  , duration : Schema.Types.Mixed
-  , reps : Number
-  , arm : String
-  , foot : String
-  , note : String
-  , direction : String
+  , label : String
+  , name : String
+  , metrics : {
+    distance : {
+      value : Number
+      , units : String
+    }
+    , weight : {
+      value : Number
+      , units : String
+    }
+    , height : {
+      value : Number
+      , units : String
+    }
+    , duration : {
+      value : Number
+      , units : String
+    }
+    , reps : {
+      value : Number
+    }
+    , arm : {
+      value : String
+    }
+    , foot : {
+      value : String
+    }
+    , direction : {
+      value : String
+    }
+  }
 }, { _id : false })
 
 module.exports = TaskSchema;
