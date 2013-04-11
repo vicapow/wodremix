@@ -10,7 +10,7 @@ module.exports = function(app){
   })
   app.get('/wod/pr/list', function(req, res, next){
     if(!req.isAuthenticated()) return res.render('login')
-    Workout.getRecords(req.user._id, function(err, records){
+    Workout.getRecords({userid : req.user._id}, function(err, records){
       if(err) throw err
       return res.render('wod/pr/list', { records : records })
     })
@@ -26,6 +26,32 @@ module.exports = function(app){
       return res.render('wod/list', { workouts : workouts })
     })
   })
+  app.get('/wod/pr/:movement', function(req, res, next){
+    var name = req.params.movement
+    name = name.replace(/-/g,' ')
+    var movement = movements[name]
+    if(!movement) return res.redirect('/')
+    Workout.getRecords({
+      userid : req.user._id
+      , movement : name
+    }, function(err, records){
+      if(err) return next(err)
+      Workout.getWith({
+        userid : req.user._id
+        , movement : name
+      }, function(err, workouts){
+        if(err) return next(err)
+        workouts = _.map(workouts, function(workout){
+          return workout.value
+        })
+        return res.render('wod/pr/movement', {
+          movement : movement
+          , records : records
+          , workouts : workouts
+        })
+      })
+    })
+  })
   app.get('/wod/:hash', function(req, res, next){
     if(!req.isAuthenticated()) return res.render('login')
     Workout.find({hash : req.params.hash})
@@ -38,15 +64,6 @@ module.exports = function(app){
         , workout : workouts[0]
         , workouts : workouts
       })
-    })
-  })
-  app.get('/wod/pr/:movement', function(req, res, next){
-    var name = req.params.movement
-    name = name.replace(/-/g,' ')
-    var movement = movements[name]
-    if(!movement) return res.redirect('/')
-    return res.render('wod/pr/movement', {
-      movement : movement
     })
   })
 }

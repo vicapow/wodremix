@@ -4,8 +4,13 @@ include ../../layout
 include ../../includes/nav
 //- include the workout list item partial
 include ../../workout/partials/pr-list
+include ../../workout/partials/workout-list
 block body
   mixin nav('stats')
   .container.page-container
     .row-fluid
       h2 !{movement.label}
+      h3 PRs
+      mixin pr-list(records)
+      h3 Workouts
+      mixin workout-list(workouts)

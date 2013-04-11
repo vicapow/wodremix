@@ -80,9 +80,34 @@ WorkoutSchema.methods.getRepsPerRound = function(){
     return memo + task.metrics.reps.value
   }, 0)
 }
+
+WorkoutSchema.statics.getWith = function(opts, cb){
+  if(!cb) cb = opts
+  var o = {
+    map : function(){
+      if(creator && !this.creator.equals(creator)) return
+       var saw_movement = false
+       for(var i = 0; i < this.tasks.length; i++)
+         if(this.tasks[i].name === movement) saw_movement = true
+      if(!movement || saw_movement) emit({
+        hash : this.hash
+      }, this)
+   }
+   , reduce : function(k, vals){
+     return vals[0]
+   }
+   , scope : {
+     creator : opts.creator
+     , movement : opts.movement
+   }
+  }
+  
+  Workout.mapReduce(o, cb)
+}
+
 /**
   * getRecords([options], callback)
-  * retrieve records. optionally for a given user and/or gym
+  * retrieve records. optionally for a given user and/or gym and/or movment
   */
 WorkoutSchema.statics.getRecords = function(opts, cb){
   // NOTE: map/reduce methods are run on the server, so they cannot reference
@@ -97,6 +122,7 @@ WorkoutSchema.statics.getRecords = function(opts, cb){
      
      for(var i = 0; i < this.result.sets.length; i++){
        var set = this.result.sets[i]
+       if(movement && this.tasks[i].name !== movement) return
        emit({
          name : this.tasks[i].name
          , reps : set.metrics.reps.value 
@@ -121,6 +147,7 @@ WorkoutSchema.statics.getRecords = function(opts, cb){
    , scope : {
      creator : opts.creator
      , gymid : opts.gymid
+     , movement : opts.movement
      , unitConvert : unitConvert
    }
   }

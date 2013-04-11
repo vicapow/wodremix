@@ -87,7 +87,7 @@ var ResultsView = Backbone.View.extend({
   , onTimeChange : function(){
     var minutes = this.$('.duration select[name=minutes]').val()
     var seconds = this.$('.duration select[name=seconds]').val()
-    var total = minutes * 60 + seconds
+    var total = Number(minutes) * 60 + Number(seconds)
     var duration = this.workout.result.get('metric').set({
       value : total
       , units : "seconds"
@@ -107,14 +107,9 @@ var ResultsView = Backbone.View.extend({
   }
   , onRoundsChange : function(){
     var repsInARound = this.workout.get('reps')
-    console.log('reps in a round : ' + repsInARound )
     var rounds = this.$('.rounds select[name=rounds]').val()
     var reps = this.$('.rounds select[name=reps]').val()
-    console.log('rounds: ' + rounds)
-    console.log('reps in a round : ' + repsInARound )
-    console.log('reps: ' + reps)
     var total = rounds * repsInARound + Number(reps)
-    console.log('total: ' + total)
     this.workout.result.get('metric').set({
       value : total
       , units : "reps"
