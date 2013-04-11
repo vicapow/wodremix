@@ -1,41 +1,26 @@
+//- include the layout
 include ../layout
+//- include the nav mixin
+include ../includes/nav
+//- include the workout list item partial
+include ../workout/partials/workout-list
+include ../workout/partials/pr-list
 block body
-  include ../includes/nav
   mixin nav('Stats')
   .container.page-container
     .row-fluid
       h2 Stats 
       h3 Recently Logged Workouts
-      table.table.table-bordered.table-striped
-        tbody
-          for workout in workouts
-            tr
-              td
-                a(href="/wod/" + workout.hash) !{workout.label} 
-                | !{moment(workout.date).fromNow()}
-                //- span.pull-right.badge.badge-info 350 lbs
-      a.pull-right.btn.btn-primary all
+      mixin workouts-list(workouts)
+      a(href="/wod/list").pull-right.btn.btn-primary all
       br
       br
-      h3 PRs 
-      table.table.table-bordered.table-striped
-        tbody
-          tr
-            td
-              | Deadlift 
-              span.pull-right.badge.badge-info 405 lbs
-              | 
-              span.pull-right.badge.badge-info 1 RM
-          tr
-            td
-              | Back squat 
-              span.pull-right.badge.badge-info 350 lbs
-              | 
-              span.pull-right.badge.badge-info 2 RM
+      h3 Recent PRs 
+      mixin pr-list(records)
       .pull-right 
         a.btn.btn-primary
           i.icon-plus
-        a.btn.btn-primary all
+        a.btn.btn-primary(href="/wod/pr/list") all
       .clear
       br
       br

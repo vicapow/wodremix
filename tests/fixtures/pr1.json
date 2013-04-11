@@ -1,0 +1,30 @@
+{
+  "type" : "weight"
+  , "name" : "1-1-1-1-1-1-1 Deadlift"
+  , "tasks" : [{
+    "name" : "deadlift"
+    , "reps" : { "value" : 3, "units" : null }
+  }
+  , {
+    "name" : "deadlift"
+    , "reps" : { "value" : 3, "units" : null}
+  }]
+  , "result" : {
+    "sets" : [
+      {
+        "name" : "deadlift"
+        , "metrics" : {
+          "weight" : { "value" : 110, "units" : "pounds" }
+          , "reps" : { "value" : 3, "units" : null }
+        }
+      }
+      , {
+        "name" : "deadlift"
+        , "metrics" : {
+          "weight" : { "value" : 200, "units" : "pounds" }
+          , "reps" : { "value" : 2, "units" : null }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+include ./workout-list-item
+mixin workouts-list(workouts)
+  table.table.table-bordered.table-striped
+    tbody
+      for workout in workouts
+        tr
+          td
+            mixin workout-list-item(workout)

@@ -27,6 +27,7 @@ app.locals.menu = {
   , "stats" : "/stats"
 }
 app.locals.moment = require('moment')
+app.locals.unitAbbr = require('./assets/data/units-abbr')
 app.locals.formats = {}
 app.locals.formats.duration = function(d){
   var s = '', m = ''

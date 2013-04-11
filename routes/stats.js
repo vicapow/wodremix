@@ -8,12 +8,13 @@ module.exports = function(app){
     .sort({ field: 'asc', date: -1 })
     .limit(5).exec(function(err, workouts){
       if(err) return next(err)
-      end(workouts)
-    })
-    function end(workouts){
-      return res.render('stats/index', {
-        workouts : workouts
+      Workout.getRecords({creator: req.user._id}, function(err, records){
+        if(err) return next(err)
+        return res.render('stats/index', {
+          workouts : workouts
+          , records : records
+        })
       })
-    }
+    })
   })
 }

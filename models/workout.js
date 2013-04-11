@@ -4,6 +4,7 @@ var mongoose = require('mongoose')
   , TaskSchema = require('./task.schema')
   , crypto = require('crypto')
   , moment = require('moment')
+  , unitConvert = require('../assets/data/unit-convert')
 
 var WorkoutSchema = new Schema({
   label : String
@@ -47,10 +48,18 @@ WorkoutSchema.pre('save', function(next){
   next()
 })
 
+/** taks a workout in the `workout.js` format and converts it to our internal
+  * workout format
+  * for example:
+  *  { weight: 100, units : 'pounds' }
+  * goes to...
+  * { weight : { value : 100, units : 'pounds' } }
+  */
 WorkoutSchema.statics.cleanTasks = function(workout){
   var tasks = workout.tasks
   _.each(tasks, function(task){
     if(task.units){
+      // remove keys that arent tasks we know about
       var attrs = _.union(_.keys(task),['distance', 'weight', 'height', 'duration'])
       _.each(attrs, function(attr){
         if(typeof(task[attr]) !== 'number') return
@@ -61,7 +70,7 @@ WorkoutSchema.statics.cleanTasks = function(workout){
       })
       delete task.units
     }
-    if(!task.reps) task.reps = 1
+    if(!task.reps) task.reps = { value : 1, units : null }
   })
   return workout
 }
@@ -71,38 +80,20 @@ WorkoutSchema.methods.getRepsPerRound = function(){
     return memo + task.metrics.reps.value
   }, 0)
 }
-
+/**
+  * getRecords([options], callback)
+  * retrieve records. optionally for a given user and/or gym
+  */
 WorkoutSchema.statics.getRecords = function(opts, cb){
-  // map/reduce methods are run on the server, so they cannot reference
-  // any variables outside of its scope
+  // NOTE: map/reduce methods are run on the server, so they cannot reference
+  // any variables outside of its scope without passing them to the `scope`
+  // property
+  if(!cb) cb = opts
   var o = {
    map : function(){
      if(this.type !== 'weight') return
-     if(userid && !this.creator.equals(userid)) return
+     if(creator && !this.creator.equals(creator)) return
      if(gymid && !this.gym.equals(gymid)) return
-     var conversions = {
-       // weight
-       // from : http://www.onlineconversion.com/weight_all.htm
-       "pounds" : {
-         "kilograms" : 0.45359237
-         , "poods" : 0.027827752761
-       }
-       , "kilograms" : {
-         "pounds" : 2.2046226218
-         , "poods" : 0.061349693252
-       }
-       , "poods" : {
-         "kilograms" : 16.3
-         , "pounds" : 35.935348736
-       }
-     }
-
-     var convert = function(metric, to){
-       var from = metric.units
-       var value = metric.value
-       if(from === to) return value
-       return conversions[from][to] * value
-     }
      
      for(var i = 0; i < this.result.sets.length; i++){
        var set = this.result.sets[i]
@@ -111,23 +102,26 @@ WorkoutSchema.statics.getRecords = function(opts, cb){
          , reps : set.metrics.reps.value 
       }
       , { 
-        weight : convert(set.metrics.weight, 'pounds')
+        __data__ : unitConvert(set.metrics.weight, 'pounds')
         , workout : this._id
         , label : set.label
-        , units : set.metrics.weight.units
+        , metrics : set.metrics
+        , date : this.date
+        , name : this.tasks[i].name
       })
      }
    }
    , reduce : function(k, vals){
      var max = 0
-     for(var i = 0; i < vals.length; i++){
-       if(vals[i] > max) max = vals[i].weight
+     for(var i = 1; i < vals.length; i++){
+       if(vals[i].__data__ > vals[max].__data__) max = i
      }
-     return max
+     return vals[max]
    }
    , scope : {
-     userid : opts.userid
+     creator : opts.creator
      , gymid : opts.gymid
+     , unitConvert : unitConvert
    }
   }
   

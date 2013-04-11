@@ -5,11 +5,12 @@ mixin result(workout)
   if(workout.type === 'weight')
     for set in workout.result.sets
       span.badge.badge-info !{set.metrics.reps.value} @ !{set.metrics.weight.value} !{unitAbbr(set.metrics.weight.units)}
+      span.pull-right !{moment(workout.date).fromNow()}
   else if(workout.type === 'duration')
     - var d = workout.result.duration
     - var dur = moment.duration(d.value, d.units)
     !{formats.duration(dur)}
-    | !{workout.date}
+    span.pull-right !{moment(workout.date).fromNow()}
   else if(workout.type === 'rounds')
     - var reps = workout.result.reps.value
     - var rounds = Math.floor( reps / workout.getRepsPerRound() )

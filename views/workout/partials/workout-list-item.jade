@@ -1,0 +1,3 @@
+mixin workout-list-item(workout)
+  a(href="/wod/" + workout.hash) !{workout.label} 
+  | !{moment(workout.date).fromNow()}

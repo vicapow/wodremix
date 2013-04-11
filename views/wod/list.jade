@@ -1,0 +1,13 @@
+//- include the layout
+include ../layout
+//- include the nav mixin
+include ../includes/nav
+//- include the workout list item partial
+include ../workout/partials/workout-list
+block body
+  mixin nav('stats')
+  .container.page-container
+    .row-fluid
+      h2 All Logged Workouts
+      mixin workouts-list(workouts)
+      br

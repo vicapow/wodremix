@@ -1,17 +1,2 @@
-mixin metricBadge(metric, pullRight)
-  span.label.label-info(class = pullRight ? 'pull-right' : 'pull-left') 
-    !{metric.value} !{unitAbbr(metric.units)}
-td
-  - var metricNames = Object.keys(task.metrics)
-  if(task.metrics['reps'])
-    mixin metricBadge(task.metrics['reps'])
-    - metricNames.splice(metricNames.indexOf('reps'),1)
-  else if(metricNames.length)
-    mixin metricBadge(task.metrics[metricNames.shift()])
-  span(style="margin-left:4px")
-    !{task.label}
-  for name in metricNames
-    - var metric = task.metrics[name]
-    if metric.value
-      mixin metricBadge(task.metrics[name], true)
-    
+include ../../partials/task
+mixin task(task)
