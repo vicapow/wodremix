@@ -6,7 +6,8 @@ module.exports = function(app){
     if(!req.isAuthenticated()) return res.render('login')
     var workout = JSON.parse(req.body.workout)
     workout = new Workout(workout)
+    workout.creator = req.user._id
     workout.save()
-    res.json(workout)
+    res.redirect('/stats')
   })
 }

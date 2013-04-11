@@ -6,6 +6,7 @@ var TaskView = require('./task')
   , wodtypes = require('./../../../data/wodtypes')
   , movements = require('./../../../data/movements')
   , postToUrl = require('post-to-url')
+  , _ = require('underscore')
 
 var WorkoutEditor = Backbone.View.extend({
   className : 'workout-editor'

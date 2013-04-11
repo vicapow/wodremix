@@ -24,7 +24,7 @@ var wodtypes = {
     }
   }
   , "weight" : {
-    label : "Rounds for weight"
+    label : "Weightlifting"
     , desc : "Complete the workout with the heaviest weight possible."
     // movement has to have a weight metric
     , required : ["weight"]

@@ -26,6 +26,16 @@ app.locals.menu = {
   "log" : "/wod/log"
   , "stats" : "/stats"
 }
+app.locals.moment = require('moment')
+app.locals.formats = {}
+app.locals.formats.duration = function(d){
+  var s = '', m = ''
+  s = s + d._data.seconds;
+  if(s.length===1) s = '0' + s
+  m = m + d._data.minutes;
+  if(m.length===1) m = '0' + m;
+  return m + ':' + s
+}
 
 // compression is good
 app.use(express.compress())
@@ -84,10 +94,7 @@ app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
 // browserify
 browserify.settings.development.cache = 'yes'
 app.get('/js/bin/common.js', browserify([
-  './assets/js/jquery/jquery-1.9.1'
-  , './assets/flatstrap/assets/js/bootstrap'
-  , './assets/js/underscore/underscore'
-  , './assets/js/backbone/backbone'
+  './assets/flatstrap/assets/js/bootstrap'
   , './assets/js/init'
   , './assets/components/ftlabs-fastclick/lib/fastclick'
   , './node_modules/post-to-url'

@@ -37,11 +37,12 @@ var Workout = Backbone.Model.extend({
     if(metric.get('name') === 'reps') this.__updateReps()
   }
   , __updateReps : function(){
+    console.log('__updateReps')
     var num = 0
     this.tasks.each(function(task){
       var metric = task.metrics.findWhere({name:'reps'})
       if(!metric) num += 1
-      else num += metric.get('value')
+      else num += Number(metric.get('value'))
     }, this)
     this.set('reps', num)
   }

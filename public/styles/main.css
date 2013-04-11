@@ -8626,7 +8626,7 @@ h6 {
   font-weight: 300;
 }
 .page-container {
-  padding: 60px 0 80px;
+  padding: 0px 0 80px;
 }
 @media (max-width: 979px) {
   .page-container {

@@ -1,6 +1,6 @@
-require('./jquery/jquery-1.9.1.js')
-_ = require('./underscore/underscore.js')
-Backbone = require('./backbone/backbone.js')
+require('jquery-browserify')
+_ = require('underscore')
+Backbone = require('backbone')
 require('./../flatstrap/assets/js/bootstrap.js')
 
 $(function(){

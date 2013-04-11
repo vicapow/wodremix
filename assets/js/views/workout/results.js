@@ -1,4 +1,5 @@
 var units = require('./../../../data/units.js')
+  , _ = require('underscore')
 
 var ResultsView = Backbone.View.extend({
   className : 'results'
@@ -16,8 +17,8 @@ var ResultsView = Backbone.View.extend({
   }
   , events : {
     'change input[name=reps]' : 'onChangeReps'
-    , 'change .duration input[name=minutes]' : 'onTimeChange'
-    , 'change .duration input[name=seconds]' : 'onTimeChange'
+    , 'change .duration select[name=minutes]' : 'onTimeChange'
+    , 'change .duration select[name=seconds]' : 'onTimeChange'
     , 'change .rounds select[name=rounds]' : 'onRoundsChange'
     , 'change .rounds select[name=reps]' : 'onRoundsChange'
     , 'change .set input[name=weight]' : 'onChangeSetWeight'
@@ -84,12 +85,13 @@ var ResultsView = Backbone.View.extend({
     round.get('weight').units = $el.val()
   }
   , onTimeChange : function(){
-    var minutes = this.$('.duration input[name=minutes]').val()
-    var seconds = this.$('.duration input[name=seconds]').val()
+    var minutes = this.$('.duration select[name=minutes]').val()
+    var seconds = this.$('.duration select[name=seconds]').val()
     var total = minutes * 60 + seconds
-    var duration = this.workout.result.get('metric').get('duration')
-    duration.value = total
-    duration.units = "seconds"
+    var duration = this.workout.result.get('metric').set({
+      value : total
+      , units : "seconds"
+    })
   }
   , updateSelectReps : function(){
     var select = this.$('select[name=reps]')
@@ -105,13 +107,18 @@ var ResultsView = Backbone.View.extend({
   }
   , onRoundsChange : function(){
     var repsInARound = this.workout.get('reps')
-    var rounds = this.$('.duration input[name=minutes]').val()
-    var reps = this.$('.duration input[name=seconds]').val()
-    var total = rounds * repsInARound + reps
-    var reps = this.workout.result.get('metric').get('reps')
-    if(!reps) return
-    reps.value = total
-    reps.units = "reps"
+    console.log('reps in a round : ' + repsInARound )
+    var rounds = this.$('.rounds select[name=rounds]').val()
+    var reps = this.$('.rounds select[name=reps]').val()
+    console.log('rounds: ' + rounds)
+    console.log('reps in a round : ' + repsInARound )
+    console.log('reps: ' + reps)
+    var total = rounds * repsInARound + Number(reps)
+    console.log('total: ' + total)
+    this.workout.result.get('metric').set({
+      value : total
+      , units : "reps"
+    })
   }
   , render : function(){
     var $el = this.$el
@@ -128,8 +135,8 @@ var ResultsView = Backbone.View.extend({
       , units : units[type]
     }))
     this.updateSelectReps()
-    if(!this.$el.is(':visible') && sets.length)  this.$el.show()
-    else if(!sets.length && this.$el.is(':visible')) this.$el.hide()
+    if(!this.$el.is(':visible') && this.workout.tasks.length)  this.$el.show()
+    else if(!this.workout.tasks.length && this.$el.is(':visible')) this.$el.hide()
   }
 })
 

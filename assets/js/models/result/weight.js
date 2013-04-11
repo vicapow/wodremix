@@ -1,4 +1,5 @@
 var Backbone = require('backbone')
+var _ = require('underscore')
 var Metric = require('../metric')
 var movements = require('../../../data/movements')
 var deepcopy = require('deepcopy')

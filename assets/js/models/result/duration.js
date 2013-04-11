@@ -11,11 +11,9 @@ var DurationResult = Backbone.Model.extend({
   }
   , toJSON: function(){
     return {
-      metrics : {
-        duration : {
-          value : this.get('value')
-          , units : this.get('units')
-        }
+      duration : {
+        value : Number(this.get('value'))
+        , units : this.get('units')
       }
     }
   }

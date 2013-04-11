@@ -11,11 +11,9 @@ var RepsResult = Backbone.Model.extend({
   }
   , toJSON : function(){
     return {
-      metrics : {
-        reps : {
-          value : this.get('value')
-          , units : this.get('units')
-        }
+      reps : {
+        value : Number(this.get('value'))
+        , units : this.get('units')
       }
     }
   }

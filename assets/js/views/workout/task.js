@@ -1,6 +1,7 @@
-var units = require('./../../../data/units.js')
-  , movements = require('./../../../data/movements.js')
-  , unitAbbr = require('./../../../data/units-abbr.js')
+var units = require('./../../../data/units')
+  , movements = require('./../../../data/movements')
+  , unitAbbr = require('./../../../data/units-abbr')
+  , _ = require('underscore')
 
 var TaskView = Backbone.View.extend({
   tagName : 'tr'
@@ -73,35 +74,12 @@ var TaskView = Backbone.View.extend({
   , onClickUnits : function(){
     this.$('select.units').focus()
   }
-  // , onClickRepType : function(){
-  //   this.$('select.rep-type').focus()
-  // }
-  // , onChangeRepTypeSelect : function(){
-  //   if(
-  //     this.$('select.rep-type').val() === 'max' 
-  //     && this.model.get('reps') !== 'max' 
-  //   ){
-  //     this._prevReps = this.model.get('reps')
-  //     this.model.set('reps','max')
-  //   }else if(this.model.get('reps') === 'max'){
-  //     this.model.set('reps', this._prevReps)
-  //   }
-  // }
   , onChangeMetricUnitSelect : function(e){
     var $el = this.$(e.target)
     var metric = $el.data('metric')
     metric = this.model.metrics.findWhere({name:metric})
     metric.set('units', $el.val())
   }
-  // , onChangeRepType : function(){
-  //   if(this.model.get('reps') === 'max'){
-  //     this.$('input[name=reps]').hide()
-  //     this.$('button.rep-type').text('max reps')
-  //   }else{
-  //     this.$('input[name=reps]').show()
-  //     this.$('button.rep-type').text('reps')
-  //   }
-  // }
   , onChangeMetricInput : function(e){
     var $el = $(e.target)
     var metric = $el.attr('name')
@@ -124,7 +102,7 @@ var TaskView = Backbone.View.extend({
         , metricNames : this.model.metrics.pluck('name')
         , unitAbbr : unitAbbr
       }
-      , this.model.toJSON()
+      , { task : this.model.toJSON() }
     )))
     this.renderMetrics()
     this.updateOpenMetricInputOptions()
@@ -152,7 +130,10 @@ var TaskView = Backbone.View.extend({
     this.$('.metrics-container').empty()
     this.model.metrics.each(function(metric){
       if(this.workout.get('type') === metric.get('name')) return
-      var locals = _.extend( {unitOpts: units}, this.model.toJSON(), metric.toJSON() )
+      var locals = _.extend( 
+        { metric : metric.toJSON() }
+        , { units : units }
+      )
       this.$('.metrics-container')
         .append(Templates['workout/editor/task/metric'](locals))
     }, this)

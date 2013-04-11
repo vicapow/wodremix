@@ -47,6 +47,9 @@ describe('Data', function(){
         + 'metrics should be added back.')
       should.exist(metric)
     })
+    it('should retrieve a users PRs', function(){
+      Workout.getRecords
+    })
   })
 })
 

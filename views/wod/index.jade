@@ -1,0 +1,42 @@
+include ../layout
+
+mixin result(workout)
+  //- a(href="/wod/result/" + workout.id)
+  if(workout.type === 'weight')
+    for set in workout.result.sets
+      span.badge.badge-info !{set.metrics.reps.value} @ !{set.metrics.weight.value} !{unitAbbr(set.metrics.weight.units)}
+  else if(workout.type === 'duration')
+    - var d = workout.result.duration
+    - var dur = moment.duration(d.value, d.units)
+    !{formats.duration(dur)}
+    | !{workout.date}
+  else if(workout.type === 'rounds')
+    - var reps = workout.result.reps.value
+    - var rounds = Math.floor( reps / workout.getRepsPerRound() )
+    - reps = reps % rounds
+    !{rounds} rounds
+    !{reps} reps
+    span.pull-right !{moment(workout.date).fromNow()}
+  else
+    !{JSON.stringify(workout.type)}
+
+block body
+  include ../includes/nav
+  mixin nav('wod')
+  .container.page-container
+    .row-fluid
+      h2 WOD
+      h3 !{wodtype.label} of
+      table.table.table-bordered.table-striped.table-condensed.movements
+        tbody
+          for task in workout.tasks
+            tr
+              include ../workout/editor/task/closed
+      
+      h3 Recent Results
+      table.table.table-bordered.table-striped
+        tbody
+          for workout in workouts
+            tr
+              td
+                mixin result(workout)

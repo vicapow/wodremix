@@ -27,6 +27,8 @@
     "optimist": "~0.3.5",
     "backbone": "~1.0.0",
     "post-to-url": "0.0.0",
-    "deepcopy": "~0.1.2"
+    "deepcopy": "~0.1.2",
+    "jquery-browserify": "~1.8.1",
+    "moment": "~2.0.0"
   }
 }
