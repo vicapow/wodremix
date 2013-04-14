@@ -1,0 +1,3 @@
+[submodule "assets/flatpstrap"]
+	path = assets/flatpstrap
+	url = https://github.com/littlesparkvt/flatstrap.git
