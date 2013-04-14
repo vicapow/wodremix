@@ -1,2 +1,3 @@
-+ add defaults for men/women (not just men)
++ allow workout results to be removed
 + add "max reps" workout type
++ add defaults for men/women (not just men)
