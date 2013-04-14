@@ -104,4 +104,4 @@ app.get('/js/bin/common.js', browserify([
 ]))
 app.get('/js/bin/pages/home.js', browserify('./assets/js/pages/home.js'))
 
-app.listen(3000)
+app.listen(3003)
