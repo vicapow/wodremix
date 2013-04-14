@@ -1,0 +1,9 @@
+include ../../workout/partials/task
+mixin movements-list(movements)
+  table.table.table-bordered.table-striped
+    tbody
+      for movement in movements
+        tr
+          td
+            a(href="/movements/" + movement.name.replace(/ /g, '-'))
+              !{movement.label}

@@ -25,6 +25,7 @@ app.set('views', __dirname + '/views')
 app.locals.menu = {
   "log" : "/wod/log"
   , "stats" : "/stats"
+  , "movements" : "/movements"
 }
 app.locals.moment = require('moment')
 app.locals.unitAbbr = require('./assets/data/units-abbr')

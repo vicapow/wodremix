@@ -3,9 +3,7 @@ var passport = require('passport')
 
 module.exports = function(app){
   app.get('/', function(req, res, next){
-    if(!req.isAuthenticated()){
-      return res.render('login')
-    }
+    if(!req.isAuthenticated()) return res.render('login')
     else return res.redirect('/stats')
   })
   app.post('/login', passport.authenticate('local', {
@@ -19,6 +17,7 @@ module.exports = function(app){
   })
   
   require('./wod')(app)
+  require('./movements')(app)
   require('./wod-result')(app)
   require('./stats')(app)
 }

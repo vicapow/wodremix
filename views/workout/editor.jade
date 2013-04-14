@@ -3,6 +3,11 @@ label(for="type") type
 select(name="type", class="type")
   for type, key in wodtypes
     option(value=key) !{type.label}
+label(for="date") date
+select(name="date", class="date")
+  option(value="today") Today
+  option(value="yesterday") Yesterday
+  option(value="idk") I don't remember
 .metric-container
 
 br

@@ -3,23 +3,25 @@ include ../includes/nav
 include ../workout/partials/task
 
 mixin result(workout)
-  //- a(href="/wod/result/" + workout.id)
   if(workout.type === 'weight')
     for set in workout.result.sets
       span.badge.badge-info !{set.metrics.reps.value} @ !{set.metrics.weight.value} !{unitAbbr(set.metrics.weight.units)}
-      span.pull-right !{moment(workout.date).fromNow()}
+      if(workout.date)
+        span.pull-right !{moment(workout.date).fromNow()}
   else if(workout.type === 'duration')
     - var d = workout.result.duration
     - var dur = moment.duration(d.value, d.units)
     !{formats.duration(dur)}
-    span.pull-right !{moment(workout.date).fromNow()}
+    if(workout.date)
+      span.pull-right !{moment(workout.date).fromNow()}
   else if(workout.type === 'rounds')
     - var reps = workout.result.reps.value
     - var rounds = Math.floor( reps / workout.getRepsPerRound() )
     - reps = reps % rounds
     !{rounds} rounds
     !{reps} reps
-    span.pull-right !{moment(workout.date).fromNow()}
+    if(workout.date)
+      span.pull-right !{moment(workout.date).fromNow()}
   else
     !{JSON.stringify(workout.type)}
 
@@ -34,7 +36,7 @@ block body
           for task in workout.tasks
             tr
               td
-                a(href="/wod/pr/" + task.name.replace(/ /g, '-'))
+                a(href="/movements/" + task.name.replace(/ /g, '-'))
                   mixin task(task)
       
       h3 Recent Results

@@ -1,2 +1,2 @@
-+ fix metric apperance when task name changes
-+ fix results re-ordering
++ add defaults for men/women (not just men)
++ add "max reps" workout type

@@ -1,0 +1,12 @@
+//- include the layout
+include ../layout
+//- include the nav mixin
+include ../includes/nav
+//- include the movement list item partial
+include ./partials/list
+block body
+  mixin nav('movements')
+  .container.page-container
+    .row-fluid
+      h2 Movements
+      mixin movements-list(movements)

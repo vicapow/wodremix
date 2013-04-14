@@ -35,11 +35,9 @@ describe('DB', function(){
           should.not.exist(err)
           Workout.getRecords(function(err, records){
             should.not.exist(err)
-            console.log(records)
             var rep2max = _.find(records, function(r){ 
               return r._id.name === 'deadlift' && r._id.reps === 2 
             })
-            console.log(records[0])
             should.exist(rep2max)
             should.exist(rep2max.value.metrics)
             should.exist(rep2max.value.metrics.weight)

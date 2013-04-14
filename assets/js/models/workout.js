@@ -15,6 +15,7 @@ var Workout = Backbone.Model.extend({
     this.tasks = new Tasks()
     this.unset('metric')
     this.set('reps', 0)
+    this.set('date', 'today')
     this.listenTo(this.tasks, 'add', this.__onAddTask)
     this.listenTo(this.tasks, 'remove', this.__onRemoveTask)
     this.listenTo(this, 'change:unused', this.__updateUnusedMetrics)

@@ -5,20 +5,20 @@ var Workout = require('../models/workout')
 
 module.exports = function(app){
   app.get('/wod/log', function(req, res, next){
-    if(!req.isAuthenticated()) return res.render('login')
+    if(!req.isAuthenticated()) return res.redirect('/')
     return res.render('workout/log')
   })
   app.get('/wod/pr/list', function(req, res, next){
-    if(!req.isAuthenticated()) return res.render('login')
+    if(!req.isAuthenticated()) return res.redirect('/')
     Workout.getRecords({userid : req.user._id}, function(err, records){
-      if(err) throw err
+      if(err) records = []
       return res.render('wod/pr/list', { records : records })
     })
   })
   // list all the workouts for a user
   // TODO: pagination (low priority)
   app.get('/wod/list', function(req, res, next){
-    if(!req.isAuthenticated()) return res.render('login')
+    if(!req.isAuthenticated()) return res.redirect('/')
     Workout.find({creator:req.user._id})
     .sort({ field: 'asc', date: -1 })
     .exec(function(err, workouts){
@@ -26,34 +26,8 @@ module.exports = function(app){
       return res.render('wod/list', { workouts : workouts })
     })
   })
-  app.get('/wod/pr/:movement', function(req, res, next){
-    var name = req.params.movement
-    name = name.replace(/-/g,' ')
-    var movement = movements[name]
-    if(!movement) return res.redirect('/')
-    Workout.getRecords({
-      userid : req.user._id
-      , movement : name
-    }, function(err, records){
-      if(err) return next(err)
-      Workout.getWith({
-        userid : req.user._id
-        , movement : name
-      }, function(err, workouts){
-        if(err) return next(err)
-        workouts = _.map(workouts, function(workout){
-          return workout.value
-        })
-        return res.render('wod/pr/movement', {
-          movement : movement
-          , records : records
-          , workouts : workouts
-        })
-      })
-    })
-  })
   app.get('/wod/:hash', function(req, res, next){
-    if(!req.isAuthenticated()) return res.render('login')
+    if(!req.isAuthenticated()) return res.redirect('/')
     Workout.find({hash : req.params.hash})
     .sort({ field: 'asc', date: -1 })
     .exec(function(err, workouts){

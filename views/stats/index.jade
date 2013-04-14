@@ -11,16 +11,21 @@ block body
     .row-fluid
       h2 Stats 
       h3 Recently Logged Workouts
-      mixin workout-list(workouts)
-      a(href="/wod/list").pull-right.btn.btn-primary all
+      if(workouts.length)
+        mixin workout-list(workouts)
+        a.pull-right.btn.btn-primary(href="/wod/list") all
+      else
+        h4 No workouts logged yet. click the 'log' link above to log a workout.
       br
       br
       h3 Recent PRs 
-      mixin pr-list(records)
-      .pull-right 
-        a.btn.btn-primary
-          i.icon-plus
-        a.btn.btn-primary(href="/wod/pr/list") all
+      if(records.length)
+        mixin pr-list(records)
+        .pull-right 
+          a.btn.btn-primary(href="/wod/pr/list") all
+      else
+        if(!workouts.length)
+          h4 You have no P(ersonal) R(ecords) yet because you haven't logged a workout
       .clear
       br
       br

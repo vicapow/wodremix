@@ -1,0 +1,24 @@
+//- include the layout
+include ../layout
+//- include the nav mixin
+include ../includes/nav
+//- include the workout list item partial
+include ../workout/partials/pr-list
+include ../workout/partials/workout-list
+block body
+  mixin nav('movements')
+  .container.page-container
+    .row-fluid
+      h2 !{movement.label}
+      if(movement.videoId)
+        iframe(width="100%", height="200", src="http://www.youtube.com/embed/" + movement.videoId + "?html5=1&showinfo=0", frameborder="0", allowfullscreen)
+      h3 PRs
+      if(records.length)
+        mixin pr-list(records)
+      else
+        p No !{movement.label} PRs logged yet.
+      h3 Workouts
+      if(workouts.length)
+        mixin workout-list(workouts)
+      else
+        p No !{movement.label} workouts logged yet.

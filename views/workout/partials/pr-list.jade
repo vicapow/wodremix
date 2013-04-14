@@ -6,5 +6,5 @@ mixin pr-list(records)
         - record = record.value
         tr
           td
-            a(href="/wod/pr/" + record.name.replace(/ /g, '-'))
+            a(href="/movements/" + record.name.replace(/ /g, '-'))
               mixin task(record)

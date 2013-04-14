@@ -8,6 +8,7 @@ var abbrs = {
   , 'miles' : 'ml'
   , 'kilometers' : 'km'
   , 'centimeters' : 'cm'
+  , 'yards' : 'yd'
   , 'seconds' : 'sec'
   , 'minutes' : 'min'
 }

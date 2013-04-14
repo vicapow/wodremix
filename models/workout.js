@@ -11,7 +11,7 @@ var WorkoutSchema = new Schema({
   , desc : String
   , type : String
   // date the workout is assigned for
-  , date : { type : Date, default : Date.now }
+  , date : { type : Date, default : null }
   // date this record was created
   , created : { type : Date, default : Date.now }
   , type : String

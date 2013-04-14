@@ -16,6 +16,7 @@ var WorkoutEditor = Backbone.View.extend({
     'change .type' : 'onTypeInputChange'
     , 'click .add-movement' : 'onClickAddMovement'
     , 'click button.submit' : 'onSubmit'
+    , 'change .date' : 'onDateInputChange'
   }
   , resultsView : null
   , metricView : null
@@ -60,6 +61,10 @@ var WorkoutEditor = Backbone.View.extend({
     // change the model type
     var type = this.$('.type').val()
     this.workout.set('type', type)
+  }
+  , onDateInputChange : function(){
+    var date = this.$('.date').val()
+    this.workout.set('date', date)
   }
   , onTaskAdded : function(task){
     var view = new TaskView({model : task, workout : this.workout})
