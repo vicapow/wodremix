@@ -21,7 +21,6 @@
     "passport": "~0.1.16",
     "passport-local": "~0.1.6",
     "connect-mongo": "~0.3.2",
-    "handlebar-rider": "~0.1.20",
     "asset-rack": "~2.1.5",
     "browserify-middleware": "~1.4.0",
     "optimist": "~0.3.5",
