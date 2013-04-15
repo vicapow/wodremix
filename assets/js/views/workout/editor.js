@@ -17,6 +17,7 @@ var WorkoutEditor = Backbone.View.extend({
     , 'click .add-movement' : 'onClickAddMovement'
     , 'click button.submit' : 'onSubmit'
     , 'change .date' : 'onDateInputChange'
+    , 'click a.cancel' : 'onCancel'
   }
   , resultsView : null
   , metricView : null
@@ -79,6 +80,9 @@ var WorkoutEditor = Backbone.View.extend({
     postToUrl('/wod-result/create', {
       workout : JSON.stringify(workout)
     }, 'POST' )
+  }
+  , onCancel : function(){
+    window.location = '/'
   }
   , render : function(){
     this.$el.html(this.template({

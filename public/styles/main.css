@@ -8674,9 +8674,6 @@ table.results td span {
   line-height: 30px;
   text-align: center;
 }
-body {
-  background-color: blue;
-}
 @media (max-width: 767px) {
   body {
     /*    padding-left: 10px;

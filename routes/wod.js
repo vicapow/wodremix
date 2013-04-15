@@ -26,13 +26,25 @@ module.exports = function(app){
       return res.render('wod/list', { workouts : workouts })
     })
   })
+  app.get('/wod/result/remove/:id', function(req, res, next){
+    if(!req.isAuthenticated()) return res.redirect('/')
+    Workout.findOne({_id : req.params.id}, function(err, workout){
+      if(err) return next(err)
+      console.log(workout)
+      if(!workout) return res.redirect('/wod/list')
+      var hash = workout.hash
+      workout.remove()
+      console.log('workout removed')
+      return res.redirect('/wod/' + hash)
+    })
+  })
   app.get('/wod/:hash', function(req, res, next){
     if(!req.isAuthenticated()) return res.redirect('/')
     Workout.find({hash : req.params.hash})
     .sort({ field: 'asc', date: -1 })
     .exec(function(err, workouts){
       if(err) return next(err)
-      if(!workouts.length) return res.send(404)
+      if(!workouts.length) return res.redirect('/wod/list')
       return res.render('wod/index', {
         wodtype : wodtypes[workouts[0].type]
         , workout : workouts[0]

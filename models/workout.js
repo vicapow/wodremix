@@ -130,6 +130,7 @@ WorkoutSchema.statics.getRecords = function(opts, cb){
       , { 
         __data__ : unitConvert(set.metrics.weight, 'pounds')
         , workout : this._id
+        , hash : this.hash
         , label : set.label
         , metrics : set.metrics
         , date : this.date
