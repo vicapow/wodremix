@@ -10,22 +10,22 @@ block body
   .container.page-container
     .row-fluid
       h2 Stats 
-      h3 Recently Logged Workouts
+      h4 Recently Workouts
       if(workouts.length)
         mixin workout-list(workouts)
         a.pull-right.btn.btn-primary(href="/wod/list") all
       else
-        h4 No workouts logged yet. click the 'log' link above to log a workout.
+        p No workouts logged yet. click the 'log' link above to log a workout.
       br
       br
-      h3 Recent PRs 
+      h4 Recent PRs 
       if(records.length)
         mixin pr-list(records)
         .pull-right 
           a.btn.btn-primary(href="/wod/pr/list") all
       else
         if(!workouts.length)
-          h4 You have no P(ersonal) R(ecords) yet because you haven't logged a workout
+          p You have no P(ersonal) R(ecords) yet because you haven't logged a workout
       .clear
       br
       br
