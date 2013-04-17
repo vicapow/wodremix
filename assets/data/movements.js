@@ -12,6 +12,14 @@ _.each(movements, function(movement, name){
   movement.name = name
 })
 
+// NOTE: array result
+movements = _.sortBy(movements, function(movement){
+  return movement.name
+})
+
+// NOTE: object result
+movements = _.object(_.pluck(movements, 'name'), movements)
+
 
 var Movements = function(){
   // copy all the movements to this new instance

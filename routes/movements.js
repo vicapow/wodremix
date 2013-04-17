@@ -23,7 +23,7 @@ module.exports = function(app){
         userid : req.user._id
         , movement : name
       }, function(err, workouts){
-        if(err) return next(err)
+        if(err) workouts = []
         workouts = _.map(workouts, function(workout){
           return workout.value
         })

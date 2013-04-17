@@ -4,7 +4,7 @@ mixin nav(current)
       ul.main-nav.pull-right
         for link, label in menu
           li(class = (current === label) ? 'active' : null)
-            a(href=link) !{label}
+            a.btn.btn-primary(href=link) !{label}
         li
-          a(href="/logout") logout
+          a.btn.btn-primary(href="/logout") logout
               
