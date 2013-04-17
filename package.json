@@ -28,6 +28,7 @@
     "post-to-url": "0.0.0",
     "deepcopy": "~0.1.2",
     "jquery-browserify": "~1.8.1",
-    "moment": "~2.0.0"
+    "moment": "~2.0.0",
+    "workout-movements": "git+https://github.com/vicapow/workout-movements.git"
   }
 }
