@@ -29,6 +29,6 @@
     "deepcopy": "~0.1.2",
     "jquery-browserify": "~1.8.1",
     "moment": "~2.0.0",
-    "workout-movements": "git+https://github.com/vicapow/workout-movements.git"
+    "workout-movements": "git+https://github.com/vicapow/workout-movements.git#3e7371e3cdc4934908ed8974a855a0e9aac4c070"
   }
 }
