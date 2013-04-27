@@ -125,6 +125,7 @@ WorkoutSchema.statics.getRecords = function(opts, cb){
        if(movement && this.tasks[i].name !== movement) return
        var sort = Number(this.date)
        if(!sort) sort = Number.MAX_VALUE
+       if(set.metrics.reps.value === 0) continue
        emit({
          sorting : sort
          , name : this.tasks[i].name
