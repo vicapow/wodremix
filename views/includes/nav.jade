@@ -1,10 +1,13 @@
 mixin nav(current)
   .container
     .row-fluid
-      ul.main-nav.pull-right
+      .btn-group.main-nav.pull-right
         for link, label in menu
-          li(class = (current === label) ? 'active' : null)
-            a.btn.btn-primary(href=link) !{label}
-        li
-          a.btn.btn-primary(href="/logout") logout
+          a.btn.btn-primary(href=link) 
+            if(label === 'log')
+              i.icon-pencil
+            else if(label === 'stats')
+              i.icon-book
+            |  !{label}
+        a.btn.btn-primary(href="/logout") logout
               

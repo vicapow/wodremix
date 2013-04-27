@@ -10,7 +10,7 @@ block body
   .container.page-container
     .row-fluid
       h2 Stats 
-      h4 Recently Workouts
+      h4 Recent Workouts
       if(workouts.length)
         mixin workout-list(workouts)
         a.pull-right.btn.btn-primary(href="/wod/list") all
@@ -24,8 +24,7 @@ block body
         .pull-right 
           a.btn.btn-primary(href="/wod/pr/list") all
       else
-        if(!workouts.length)
-          p You have no P(ersonal) R(ecords) yet because you haven't logged a workout
+        p You haven't logged any workouts with PRs
       .clear
       br
       br

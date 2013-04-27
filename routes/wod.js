@@ -30,11 +30,9 @@ module.exports = function(app){
     if(!req.isAuthenticated()) return res.redirect('/')
     Workout.findOne({_id : req.params.id}, function(err, workout){
       if(err) return next(err)
-      console.log(workout)
       if(!workout) return res.redirect('/wod/list')
       var hash = workout.hash
       workout.remove()
-      console.log('workout removed')
       return res.redirect('/wod/' + hash)
     })
   })
