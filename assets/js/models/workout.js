@@ -16,28 +16,28 @@ var Workout = Backbone.Model.extend({
     this.unset('metric')
     this.set('reps', 0)
     this.set('date', 'today')
-    this.listenTo(this.tasks, 'add', this.__onAddTask)
-    this.listenTo(this.tasks, 'remove', this.__onRemoveTask)
-    this.listenTo(this, 'change:unused', this.__updateUnusedMetrics)
-    this.listenTo(this, 'change:type', this.__updateWorkoutFromTypeChange)
-    this.listenTo(this, 'change:required', this.__removeTasksWithoutRequiredMetrics)
+    this.listenTo(this.tasks, 'add', this.onAddTask)
+    this.listenTo(this.tasks, 'remove', this.onRemoveTask)
+    this.listenTo(this, 'change:unused', this.updateUnusedMetrics)
+    this.listenTo(this, 'change:type', this.updateWorkoutFromTypeChange)
+    this.listenTo(this, 'change:required', this.removeTasksWithoutRequiredMetrics)
     this.result = new Result({workout:this})
   }
-  , __onAddTask : function(task){
-    if(this.__hasTaskRequiredMetrics(task)){
+  , onAddTask : function(task){
+    if(this.hasTaskRequiredMetrics(task)){
       task.setUnusedMetrics(this.get('unused'))
-      this.listenTo(task.metrics, 'change:value', this.__onTaskMetricChange)
-      this.__updateReps()
+      this.listenTo(task.metrics, 'change:value', this.onTaskMetricChange)
+      this.updateReps()
     }else this.tasks.remove(task)
   }
-  , __onRemoveTask : function(task){
+  , onRemoveTask : function(task){
     this.stopListening(task.metrics)
-    this.__updateReps()
+    this.updateReps()
   }
-  , __onTaskMetricChange : function(metric){
-    if(metric.get('name') === 'reps') this.__updateReps()
+  , onTaskMetricChange : function(metric){
+    if(metric.get('name') === 'reps') this.updateReps()
   }
-  , __updateReps : function(){
+  , updateReps : function(){
     var num = 0
     this.tasks.each(function(task){
       var metric = task.metrics.findWhere({name:'reps'})
@@ -46,25 +46,25 @@ var Workout = Backbone.Model.extend({
     }, this)
     this.set('reps', num)
   }
-  , __updateUnusedMetrics : function(){
+  , updateUnusedMetrics : function(){
     this.tasks.each(function(task){
       task.setUnusedMetrics(this.get('unused'))
     }, this)
   }
-  , __hasTaskRequiredMetrics : function(task){
+  , hasTaskRequiredMetrics : function(task){
     var taskMetrics = task.metrics.pluck('name')
     var required = this.get('required')
     return _.intersection(taskMetrics, required).length >= required.length
   }
-  , __removeTasksWithoutRequiredMetrics : function(){
+  , removeTasksWithoutRequiredMetrics : function(){
     var tasksToBeRemoved = []
     this.tasks.each(function(task){
-      if(!this.__hasTaskRequiredMetrics(task)) tasksToBeRemoved.push(task)
+      if(!this.hasTaskRequiredMetrics(task)) tasksToBeRemoved.push(task)
     }, this)
     this.tasks.remove(tasksToBeRemoved)
   }
   // updating the workout type should update other workout attributes
-  , __updateWorkoutFromTypeChange : function(){
+  , updateWorkoutFromTypeChange : function(){
     var workout = workouts[this.get('type')]
     workout  = _.extend({}, workout) // NOTE: shallow copy
     var metric = workout.metric

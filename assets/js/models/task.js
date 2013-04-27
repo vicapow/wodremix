@@ -19,7 +19,7 @@ var Task = Backbone.Model.extend({
     Backbone.Model.call(this, movement)
     this.metrics = new Metrics()
     this.setMetrics(metrics)
-    this.listenTo(this, 'change:name', this.__onChangeName)
+    this.listenTo(this, 'change:name', this.onChangeName)
   }
   , defaults : {
     "workoutType" : 'rounds'
@@ -97,7 +97,7 @@ var Task = Backbone.Model.extend({
     this.metrics.add(metrics)
     this.__unusedMetrics.remove(metrics)
   }
-  , __onChangeName : function(){
+  , onChangeName : function(){
     var name = this.get('name')
     var movement = movements[name]
     if(!movement) throw new Error("No movement found with name: " + name)

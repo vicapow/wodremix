@@ -11,7 +11,7 @@ var TaskView = Backbone.View.extend({
     'click .move-up'            : 'onClickUp'
     , 'click .move-down'        : 'onClickDown'
     , 'click .btn-remove'       : 'onClickRemove'
-    , 'change .movement'        : 'onChangeMovement'
+    , 'change .movement'        : 'onChangeMovementSelect'
     , 'click .btn-done'         : 'onClickDone'
     , 'click'                   : 'onClick'
     , 'click button.units'      : 'onClickUnits'
@@ -30,6 +30,7 @@ var TaskView = Backbone.View.extend({
     this.listenTo(this.model, 'remove', this.remove)
     this.listenTo(this.model.metrics, 'add', this.onChangeMetrics)
     this.listenTo(this.model.metrics, 'remove', this.onChangeMetrics)
+    this.listenTo(this.model, 'change:name', this.onChangeMovement)
     this.model.set('open', true)
     this.listenTo(this.workout, 'change:type', this.onChangeWorkoutType)
     this.render()
@@ -46,9 +47,12 @@ var TaskView = Backbone.View.extend({
     this.model.collection.remove(this.model)
     return false
   }
-  , onChangeMovement : function(){
-    var newName = this.$('.movement').val()
-    this.model.set('name', newName)
+  , onChangeMovementSelect : function(){
+    var name = this.$('.movement').val()
+    this.model.set('name', name)
+  }
+  , onChangeMovement : function(name){
+    this.model.setUnusedMetrics(this.workout.get('unused'))
   }
   , onChangeMetrics : function(metric){
     this.renderMetrics()
