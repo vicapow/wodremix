@@ -22,6 +22,9 @@ app.use(new rack.JadeAsset({
 // template
 app.set('view engine', 'jade')
 app.set('views', __dirname + '/views')
+
+app.locals.pretty = true
+
 app.locals.menu = {
   "log" : "/wod/log"
   , "stats" : "/stats"
@@ -94,8 +97,8 @@ app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
 
 // browserify
 browserify.settings.development.cache = 'yes'
-app.get('/js/bin/common.js', browserify([
-  './assets/flatstrap/assets/js/bootstrap'
+app.get('/js/common.js', browserify([
+  './assets/flatstrap/assets/js/bootstrap.min.js'
   , './assets/js/init'
   , './assets/components/ftlabs-fastclick/lib/fastclick'
   , './node_modules/post-to-url'

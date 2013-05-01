@@ -30,6 +30,7 @@
     "jquery-browserify": "~1.8.1",
     "moment": "~2.0.0",
     "workout-movements": "git+https://github.com/vicapow/workout-movements.git#47db8f0edd57414b04ce6c8642110cc7d869e669",
-    "express-useragent": "0.0.7-1"
+    "express-useragent": "0.0.7-1",
+    "d3": "~3.1.6"
   }
 }
