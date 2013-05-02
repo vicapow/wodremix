@@ -8642,12 +8642,17 @@ ul.workout-list > li {
   clear: both;
 }
 .main-nav {
-  margin-top: 20px;
+  margin-top: 0px;
   list-style: none;
+  width: 100%;
 }
-.main-nav li {
-  display: inline;
-  margin: 10px;
+.main-nav a {
+  width: 33.333%;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0;
 }
 .workout-editor table tr {
   margin: 20px;
@@ -8676,8 +8681,7 @@ table.results td span {
 }
 @media (max-width: 767px) {
   body {
-    /*    padding-left: 10px;
-      padding-right: 10px;*/
-  
+    padding-left: 0px;
+    padding-right: 0px;
   }
 }
