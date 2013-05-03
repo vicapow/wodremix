@@ -29,7 +29,7 @@
     "deepcopy": "~0.1.2",
     "jquery-browserify": "~1.8.1",
     "moment": "~2.0.0",
-    "workout-movements": "git+https://github.com/vicapow/workout-movements.git#850c0cc9e70e1f6156fd8f61fd6a41a4ed84f646",
+    "workout-movements": "git+https://github.com/vicapow/workout-movements.git#e4af01e3fa03223e01f1ef2a2330179ff36469aa",
     "express-useragent": "0.0.7-1",
     "d3": "~3.1.6"
   }
