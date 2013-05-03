@@ -1,21 +1,24 @@
 h2 !{title}
-label(for="type") type
-select(name="type", class="type")
+br
+label(for="type") workout type
+select.type.btn(name="type")
   for type, key in wodtypes
     option(value=key) !{type.label}
+br
+
 label(for="date") date
-select(name="date", class="date")
+select.date.btn(name="date")
   option(value="today") Today
   option(value="yesterday") Yesterday
   option(value="idk") I don't remember
+br
 .metric-container
 
 br
 br
 table.table.table-bordered.table-striped.table-condensed.movements
   tbody
-a.btn.btn-primary.pull-right.add-movement
-  i.icon-plus  add a movement
+a.btn.btn-primary.pull-right.add-movement add a movement
 .clear
 
 .results-container

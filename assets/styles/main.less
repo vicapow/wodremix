@@ -9,8 +9,55 @@
 @navbarInverseBackgroundHighlight: @colorPrimary;
 @navbarInverseBorder: none;
 
+* { 
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+body{
+  padding: 0;
+  margin: 0;
+}
+
+div, a, p{
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+}
+
+select{
+  -webkit-appearance: none;
+  width: 100%;
+  border-radius: 0;
+  &.btn {
+    border-left: none;
+    border-right: none;
+  }
+}
+
+.btn {
+  font-size: 1.5em;
+  line-height: 1.5em;
+  height: auto;
+}
+
+.btn-group {
+  .btn {
+    font-size: 21px;
+  }
+}
+
 h1, h2, h3, h4, h5, h6{
   font-weight: 300;
+}
+
+h2{
+  //background-color: @grayLighter;
+  margin: 0px;
+  padding: 1px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.5em;
 }
 
 .page-container{
@@ -20,6 +67,10 @@ h1, h2, h3, h4, h5, h6{
   .page-container{
     padding: 0px 0 0px;
   }
+}
+
+.btn{
+  font-size: 1.5em;
 }
 
 ul.workout-list{
@@ -35,16 +86,22 @@ ul.workout-list{
 }
 
 .main-nav{
-  margin-top: 0px;
   list-style: none;
   width: 100%;
-  a{
-    width: 33.333%;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin: 0;
+  margin: 0;
+  padding: 0px;
+  overflow: hidden;
+  .container{
+    width: 101%;
+    a{
+      border: none;
+      width: 33.33%;
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      height: 25px;
+    }
   }
 }
 
@@ -86,9 +143,16 @@ table.results{
   }
 }
 
-@media (max-width: 767px) {
-  body{
-    padding-left: 0px;
-    padding-right: 0px;
+label{
+  margin-left: 5px;
+}
+
+.no-border-top{
+  border-top: 0;
+}
+
+.metrics, .tasks{
+  input{
+    height: 31px;
   }
 }

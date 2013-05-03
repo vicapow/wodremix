@@ -86,7 +86,7 @@ var WorkoutEditor = Backbone.View.extend({
   }
   , render : function(){
     this.$el.html(this.template({
-      title : 'Log A Wod'
+      title : ''
       , wodtypes : wodtypes
     }))
     this.$('.results-container').html(this.resultsView.el)

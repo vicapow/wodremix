@@ -8617,6 +8617,38 @@ a.badge:focus {
 .graph.graph-days-on .day.day-off {
   background-color: #cccccc;
 }
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+body {
+  padding: 0;
+  margin: 0;
+}
+div,
+a,
+p {
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+}
+select {
+  -webkit-appearance: none;
+  width: 100%;
+  border-radius: 0;
+}
+select.btn {
+  border-left: none;
+  border-right: none;
+}
+.btn {
+  font-size: 1.5em;
+  line-height: 1.5em;
+  height: auto;
+}
+.btn-group .btn {
+  font-size: 21px;
+}
 h1,
 h2,
 h3,
@@ -8625,6 +8657,13 @@ h5,
 h6 {
   font-weight: 300;
 }
+h2 {
+  margin: 0px;
+  padding: 1px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.5em;
+}
 .page-container {
   padding: 0px 0 80px;
 }
@@ -8632,6 +8671,9 @@ h6 {
   .page-container {
     padding: 0px 0 0px;
   }
+}
+.btn {
+  font-size: 1.5em;
 }
 ul.workout-list > li {
   border: 1px solid #e5e5e5;
@@ -8642,17 +8684,23 @@ ul.workout-list > li {
   clear: both;
 }
 .main-nav {
-  margin-top: 0px;
   list-style: none;
   width: 100%;
+  margin: 0;
+  padding: 0px;
+  overflow: hidden;
 }
-.main-nav a {
-  width: 33.333%;
+.main-nav .container {
+  width: 101%;
+}
+.main-nav .container a {
+  border: none;
+  width: 33.33%;
   padding-left: 0;
   padding-right: 0;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin: 0;
+  height: 25px;
 }
 .workout-editor table tr {
   margin: 20px;
@@ -8679,9 +8727,13 @@ table.results td span {
   line-height: 30px;
   text-align: center;
 }
-@media (max-width: 767px) {
-  body {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
+label {
+  margin-left: 5px;
+}
+.no-border-top {
+  border-top: 0;
+}
+.metrics input,
+.tasks input {
+  height: 31px;
 }

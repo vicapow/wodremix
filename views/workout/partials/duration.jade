@@ -1,9 +1,9 @@
 mixin duration(minutes, seconds)
   .duration
-    select(name="minutes")
+    select.btn(name="minutes")
       for num in _.range(0, 60)
         option(value=num, selected = (minutes === num)) !{num} minutes
     .clear
-    select(name="seconds")
+    select.btn.no-border-top(name="seconds")
       for num in _.range(0, 60)
         option(value=num, selected = (seconds === num))!{num} seconds

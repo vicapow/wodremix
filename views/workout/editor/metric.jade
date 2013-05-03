@@ -1,5 +1,5 @@
 //- NOTE: this is a workout metric, which is different from a task metric
-include ../includes/duration
+include ../partials/duration
 if(type === 'duration')
   label(for="duration") duration
   - var seconds = 0
@@ -11,7 +11,7 @@ if(type === 'duration')
   mixin duration(minutes, seconds)
 else if(type === 'rounds')
   label(for="rounds") rounds
-  select.rounds.input-medium
+  select.btn
     for num in _.range(1,100)
       option(value=num)
         if(num !==1)
@@ -20,7 +20,7 @@ else if(type === 'rounds')
           | !{num} round
 else if(type === 'reps')
   label(for="reps") rounds
-  select.reps.input-medium
+  select.reps.btn
     for num in _.range(1,201)
       option(value=num)
         if(num !==1)
