@@ -8695,9 +8695,6 @@ ul.workout-list > li {
   padding-top: 4px;
   padding-bottom: 4px;
 }
-.main-nav .active {
-  box-shadow: inset 0 0 10px #000000;
-}
 .workout-editor table tr {
   margin: 20px;
 }
