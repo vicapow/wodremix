@@ -4,12 +4,13 @@ var passport = require('passport')
 
 module.exports = function(app){
   app.get('/', useragent.express(), function(req, res, next){
-    if(!req.useragent.isMobile && req.headers.host.indexOf('localhost') === -1 ) return res.render('not-supported')
+    if(!req.useragent.isMobile && req.headers.host.indexOf('localhost') === -1 ) 
+      return res.render('not-supported')
     if(!req.isAuthenticated()) return res.render('login')
-    else return res.redirect('/stats')
+    else return res.redirect('/wod/log')
   })
   app.post('/login', passport.authenticate('local', {
-    successRedirect : '/stats'
+    successRedirect : '/wod/log'
     , failureRedirect : '/'
   }))
   

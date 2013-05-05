@@ -25,8 +25,7 @@ block body
   mixin nav('wod')
   .container.page-container
     .row-fluid
-      h2 WOD
-      h3 !{wodtype.label} of
+      h3 WOD: !{wodtype.label} of
       table.table.table-bordered.table-striped.table-condensed.movements
         tbody
           for task in workout.tasks

@@ -2,7 +2,7 @@ mixin nav(current)
   .main-nav
     .container
       for link, label in menu
-        a.btn.btn-primary(href=link, class = current.toLowerCase() === label.toLowerCase() ? 'btn-info' : '' )
+        a.btn.btn-primary(href=link, class = current.toLowerCase() === label.toLowerCase() ? 'btn-info active' : '' )
           //- if(label === 'log')
           //-   i.icon-pencil
           //- else if(label === 'stats')
