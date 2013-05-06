@@ -9,5 +9,8 @@ block body
   .container.page-container
     .row-fluid
       h2 All Logged Workouts
-      mixin workout-list(workouts)
-      br
+      if(!workouts.length)
+        p You have not logged any works yet.
+      else
+        mixin workout-list(workouts)
+        br

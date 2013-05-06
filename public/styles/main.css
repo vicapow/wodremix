@@ -917,11 +917,11 @@ a.text-error:focus {
   color: #953b39;
 }
 .text-info {
-  color: #006dcc;
+  color: #000000;
 }
 a.text-info:hover,
 a.text-info:focus {
-  color: #005299;
+  color: #000000;
 }
 .text-success {
   color: #468847;
@@ -1853,19 +1853,19 @@ input[type="checkbox"][readonly] {
 .control-group.info .control-label,
 .control-group.info .help-block,
 .control-group.info .help-inline {
-  color: #006dcc;
+  color: #000000;
 }
 .control-group.info .checkbox,
 .control-group.info .radio,
 .control-group.info input,
 .control-group.info select,
 .control-group.info textarea {
-  color: #006dcc;
+  color: #000000;
 }
 .control-group.info input,
 .control-group.info select,
 .control-group.info textarea {
-  border-color: #006dcc;
+  border-color: #000000;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -1873,33 +1873,33 @@ input[type="checkbox"][readonly] {
 .control-group.info input:focus,
 .control-group.info select:focus,
 .control-group.info textarea:focus {
-  border-color: #005299;
+  border-color: #000000;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
 }
 .control-group.info .input-prepend .add-on,
 .control-group.info .input-append .add-on {
-  color: #006dcc;
+  color: #000000;
   background-color: #d9edf7;
-  border-color: #006dcc;
+  border-color: #000000;
 }
 .control-group.info .control-label,
 .control-group.info .help-block,
 .control-group.info .help-inline {
-  color: #006dcc;
+  color: #000000;
 }
 .control-group.info .checkbox,
 .control-group.info .radio,
 .control-group.info input,
 .control-group.info select,
 .control-group.info textarea {
-  color: #006dcc;
+  color: #000000;
 }
 .control-group.info input,
 .control-group.info select,
 .control-group.info textarea {
-  border-color: #006dcc;
+  border-color: #000000;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -1907,16 +1907,16 @@ input[type="checkbox"][readonly] {
 .control-group.info input:focus,
 .control-group.info select:focus,
 .control-group.info textarea:focus {
-  border-color: #005299;
+  border-color: #000000;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
 }
 .control-group.info .input-prepend .add-on,
 .control-group.info .input-append .add-on {
-  color: #006dcc;
+  color: #000000;
   background-color: #d9edf7;
-  border-color: #006dcc;
+  border-color: #000000;
 }
 input:focus:invalid,
 textarea:focus:invalid,
@@ -4586,10 +4586,10 @@ input[type="button"].btn-block {
 .btn-primary {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #006dcc;
-  border-color: #0044cc #0044cc #002a80;
+  background-color: #000000;
+  border-color: #000000 #000000 #000000;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #0044cc;
+  *background-color: #000000;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
@@ -4601,12 +4601,12 @@ input[type="button"].btn-block {
 .btn-primary.disabled,
 .btn-primary[disabled] {
   color: #ffffff;
-  background-color: #0044cc;
-  *background-color: #003bb3;
+  background-color: #000000;
+  *background-color: #000000;
 }
 .btn-primary:active,
 .btn-primary.active {
-  background-color: #003399 \9;
+  background-color: #000000 \9;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -4615,12 +4615,12 @@ input[type="button"].btn-block {
 .btn-primary.disabled,
 .btn-primary[disabled] {
   color: #ffffff;
-  background-color: #0044cc;
-  *background-color: #003bb3;
+  background-color: #000000;
+  *background-color: #000000;
 }
 .btn-primary:active,
 .btn-primary.active {
-  background-color: #003399 \9;
+  background-color: #000000 \9;
 }
 .btn-warning {
   color: #ffffff;
@@ -4742,10 +4742,10 @@ input[type="button"].btn-block {
 .btn-info {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #49afcd;
-  border-color: #2f96b4 #2f96b4 #1f6377;
+  background-color: #414141;
+  border-color: #555555 #555555 #2f2f2f;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #2f96b4;
+  *background-color: #555555;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
@@ -4757,12 +4757,12 @@ input[type="button"].btn-block {
 .btn-info.disabled,
 .btn-info[disabled] {
   color: #ffffff;
-  background-color: #2f96b4;
-  *background-color: #2a85a0;
+  background-color: #555555;
+  *background-color: #484848;
 }
 .btn-info:active,
 .btn-info.active {
-  background-color: #24748c \9;
+  background-color: #3b3b3b \9;
 }
 .btn-info:hover,
 .btn-info:focus,
@@ -4771,12 +4771,12 @@ input[type="button"].btn-block {
 .btn-info.disabled,
 .btn-info[disabled] {
   color: #ffffff;
-  background-color: #2f96b4;
-  *background-color: #2a85a0;
+  background-color: #555555;
+  *background-color: #484848;
 }
 .btn-info:active,
 .btn-info.active {
-  background-color: #24748c \9;
+  background-color: #3b3b3b \9;
 }
 .btn-inverse {
   color: #ffffff;
@@ -4963,7 +4963,7 @@ input[type="submit"].btn.btn-mini {
   background-color: #e6e6e6;
 }
 .btn-group.open .btn-primary.dropdown-toggle {
-  background-color: #0044cc;
+  background-color: #000000;
 }
 .btn-group.open .btn-warning.dropdown-toggle {
   background-color: #f89406;
@@ -4975,7 +4975,7 @@ input[type="submit"].btn.btn-mini {
   background-color: #51a351;
 }
 .btn-group.open .btn-info.dropdown-toggle {
-  background-color: #2f96b4;
+  background-color: #555555;
 }
 .btn-group.open .btn-inverse.dropdown-toggle {
   background-color: #222222;
@@ -5065,10 +5065,10 @@ input[type="submit"].btn.btn-mini {
 .alert-info {
   background-color: #d9edf7;
   border-color: #bce8f1;
-  color: #006dcc;
+  color: #000000;
 }
 .alert-info h4 {
-  color: #006dcc;
+  color: #000000;
 }
 .alert-block {
   padding-top: 14px;
@@ -5749,7 +5749,7 @@ input[type="submit"].btn.btn-mini {
   margin-right: -1px;
 }
 .navbar-inverse .navbar-inner {
-  background-color: #005db0;
+  background-color: #001c35;
   border-color: none;
 }
 .navbar-inverse .brand,
@@ -5789,7 +5789,7 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar-inverse .divider-vertical {
   border-left-color: #004685;
-  border-right-color: #006dcc;
+  border-right-color: #000000;
 }
 .navbar-inverse .nav li.dropdown.open > .dropdown-toggle,
 .navbar-inverse .nav li.dropdown.active > .dropdown-toggle,
@@ -5851,7 +5851,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-inverse .btn-navbar {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #005096;
+  background-color: #00172b;
   border-color: #00396c #00396c #00101f;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #00396c;
@@ -6461,11 +6461,11 @@ a.badge:focus {
 }
 .label-info,
 .badge-info {
-  background-color: #006dcc;
+  background-color: #000000;
 }
 .label-info[href],
 .badge-info[href] {
-  background-color: #005299;
+  background-color: #000000;
 }
 .label-inverse,
 .badge-inverse {
@@ -8612,7 +8612,7 @@ a.badge:focus {
   margin-top: 0px;
 }
 .graph.graph-days-on .day.day-on {
-  background-color: #006dcc;
+  background-color: #000000;
 }
 .graph.graph-days-on .day.day-off {
   background-color: #cccccc;
@@ -8621,6 +8621,9 @@ a.badge:focus {
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+a {
+  color: black;
 }
 body {
   padding: 0;
@@ -8695,6 +8698,9 @@ ul.workout-list > li {
   padding-top: 4px;
   padding-bottom: 4px;
 }
+.main-nav .active {
+  border-top: 2px solid white;
+}
 .workout-editor table tr {
   margin: 20px;
 }
@@ -8724,8 +8730,16 @@ label {
   margin-left: 5px;
   margin-bottom: 0px;
 }
+p {
+  margin-left: 5px;
+  margin-right: 5px;
+}
 .no-border-top {
   border-top: 0;
+}
+.remove {
+  padding: 2px;
+  margin: 0;
 }
 .metrics input,
 .tasks input {

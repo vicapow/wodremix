@@ -1,5 +1,5 @@
 mixin workout-list-item(workout)
-  a(href="/wod/" + workout.hash) !{workout.label}
+  !{workout.label}
   span.pull-right
     if workout.date
       |  !{moment(workout.date).fromNow()}

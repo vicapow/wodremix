@@ -1,5 +1,5 @@
 .rounds
-  select.btn.btn.primary(name="rounds")
+  select.btn.btn-primary(name="rounds")
     for num in _.range(0, 59)
       option(value=num)
         if(num === 1)
@@ -7,4 +7,4 @@
         else
           !{num} rounds
   .clear
-  select(name="reps")
+  select.btn.btn-primary(name="reps")

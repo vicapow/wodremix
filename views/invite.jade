@@ -1,0 +1,22 @@
+//- include the layout
+include layout
+//- include the nav mixin
+include includes/nav
+//- include the workout list item partial
+include workout/partials/workout-list
+include workout/partials/pr-list
+block body
+  .container
+    .row-fluid
+      p You've been invited to sign up for WOD ReMIX. To get started, just pick a username and password.
+      .span12
+        form(method="post", action="/login", enctype="application/x-www-form-urlencoded")
+          label Username
+          input.input-block-level(type="text", name="username")
+          label Password
+          input.input-block-level(type="password", name="password")
+          label Password (again)
+          input.input-block-level(type="password", name="password-again")
+          input.btn.btn-primary.btn-block(type="submit", value="Sign up")
+
+      

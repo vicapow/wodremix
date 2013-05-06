@@ -26,20 +26,21 @@ block body
   .container.page-container
     .row-fluid
       h3 WOD: !{wodtype.label} of
-      table.table.table-bordered.table-striped.table-condensed.movements
+      table.table.table-bordered.table-striped.movements
         tbody
           for task in workout.tasks
             tr
               td
                 a(href="/movements/" + task.name.replace(/ /g, '-'))
-                  mixin task(task)
+                  div
+                    mixin task(task)
       
       h3 Recent Results
-      table.table.table-bordered.table-striped.table-condensed
+      table.table.table-bordered.table-striped
         tbody
           for workout in workouts
             tr
               td
-                a.prompt-confirm(href="/wod/result/remove/" + workout.id, data-message = "are you sure you want to delete this workout?").badge.badge-important.pull-right
-                  i.icon-remove
+                a.badge.badge-important.pull-right.prompt-confirm(href="/wod/result/remove/" + workout.id, data-message = "are you sure you want to delete this workout?")
+                  .remove remove
                 mixin result(workout)

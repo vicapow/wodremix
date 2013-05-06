@@ -82,7 +82,7 @@ var WorkoutEditor = Backbone.View.extend({
     }, 'POST' )
   }
   , onCancel : function(){
-    window.location = '/'
+    window.location = '/stats'
   }
   , render : function(){
     this.$el.html(this.template({

@@ -2,10 +2,13 @@
 @import "../flatstrap/assets/less/responsive.less";
 @import "dashboard.less";
 
-@colorPrimary: #006dcc;
+@colorPrimary: black;
 @colorSecondary: #ccc;
 @infoText: @colorPrimary;
 @navbarInverseBackground: #004685;
+@btnPrimaryBackground: black;
+@btnInfoBackground: #333;
+@btnInfoBackgroundHighlight: #555;
 @navbarInverseBackgroundHighlight: @colorPrimary;
 @navbarInverseBorder: none;
 
@@ -13,6 +16,10 @@
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+a{
+  color: black;
 }
 
 body{
@@ -95,7 +102,7 @@ ul.workout-list{
     }
   }
   .active{
-    
+    border-top: 2px solid white;
   }
 }
 
@@ -142,8 +149,18 @@ label{
   margin-bottom: 0px;
 }
 
+p {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .no-border-top{
   border-top: 0;
+}
+
+.remove {
+  padding: 2px;
+  margin: 0;
 }
 
 .metrics, .tasks{

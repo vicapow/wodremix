@@ -5,4 +5,6 @@ mixin workout-list(workouts)
       for workout in workouts
         tr
           td
-            mixin workout-list-item(workout)
+            a(href="/wod/" + workout.hash)
+              div
+                mixin workout-list-item(workout)
