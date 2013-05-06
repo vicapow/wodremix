@@ -209,7 +209,7 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #333333;
-  background-color: #ffffff;
+  background-color: #333333;
 }
 a {
   color: #0088cc;
@@ -2224,7 +2224,7 @@ table {
   border-top: 2px solid #dddddd;
 }
 .table .table {
-  background-color: #ffffff;
+  background-color: #333333;
 }
 .table-condensed th,
 .table-condensed td {
@@ -2253,7 +2253,7 @@ table {
 }
 .table-striped tbody > tr:nth-child(odd) > td,
 .table-striped tbody > tr:nth-child(odd) > th {
-  background-color: #f9f9f9;
+  background-color: #444444;
 }
 .table-hover tbody tr:hover > td,
 .table-hover tbody tr:hover > th {
@@ -4742,10 +4742,10 @@ input[type="button"].btn-block {
 .btn-info {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #414141;
-  border-color: #555555 #555555 #2f2f2f;
+  background-color: #333333;
+  border-color: #333333 #333333 #0d0d0d;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #555555;
+  *background-color: #333333;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
@@ -4757,12 +4757,12 @@ input[type="button"].btn-block {
 .btn-info.disabled,
 .btn-info[disabled] {
   color: #ffffff;
-  background-color: #555555;
-  *background-color: #484848;
+  background-color: #333333;
+  *background-color: #262626;
 }
 .btn-info:active,
 .btn-info.active {
-  background-color: #3b3b3b \9;
+  background-color: #1a1a1a \9;
 }
 .btn-info:hover,
 .btn-info:focus,
@@ -4771,12 +4771,12 @@ input[type="button"].btn-block {
 .btn-info.disabled,
 .btn-info[disabled] {
   color: #ffffff;
-  background-color: #555555;
-  *background-color: #484848;
+  background-color: #333333;
+  *background-color: #262626;
 }
 .btn-info:active,
 .btn-info.active {
-  background-color: #3b3b3b \9;
+  background-color: #1a1a1a \9;
 }
 .btn-inverse {
   color: #ffffff;
@@ -4975,7 +4975,7 @@ input[type="submit"].btn.btn-mini {
   background-color: #51a351;
 }
 .btn-group.open .btn-info.dropdown-toggle {
-  background-color: #555555;
+  background-color: #333333;
 }
 .btn-group.open .btn-inverse.dropdown-toggle {
   background-color: #222222;
@@ -5206,7 +5206,7 @@ input[type="submit"].btn.btn-mini {
 .nav-tabs > .active > a:hover,
 .nav-tabs > .active > a:focus {
   color: #555555;
-  background-color: #ffffff;
+  background-color: #333333;
   border: 1px solid #ddd;
   border-bottom-color: transparent;
   cursor: default;
@@ -8623,11 +8623,32 @@ a.badge:focus {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 a {
-  color: black;
+  color: white;
+}
+.btn-primary {
+  background-color: #000;
+}
+.btn-primary.active {
+  background-color: #555;
+}
+.btn,
+table td {
+  box-shadow: 0px 0px 20px #222;
+}
+input[type="text"],
+input[type="password"] {
+  background-color: #fff;
+}
+table {
+  background: #222;
+}
+table td {
+  border: none;
 }
 body {
   padding: 0;
   margin: 0;
+  color: white;
 }
 div,
 a,
@@ -8639,10 +8660,6 @@ select {
   -webkit-appearance: none;
   width: 100%;
   border-radius: 0;
-}
-select.btn {
-  border-left: none;
-  border-right: none;
 }
 .btn {
   font-size: 1.5em;
@@ -8698,9 +8715,6 @@ ul.workout-list > li {
   padding-top: 4px;
   padding-bottom: 4px;
 }
-.main-nav .active {
-  border-top: 2px solid white;
-}
 .workout-editor table tr {
   margin: 20px;
 }
@@ -8729,6 +8743,7 @@ table.results td span {
 label {
   margin-left: 5px;
   margin-bottom: 0px;
+  color: white;
 }
 p {
   margin-left: 5px;

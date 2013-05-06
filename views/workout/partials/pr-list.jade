@@ -1,10 +1,11 @@
 include task
 mixin pr-list(records)
-  table.table.table-bordered.table-striped
+  table.table.table-striped
     tbody
       for record in records
         - record = record.value
         tr
           td
             a(href="/movements/" + record.name.replace(/ /g, '-'))
-              mixin task(record)
+              div
+                mixin task(record)

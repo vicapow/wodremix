@@ -8,9 +8,11 @@
 @navbarInverseBackground: #004685;
 @btnPrimaryBackground: black;
 @btnInfoBackground: #333;
-@btnInfoBackgroundHighlight: #555;
+@btnInfoBackgroundHighlight: #333;
 @navbarInverseBackgroundHighlight: @colorPrimary;
 @navbarInverseBorder: none;
+@bodyBackground: #333;
+@tableBackgroundAccent: #444;
 
 * { 
   margin: 0;
@@ -19,12 +21,36 @@
 }
 
 a{
-  color: black;
+  color: white;
+}
+
+.btn-primary{
+  background-color: #000;
+}
+
+.btn-primary.active{
+  background-color: #555;
+}
+
+.btn, table td{
+  box-shadow: 0px 0px 20px #222;
+}
+
+input[type="text"], 
+input[type="password"]{
+  background-color: #fff;
+}
+table{
+  background: #222;
+  td {
+    border: none;
+  }
 }
 
 body{
   padding: 0;
   margin: 0;
+  color: white;
 }
 
 div, a, p{
@@ -37,8 +63,6 @@ select{
   width: 100%;
   border-radius: 0;
   &.btn {
-    border-left: none;
-    border-right: none;
   }
 }
 
@@ -102,7 +126,6 @@ ul.workout-list{
     }
   }
   .active{
-    border-top: 2px solid white;
   }
 }
 
@@ -147,6 +170,7 @@ table.results{
 label{
   margin-left: 5px;
   margin-bottom: 0px;
+  color: white;
 }
 
 p {
