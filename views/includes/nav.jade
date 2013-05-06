@@ -1,5 +1,5 @@
 mixin nav(current)
-  .main-nav
+  .main-nav.shadow
     .container
       for link, label in menu
         a.btn.btn-primary(href=link, class = current.toLowerCase() === label.toLowerCase() ? 'btn-info active' : '' )

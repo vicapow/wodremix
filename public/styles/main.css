@@ -8631,8 +8631,7 @@ a {
 .btn-primary.active {
   background-color: #555;
 }
-.btn,
-table td {
+.shadow {
   box-shadow: 0px 0px 20px #222;
 }
 input[type="text"],
@@ -8661,10 +8660,25 @@ select {
   width: 100%;
   border-radius: 0;
 }
+select.btn {
+  box-shadow: 0px 0px 20px #222;
+}
 .btn {
   font-size: 1.5em;
   line-height: 1.5em;
   height: auto;
+}
+.btn.pull-right,
+.btn-block,
+table {
+  box-shadow: 0px 0px 20px #222;
+}
+table .btn,
+table .btn.pull-right {
+  box-shadow: none;
+}
+table .btn-group {
+  box-shadow: 0px 0px 20px #222;
 }
 .btn-group .btn {
   font-size: 21px;
@@ -8677,6 +8691,10 @@ h5,
 h6 {
   font-weight: 300;
   padding-left: 5px;
+  text-shadow: 0px 0px 10px #222;
+}
+.logo {
+  text-align: center;
 }
 .page-container {
   padding: 0px 0 80px;

@@ -33,6 +33,10 @@ a{
 }
 
 .btn, table td{
+  
+}
+
+.shadow{
   box-shadow: 0px 0px 20px #222;
 }
 
@@ -63,6 +67,7 @@ select{
   width: 100%;
   border-radius: 0;
   &.btn {
+    .shadow;
   }
 }
 
@@ -72,6 +77,19 @@ select{
   height: auto;
 }
 
+.btn.pull-right, .btn-block, table{
+  .shadow;
+}
+
+
+table{
+  .btn, .btn.pull-right{
+    box-shadow: none;
+  }
+  .btn-group{
+    .shadow;
+  }
+}
 .btn-group {
   .btn {
     font-size: 21px;
@@ -81,6 +99,11 @@ select{
 h1, h2, h3, h4, h5, h6{
   font-weight: 300;
   padding-left: 5px;
+  text-shadow: 0px 0px 10px #222;
+}
+
+.logo {
+  text-align: center;
 }
 
 .page-container{
