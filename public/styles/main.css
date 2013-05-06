@@ -8622,7 +8622,9 @@ a.badge:focus {
   padding: 0;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-a {
+a,
+a:hover,
+a:active {
   color: white;
 }
 .btn-primary {
@@ -8632,7 +8634,7 @@ a {
   background-color: #555;
 }
 .shadow {
-  box-shadow: 0px 0px 20px #222;
+  box-shadow: 0px 0px 5px #222;
 }
 input[type="text"],
 input[type="password"] {
@@ -8661,7 +8663,7 @@ select {
   border-radius: 0;
 }
 select.btn {
-  box-shadow: 0px 0px 20px #222;
+  box-shadow: 0px 0px 5px #222;
 }
 .btn {
   font-size: 1.5em;
@@ -8671,14 +8673,14 @@ select.btn {
 .btn.pull-right,
 .btn-block,
 table {
-  box-shadow: 0px 0px 20px #222;
+  box-shadow: 0px 0px 5px #222;
 }
 table .btn,
 table .btn.pull-right {
   box-shadow: none;
 }
 table .btn-group {
-  box-shadow: 0px 0px 20px #222;
+  box-shadow: 0px 0px 5px #222;
 }
 .btn-group .btn {
   font-size: 21px;
