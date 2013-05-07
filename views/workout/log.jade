@@ -6,8 +6,11 @@ block body
     var WorkoutEditor = require('./assets/js/views/workout/editor')
     $(function(){
       var editor = new WorkoutEditor()
-      $('.page-container').append(editor.$el)
+      $('.main-container .main section').append(editor.$el)
     })
-  .container.page-container
-    .row-fluid
-      .clear
+  .main-container
+    .main.wrapper.clearfix
+      article
+        header
+          h1 Log A Workout
+        section

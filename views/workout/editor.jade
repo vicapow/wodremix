@@ -1,16 +1,22 @@
 h2 !{title}
 br
 label(for="type") workout type
-select.type.btn.btn-primary(name="type")
-  for type, key in wodtypes
-    option(value=key) !{type.label}
+.select.btn
+  i.icon-sort.pull-right
+  .select-container
+    select.type(name="type")
+      for type, key in wodtypes
+        option(value=key) !{type.label}
 br
 
 label(for="date") date
-select.date.btn.btn-primary(name="date")
-  option(value="today") Today
-  option(value="yesterday") Yesterday
-  option(value="idk") I don't remember
+.select.btn
+  i.icon-sort.pull-right
+  .select-container
+    select.date(name="date")
+      option(value="today") Today
+      option(value="yesterday") Yesterday
+      option(value="idk") I don't remember
 br
 .metric-container
 
@@ -19,9 +25,9 @@ br
 label movements
 table.table.table-striped.movements
   tbody
-a.btn.btn-primary.pull-right.add-movement.btn-block add a movement
+br
+a.btn.btn-primary.add-movement add a movement
 .clear
-
 .results-container
 br
 button.btn.btn-primary.pull-right.submit submit

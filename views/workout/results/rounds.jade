@@ -1,10 +1,16 @@
 .rounds
-  select.btn.btn-primary(name="rounds")
-    for num in _.range(0, 59)
-      option(value=num)
-        if(num === 1)
-          | 1 round
-        else
-          !{num} rounds
+  .select.btn
+    i.icon-sort.pull-right
+    .select-container
+      select(name="rounds")
+        for num in _.range(0, 59)
+          option(value=num)
+            if(num === 1)
+              | 1 round
+            else
+              !{num} rounds
   .clear
-  select.btn.btn-primary(name="reps")
+  .select.btn
+    i.icon-sort.pull-right
+    .select-container
+      select(name="reps")

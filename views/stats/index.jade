@@ -3,65 +3,44 @@ include ../layout
 //- include the nav mixin
 include ../includes/nav
 //- include the workout list item partial
-include ../workout/partials/workout-list
 include ../workout/partials/pr-list
 block body
   mixin nav('Stats')
-  .container.page-container
-    .row-fluid
-      br
-      #workout-days-graph
-      script(type="text/javascript")
-        var data = [0, 1, 2, 3, 4, 5, 6]
-        var div = d3.select('#workout-days-graph')
-          .style('height', '30px')
-          .selectAll('div')
-            .data(data)
-            .enter()
-              .append('div')
-                .style('width', '0px')
-                .style('height', '0px')
-                .style('position', 'relative')
-                .style('left', function(d){ return ( ( d / (data.length - 1) ) * 90 + 5) + '%' })
-                .append('div')
-                  .style('position', 'relative')
-                  .style('left', function(d){
-                    return ( ((d / (data.length - 1)) * - 23 ) + 10 ) + 'px'
-                  })
-                  .style('top', '0px')
-        div.append('div')
-          .attr('class', 'shadow')
-          .style('width', '20px')
-          .style('height', '20px')
-          .style('border', '1px solid #fff')
-          .style('background-color', function(d){
-            return (d % 2) ? 'black' : 'green' 
-          })
-          .style('position', 'relative')
-          .style('left', '-10px')
-          .append('p')
-            .style('width', '50px')
-            .style('position', 'absolute')
-            .style('left', '-20px')
-            .style('top', '20px')
-            .style('font-size', '10px')
-            .style('text-align', 'center')
-            .text('1')
-      h4 Recent Workouts
-      if(workouts.length)
-        mixin workout-list(workouts)
-        a.pull-right.btn.btn-primary(href="/wod/list") all
-      else
-        p No workouts logged yet. click the 'log' link above to log a workout.
-      br
-      br
-      h4 Recent PRs 
-      if(records.length)
-        mixin pr-list(records)
-        .pull-right 
-          a.btn.btn-primary(href="/wod/pr/list") all
-      else
-        p You haven't logged any workouts with PRs
-      .clear
-      br
-      br
+  .main-container
+    .main.wrapper.clearfix
+      article
+        header
+          h1 Recent Workouts
+        if(workouts.length)
+          each workout in workouts
+            a(href="/wod/" + workout.hash)
+              section.clearfix
+                if workout.date
+                  span.muted.pull-right
+                    i.icon.icon-calendar
+                    |  !{moment(workout.date).fromNow()}
+                h2 !{workout.label}
+                p !{workout.description}
+        else
+          p No workouts logged yet. Click the 'log' link above to log a workout.
+  //- .container.page-container
+  //-   .row-fluid
+  //-     br
+  //-     h4 Recent Workouts
+  //-     if(workouts.length)
+  //-       mixin workout-list(workouts)
+  //-       a.pull-right.btn.btn-primary(href="/wod/list") all
+  //-     else
+  //-       p No workouts logged yet. click the 'log' link above to log a workout.
+  //-     br
+  //-     br
+  //-     h4 Recent PRs 
+  //-     if(records.length)
+  //-       mixin pr-list(records)
+  //-       .pull-right 
+  //-         a.btn.btn-primary(href="/wod/pr/list") all
+  //-     else
+  //-       p You haven't logged any workouts with PRs
+  //-     .clear
+  //-     br
+  //-     br

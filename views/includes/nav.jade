@@ -1,11 +1,16 @@
 mixin nav(current)
   .main-nav.shadow
-    .container
-      for link, label in menu
-        a.btn.btn-primary(href=link, class = current.toLowerCase() === label.toLowerCase() ? 'btn-info active' : '' )
-          //- if(label === 'log')
-          //-   i.icon-pencil
-          //- else if(label === 'stats')
-          //-   i.icon-book
-          |  !{label}
-      a.btn.btn-primary(href="/logout") logout
+  .header-container
+    header.wrapper.clearfix
+      nav#topnav
+        ul
+          for link, label in menu
+            li
+              a(href=link, class = current.toLowerCase() === label.toLowerCase() ? 'active' : '' )
+                if(label.toLowerCase() === 'stats') 
+                  i.icon.icon-tasks
+                else(label.toLowerCase() === 'log') 
+                  i.icon.icon-time
+                |  !{label}
+          li
+            a(href="/logout") logout

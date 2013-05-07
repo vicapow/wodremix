@@ -11,21 +11,27 @@ if(type === 'duration')
   mixin duration(minutes, seconds)
 else if(type === 'rounds')
   label(for="rounds") rounds
-  select.btn.btn-primary
-    for num in _.range(1,100)
-      option(value=num)
-        if(num !==1)
-          | !{num} rounds
-        else
-          | !{num} round
+  .select.btn
+    i.icon-sort.pull-right
+    .select-container
+      select
+        for num in _.range(1,100)
+          option(value=num)
+            if(num !==1)
+              | !{num} rounds
+            else
+              | !{num} round
 else if(type === 'reps')
   label(for="reps") rounds
-  select.reps.btn.btn-primary
-    for num in _.range(1,201)
-      option(value=num)
-        if(num !==1)
-          | !{num} reps
-        else
-          | !{num} rep
+  .select.btn
+    i.icon-sort.pull-right
+    .select-container
+      select.reps
+        for num in _.range(1,201)
+          option(value=num)
+            if(num !==1)
+              | !{num} reps
+            else
+              | !{num} rep
 else if(type === 'weight')
   //- NO OP
