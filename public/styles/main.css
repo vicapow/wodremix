@@ -1274,6 +1274,9 @@ section {
   -webkit-touch-callout: none !important;
   -webkit-user-select: none !important;
 }
+form.login input {
+  width: 100%;
+}
 select {
   -webkit-appearance: none;
   border-radius: 0;

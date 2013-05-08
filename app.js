@@ -98,8 +98,7 @@ app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
 // browserify
 browserify.settings.development.cache = 'yes'
 app.get('/js/common.js', browserify([
-  './assets/flatstrap/assets/js/bootstrap.min.js'
-  , './assets/js/init'
+  './assets/js/init'
   , './assets/components/ftlabs-fastclick/lib/fastclick'
   , './node_modules/post-to-url'
   , './assets/js/views/workout/editor'
