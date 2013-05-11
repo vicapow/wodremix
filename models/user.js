@@ -23,18 +23,18 @@ var UserSchema = new Schema({
   , gym : Schema.Types.ObjectId
 })
 
-UserSchema.methods.setPassword = function(password){
+UserSchema.methods.setPassword = function setPassword(password){
   this.salt = bcrypt.genSaltSync(10)
   this.password = bcrypt.hashSync(password, this.salt)
   return this
 }
-UserSchema.methods.checkPassword = function(password){
+UserSchema.methods.checkPassword = function checkPassword(password){
   if(!this.password || !this.salt) return false
   var hash = bcrypt.hashSync(password, this.salt)
   return (hash === this.password)
 }
 
-UserSchema.methods.getTodaysWorkouts = function(cb){
+UserSchema.methods.getTodaysWorkouts = function getTodaysWorkouts(cb){
   if(!this.gym) return cb(null, null)
   Gym.findById(this.gym, function(err, gym){
     if(err) return cb(err)
@@ -43,7 +43,13 @@ UserSchema.methods.getTodaysWorkouts = function(cb){
   })
 }
 
-UserSchema.statics.login = function(username, password, cb){
+UserSchema.statics.isUsernameTaken = function isUsernameTaken(username, cb){
+  User.findOne({username : username}, function(err, user){
+    return cb(err, !!user)
+  })
+}
+
+UserSchema.statics.login = function login(username, password, cb){
   User.findOne({username: username}, function(err, user){
     if(err) return cb(err)
     if(!user) return cb(null, null)

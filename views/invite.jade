@@ -8,9 +8,11 @@ include workout/partials/pr-list
 block body
   .container
     .row-fluid
-      p You've been invited to sign up for WOD ReMIX. To get started, just pick a username and password.
+      p To get started, just pick a username and password.
+      if(locals.error)
+        div.alert.alert-danger !{error}
       .span12
-        form(method="post", action="/login", enctype="application/x-www-form-urlencoded")
+        form(method="post", enctype="application/x-www-form-urlencoded")
           label Username
           input.input-block-level(type="text", name="username")
           label Password

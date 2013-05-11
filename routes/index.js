@@ -1,6 +1,7 @@
 
 var passport = require('passport')
   , common = require('./common')
+  , ensure = common.ensure
 
 module.exports = function(app){
   app.get('/', function(req, res, next){
@@ -19,14 +20,9 @@ module.exports = function(app){
     res.redirect('/')
   })
   
-  app.get('/invite', function(req, res, next){
-    if(!req.isAuthenticated() && common.isMobile(req) )
-      return res.render('invite')
-    return res.redirect('/')
-  })
-  
   require('./wod')(app)
   require('./movements')(app)
   require('./wod-result')(app)
   require('./stats')(app)
+  require('./invite')(app)
 }

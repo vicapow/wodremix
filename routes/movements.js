@@ -1,16 +1,15 @@
 var Workout = require('../models/workout')
   , _ = require('underscore')
   , movements = require('../assets/data/movements')
+  , common = require('./common')
 
 module.exports = function(app){
-  app.get('/movements', function(req, res, next){
-    if(!req.isAuthenticated()) return res.redirect('/')
+  app.get('/movements', common.ensure.auth, function(req, res, next){
     return res.render('movements/index',{
       movements : movements.all()
     })
   })
-  app.get('/movements/:movement', function(req, res, next){
-    if(!req.isAuthenticated()) return res.redirect('/')
+  app.get('/movements/:movement', common.ensure.auth, function(req, res, next){
     var name = req.params.movement
     name = name.replace(/-/g,' ')
     var movement = movements[name]

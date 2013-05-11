@@ -32,5 +32,8 @@
     "workout-movements": "git+https://github.com/vicapow/workout-movements.git#97916d3aacc3f2bee857ce77c506656054681e5e",
     "express-useragent": "0.0.7-1",
     "d3": "~3.1.6"
+  },
+  "devDependencies": {
+    "sendgrid": "~0.2.7"
   }
 }
