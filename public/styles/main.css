@@ -917,11 +917,11 @@ a.text-error:focus {
   color: #953b39;
 }
 .text-info {
-  color: #000000;
+  color: #999999;
 }
 a.text-info:hover,
 a.text-info:focus {
-  color: #000000;
+  color: #808080;
 }
 .text-success {
   color: #468847;
@@ -1853,19 +1853,19 @@ input[type="checkbox"][readonly] {
 .control-group.info .control-label,
 .control-group.info .help-block,
 .control-group.info .help-inline {
-  color: #000000;
+  color: #999999;
 }
 .control-group.info .checkbox,
 .control-group.info .radio,
 .control-group.info input,
 .control-group.info select,
 .control-group.info textarea {
-  color: #000000;
+  color: #999999;
 }
 .control-group.info input,
 .control-group.info select,
 .control-group.info textarea {
-  border-color: #000000;
+  border-color: #999999;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -1873,33 +1873,33 @@ input[type="checkbox"][readonly] {
 .control-group.info input:focus,
 .control-group.info select:focus,
 .control-group.info textarea:focus {
-  border-color: #000000;
+  border-color: #808080;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
 }
 .control-group.info .input-prepend .add-on,
 .control-group.info .input-append .add-on {
-  color: #000000;
+  color: #999999;
   background-color: #d9edf7;
-  border-color: #000000;
+  border-color: #999999;
 }
 .control-group.info .control-label,
 .control-group.info .help-block,
 .control-group.info .help-inline {
-  color: #000000;
+  color: #999999;
 }
 .control-group.info .checkbox,
 .control-group.info .radio,
 .control-group.info input,
 .control-group.info select,
 .control-group.info textarea {
-  color: #000000;
+  color: #999999;
 }
 .control-group.info input,
 .control-group.info select,
 .control-group.info textarea {
-  border-color: #000000;
+  border-color: #999999;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -1907,16 +1907,16 @@ input[type="checkbox"][readonly] {
 .control-group.info input:focus,
 .control-group.info select:focus,
 .control-group.info textarea:focus {
-  border-color: #000000;
+  border-color: #808080;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
 }
 .control-group.info .input-prepend .add-on,
 .control-group.info .input-append .add-on {
-  color: #000000;
+  color: #999999;
   background-color: #d9edf7;
-  border-color: #000000;
+  border-color: #999999;
 }
 input:focus:invalid,
 textarea:focus:invalid,
@@ -5065,10 +5065,10 @@ input[type="submit"].btn.btn-mini {
 .alert-info {
   background-color: #d9edf7;
   border-color: #bce8f1;
-  color: #000000;
+  color: #999999;
 }
 .alert-info h4 {
-  color: #000000;
+  color: #999999;
 }
 .alert-block {
   padding-top: 14px;
@@ -5749,7 +5749,7 @@ input[type="submit"].btn.btn-mini {
   margin-right: -1px;
 }
 .navbar-inverse .navbar-inner {
-  background-color: #001c35;
+  background-color: #5c7891;
   border-color: none;
 }
 .navbar-inverse .brand,
@@ -5789,7 +5789,7 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar-inverse .divider-vertical {
   border-left-color: #004685;
-  border-right-color: #000000;
+  border-right-color: #999999;
 }
 .navbar-inverse .nav li.dropdown.open > .dropdown-toggle,
 .navbar-inverse .nav li.dropdown.active > .dropdown-toggle,
@@ -5851,7 +5851,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-inverse .btn-navbar {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #00172b;
+  background-color: #546b7f;
   border-color: #00396c #00396c #00101f;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   *background-color: #00396c;
@@ -6461,11 +6461,11 @@ a.badge:focus {
 }
 .label-info,
 .badge-info {
-  background-color: #000000;
+  background-color: #999999;
 }
 .label-info[href],
 .badge-info[href] {
-  background-color: #000000;
+  background-color: #808080;
 }
 .label-inverse,
 .badge-inverse {
@@ -8612,7 +8612,7 @@ a.badge:focus {
   margin-top: 0px;
 }
 .graph.graph-days-on .day.day-on {
-  background-color: #000000;
+  background-color: #999999;
 }
 .graph.graph-days-on .day.day-off {
   background-color: #cccccc;
