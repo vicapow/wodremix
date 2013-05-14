@@ -4,7 +4,7 @@ var units = require('./../../../data/units')
   , _ = require('underscore')
 
 var TaskView = Backbone.View.extend({
-  tagName : 'tr'
+  className : 'task'
   , templateOpen : Templates['workout/editor/task/open']
   , templateClosed : Templates['workout/editor/task/closed']
   , events : {
@@ -134,10 +134,11 @@ var TaskView = Backbone.View.extend({
     this.$('.metrics-container').empty()
     this.model.metrics.each(function(metric){
       if(this.workout.get('type') === metric.get('name')) return
-      var locals = _.extend( 
-        { metric : metric.toJSON() }
-        , { units : units }
-      )
+      var locals = { 
+        metric : metric.toJSON()
+        , units : units
+        , abbr : unitAbbr
+      }
       this.$('.metrics-container')
         .append(Templates['workout/editor/task/metric'](locals))
     }, this)

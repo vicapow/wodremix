@@ -3,12 +3,11 @@ include ../layout
 //- include the nav mixin
 include ../includes/nav
 //- include the workout list item partial
-include ../workout/partials/workout-list
 include ../workout/partials/pr-list
 block body
   mixin nav('Stats')
-  .container.page-container
-    .row-fluid
+  .main-container
+    .main.wrapper.clearfix
       //- br
       //- #workout-days-graph
       //- script(type="text/javascript")
@@ -47,21 +46,40 @@ block body
       //-       .style('font-size', '10px')
       //-       .style('text-align', 'center')
       //-       .text('1')
-      h4 Recent Workouts
-      if(workouts.length)
-        mixin workout-list(workouts)
-        a.pull-right.btn.btn-primary(href="/wod/list") all
-      else
-        p No workouts logged yet. click the 'log' link above to log a workout.
-      br
-      br
-      h4 Recent PRs 
-      if(records.length)
-        mixin pr-list(records)
-        .pull-right 
-          a.btn.btn-primary(href="/wod/pr/list") all
-      else
-        p You haven't logged any workouts with PRs
-      .clear
-      br
-      br
+      article
+        header
+          h1 Recent Workouts
+        if(workouts.length)
+          each workout in workouts
+            a(href="/wod/" + workout.hash)
+              section.clearfix
+                if workout.date
+                  span.muted.pull-right
+                    i.icon.icon-calendar
+                    |  !{moment(workout.date).fromNow()}
+                h2 !{workout.label}
+                p !{workout.description}
+        else
+          p No workouts logged yet. Click the 'log' link above to log a workout.
+  //- .container.page-container
+  //-   .row-fluid
+  //-     br
+  //-     h4 Recent Workouts
+  //-     if(workouts.length)
+  //-       mixin workout-list(workouts)
+  //-       a.pull-right.btn.btn-primary(href="/wod/list") all
+  //-     else
+  //-       p No workouts logged yet. click the 'log' link above to log a workout.
+  //-     br
+  //-     br
+  //-     h4 Recent PRs 
+  //-     if(records.length)
+  //-       mixin pr-list(records)
+  //-       .pull-right 
+  //-         a.btn.btn-primary(href="/wod/pr/list") all
+  //-     else
+  //-       p You haven't logged any workouts with PRs
+  //-     .clear
+  //-     br
+  //-     br
+>>>>>>> lxe-ui

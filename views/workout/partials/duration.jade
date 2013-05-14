@@ -1,9 +1,15 @@
 mixin duration(minutes, seconds)
   .duration
-    select.btn.btn-primary(name="minutes")
-      for num in _.range(0, 60)
-        option(value=num, selected = (minutes === num)) !{num} minutes
+    .select.btn
+      i.icon-sort.pull-right
+      .select-container
+        select(name="minutes")
+          for num in _.range(0, 60)
+            option(value=num, selected = (minutes === num)) !{num} minutes
     .clear
-    select.btn.btn-primary.no-border-top(name="seconds")
-      for num in _.range(0, 60)
-        option(value=num, selected = (seconds === num))!{num} seconds
+    .select.btn.remove-border-top
+      i.icon-sort.pull-right
+      .select-container
+        select(name="seconds")
+          for num in _.range(0, 60)
+            option(value=num, selected = (seconds === num))!{num} seconds

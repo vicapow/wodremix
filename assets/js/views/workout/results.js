@@ -1,4 +1,5 @@
 var units = require('./../../../data/units.js')
+  , abbr = require('./../../../data/units-abbr.js')
   , _ = require('underscore')
 
 var ResultsView = Backbone.View.extend({
@@ -128,6 +129,7 @@ var ResultsView = Backbone.View.extend({
     this.$('.tasks').html(template({
       sets : sets
       , units : units[type]
+      , abbr : abbr
     }))
     this.updateSelectReps()
     if(!this.$el.is(':visible') && this.workout.tasks.length)  this.$el.show()
