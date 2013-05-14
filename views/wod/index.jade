@@ -4,8 +4,10 @@ include ../workout/partials/task
 
 mixin result(workout)
   if(workout.type === 'weight')
-    for set in workout.result.sets
-      span.badge.badge-info !{set.metrics.reps.value} @ !{set.metrics.weight.value} !{unitAbbr(set.metrics.weight.units)}
+    for set, i in workout.result.sets
+      span.badge.badge-info !{set.metrics.reps.value}x !{set.metrics.weight.value} !{unitAbbr(set.metrics.weight.units)}
+      if i !== workout.result.sets.length - 1
+        |  - 
   else if(workout.type === 'duration')
     - var d = workout.result.duration
     - var dur = moment.duration(d.value, d.units)

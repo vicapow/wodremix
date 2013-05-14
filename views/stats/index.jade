@@ -59,26 +59,17 @@ block body
                     |  !{moment(workout.date).fromNow()}
                 h2 !{workout.label}
                 p !{workout.description}
+          a.btn.btn-primary(href="/wod/list") all
         else
-          p No workouts logged yet. Click the 'log' link above to log a workout.
-  //- .container.page-container
-  //-   .row-fluid
-  //-     br
-  //-     h4 Recent Workouts
-  //-     if(workouts.length)
-  //-       mixin workout-list(workouts)
-  //-       a.pull-right.btn.btn-primary(href="/wod/list") all
-  //-     else
-  //-       p No workouts logged yet. click the 'log' link above to log a workout.
-  //-     br
-  //-     br
-  //-     h4 Recent PRs 
-  //-     if(records.length)
-  //-       mixin pr-list(records)
-  //-       .pull-right 
-  //-         a.btn.btn-primary(href="/wod/pr/list") all
-  //-     else
-  //-       p You haven't logged any workouts with PRs
-  //-     .clear
-  //-     br
-  //-     br
+          section
+            p No workouts logged yet. Click the 'log' link above to log your first workout.
+      article
+        header
+          h1 Recent PRs 
+        if(records.length)
+          mixin pr-list(records)
+          a.btn.btn-primary(href="/wod/pr/list") all
+        else
+          section
+            p You haven't logged any workouts with PRs
+        .clear

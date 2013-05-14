@@ -6,7 +6,8 @@ include ../../includes/nav
 include ../../workout/partials/pr-list
 block body
   mixin nav('stats')
-  .container.page-container
-    .row-fluid
-      h2 All PRs
-      mixin pr-list(records)
+  .main-container
+    .main.wrapper.clearfix
+      article
+        h1 All PRs
+        mixin pr-list(records)

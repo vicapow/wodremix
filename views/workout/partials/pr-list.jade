@@ -1,11 +1,7 @@
 include task
 mixin pr-list(records)
-  table.table.table-striped
-    tbody
-      for record in records
-        - record = record.value
-        tr
-          td
-            a(href="/movements/" + record.name.replace(/ /g, '-'))
-              div
-                mixin task(record)
+  for record in records
+    - record = record.value
+    a(href="/movements/" + record.name.replace(/ /g, '-'))
+      section
+        mixin task(record)

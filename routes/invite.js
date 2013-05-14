@@ -9,10 +9,11 @@ module.exports = function(app){
   
   app.get('/invite/accept/:code', access, function(req, res, next){
     var code = req.params.code
-    return res.render('invite')
     Invite.valid(code, function(err, valid){
       if(err) return next(err)
-      if(!valid) return res.redirect('/')
+      if(!valid) return res.render('invite', { 
+        error : 'Sorry! this invite code has already been used or is invalid'
+      })
       return res.render('invite')
     })
   })
@@ -27,17 +28,21 @@ module.exports = function(app){
     if(password.length < 6) 
       return done('password has to be at least 8 characters')
     if(password !== passwordAgain) return done('passwords do not match')
-    User.isUsernameTaken(username, function(err, taken){
+    Invite.valid(code, function(err, valid){
       if(err) return next(err)
-      if(taken) return done('That username is already taken')
-      var user = new User({
-        username : username
-      }).setPassword(password)
-      user.save(function(err){
+      if(!valid) return done("this invite code has already been used");
+      User.isUsernameTaken(username, function(err, taken){
         if(err) return next(err)
-        req.login(user, function(err){
+        if(taken) return done('That username is already taken')
+        var user = new User({
+          username : username
+        }).setPassword(password)
+        user.save(function(err){
           if(err) return next(err)
-          return res.redirect('/')
+          req.login(user, function(err){
+            if(err) return next(err)
+            return res.redirect('/')
+          })
         })
       })
     })

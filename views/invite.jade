@@ -4,20 +4,25 @@ include layout
 include includes/nav
 //- include the workout list item partial
 include workout/partials/pr-list
-block body
-  .container
-    .row-fluid
-      p To get started, just pick a username and password.
-      if(locals.error)
-        div.alert.alert-danger !{error}
-      .span12
-        form(method="post", enctype="application/x-www-form-urlencoded")
-          label Username
-          input.input-block-level(type="text", name="username")
-          label Password
-          input.input-block-level(type="password", name="password")
-          label Password (again)
-          input.input-block-level(type="password", name="password-again")
-          input.btn.btn-primary.btn-block(type="submit", value="Sign up")
 
-      
+block blody
+  .main.wrapper.clearfix
+    article
+      header
+        h1 Welcome
+      section.clearfix
+        p To sign up, pick a username and password.
+        if(locals.error)
+          div.alert.alert-danger !{error}
+        form.login(method="post", enctype="application/x-www-form-urlencoded")
+          label Username
+          div
+            input(type="text", name="username")
+          label Password
+          div
+            input(type="password", name="password")
+          label Password (again)
+          div
+            input(type="password", name="password-again")
+          br
+          input.btn.btn-primary.btn-block(type="submit", value="Sign up!")

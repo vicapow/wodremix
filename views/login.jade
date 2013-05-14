@@ -1,19 +1,19 @@
 include layout
 block blody
-  .main-container
-    .main.wrapper.clearfix
-      article
-        header
-          h1 WOD ReMIX
-        section.clearfix
-          form.login(method="post", action="/login", enctype="application/x-www-form-urlencoded")
-            label Username
-            div
-              input(type="text", name="username")
-            label Password
-            div
-              input(type="password", name="password")
-            br
-            input.btn.btn-primary.btn-block(type="submit", value="Login")
-          label build by 
-            a(href="http://twitter.com/vicapow") @vicapow
+  .main.wrapper.clearfix
+    article
+      header
+        h1 WOD ReMIX
+      section.clearfix
+        form.login(method="post", action="/login", enctype="application/x-www-form-urlencoded")
+          label Username
+          div
+            input(type="text", name="username")
+          label Password
+          div
+            input(type="password", name="password")
+          br
+          input.btn.btn-primary.btn-block(type="submit", value="Login")
+        br
+        label build by 
+          a(href="http://twitter.com/vicapow") @vicapow
