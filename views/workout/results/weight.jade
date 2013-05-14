@@ -1,21 +1,27 @@
 mixin single-weight(set, units)
   - reps = set.metrics.reps
   - weight = set.metrics.weight
-  span !{set.label}
-  .input-append.pull-right
-    input.input-mini(name="weight", data-order = set.order, type="number", min="1", max="1000", value=weight.value)
-    .btn-group
-      select.units.btn.btn-primary(name="units", data-metric="weight", data-order = set.order)
-        for unit in units
-          option(value=unit, selected = unit === weight.units ? 'select' : null) !{unit}
-  .clear
-  .pull-right
-    label(for="reps") reps
-    input.reps.input-mini(data-order = set.order, name="reps", type="number", min="0", max=reps.value, value=reps.value)
+  h2 !{set.label}
+  .metrics
+    .metrics-container
+      .metric
+        label(for="reps") reps
+        div
+          input.reps.input-mini(data-order = set.order, name="reps", type="number", min="0", max=reps.value, value=reps.value)
+      .metric
+        label(for="weight") weight
+        div
+          input.metric-value.pull-left(name="weight", type="number", min="1", max="1000", value=weight.value, data-order = set.order)
+          .select.btn
+            i.icon-sort.pull-right
+            .select-container
+              select.units(data-metric="weight", name="units", data-order = set.order)
+                for unit in units
+                  option(value="weight", selected = unit === weight.units ? 'select' : null) !{abbr(unit)}
+    .clear
 
-table.results.table.table-bordered.table-striped.table-condensed
-  tbody
-    for set in sets
-      tr
-        td.set
-          mixin single-weight(set, units)
+.results
+  for set in sets
+    section
+      .set
+        mixin single-weight(set, units)

@@ -21,6 +21,7 @@ div, a, p, header, article, section {
 form.login{
   input{
     width: 100%;
+    box-sizing: border-box;
   }
 }
 
@@ -32,10 +33,6 @@ select{
   width: 100%;
   overflow: hidden;
   line-height: 41px;
-}
-
-table.table{
-  width: 100%;
 }
 
 .select-container{
@@ -51,12 +48,12 @@ table.table{
     margin-right: 4px;
   }
   select{
-    margin-left: 12px;
+    margin-left: 0px;
   }
 }
 
 input{
-  line-height: 32px;
+  line-height: 34px;
   font-size: 18px;
   border-radius: 0;
   border: 1px solid #999;
@@ -79,23 +76,38 @@ a {
     float: left;
     .btn{
       width: 100%;
+      &:first-child{
+        border-right: none;
+      }
     }
   }
 }
 
 .workout-editor{
-  table {
-    tr {
-      margin: 20px;
-      td{
-        span {
-          line-height: 40px;
-        }
+  .open-metric{
+    box-shadow: 0px 0px 20px #333;
+    -webkit-box-shadow: 0px 0px 20px #333;
+    position: relative; // NOTE: to force absolute z-index
+    z-index: 100;
+  }
+  
+  .movements, .results, .task{
+    width: 100%;
+  }
+  .task{
+    > .btn{
+      border-top: none;
+    }
+    &:first-child{
+      > .btn{
+        border-top: 1px solid #bbb;
       }
     }
-    &.movements{
-      box-shadow: 0px 0px 1px #000;
-    }
+  }
+  select.movement{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: inherit;
   }
   .metrics {
     width: 100%;
@@ -105,6 +117,15 @@ a {
         float:left;
       }
     }
+  }
+}
+
+table {
+  &.table-bordered {
+    border: 1px solid #333;
+  }
+  &.table-striped{
+    // TODO
   }
 }
 
@@ -229,6 +250,12 @@ section:not(:first-child) {
   padding: 10px;
 }
 
+a{
+  &.movement, &.record, &.remove, &.workout {
+    color: inherit;
+  }
+}
+
 
 h2 {
   padding: 0;
@@ -250,12 +277,19 @@ p {
   float: right;
 }
 
-section > .pull-right {
-  padding: 0;
+.muted, a.muted {
   color: #888;
   font-size: 14px;
 }
 
-.muted {
+.clear{
+  clear: both;
+}
 
+.remove-border-top{
+  border-top: none;
+}
+
+i{
+  pointer-events: none;
 }

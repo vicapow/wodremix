@@ -4,11 +4,22 @@ include ../layout
 include ../includes/nav
 block body
   mixin nav('stats')
-  .container.page-container
-    .row-fluid
-      h2 All Logged Workouts
-      if(!workouts.length)
-        p You have not logged any works yet.
-      else
-        mixin workout-list(workouts)
-        br
+  .main-container
+    .main.wrapper.clearfix
+      article
+        header
+          h1 Recent Workouts
+        if(!workouts.length)
+          section
+            p You have not logged any works yet.
+        else
+          if(workouts.length)
+            each workout in workouts
+              a(href="/wod/" + workout.hash)
+                section.clearfix
+                  if workout.date
+                    span.muted.pull-right
+                      i.icon.icon-calendar
+                      |  !{moment(workout.date).fromNow()}
+                  h2 !{workout.label}
+                  p !{workout.description}

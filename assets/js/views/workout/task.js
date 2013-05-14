@@ -4,7 +4,7 @@ var units = require('./../../../data/units')
   , _ = require('underscore')
 
 var TaskView = Backbone.View.extend({
-  tagName : 'tr'
+  className : 'task'
   , templateOpen : Templates['workout/editor/task/open']
   , templateClosed : Templates['workout/editor/task/closed']
   , events : {

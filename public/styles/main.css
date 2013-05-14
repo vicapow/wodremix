@@ -1276,6 +1276,7 @@ section {
 }
 form.login input {
   width: 100%;
+  box-sizing: border-box;
 }
 select {
   -webkit-appearance: none;
@@ -1285,9 +1286,6 @@ select {
   width: 100%;
   overflow: hidden;
   line-height: 41px;
-}
-table.table {
-  width: 100%;
 }
 .select-container {
   overflow: hidden;
@@ -1302,10 +1300,10 @@ table.table {
   margin-right: 4px;
 }
 .select.btn select {
-  margin-left: 12px;
+  margin-left: 0px;
 }
 input {
-  line-height: 32px;
+  line-height: 34px;
   font-size: 18px;
   border-radius: 0;
   border: 1px solid #999;
@@ -1326,14 +1324,30 @@ a {
 .buttons .button-container .btn {
   width: 100%;
 }
-.workout-editor table tr {
-  margin: 20px;
+.buttons .button-container .btn:first-child {
+  border-right: none;
 }
-.workout-editor table tr td span {
-  line-height: 40px;
+.workout-editor .open-metric {
+  box-shadow: 0px 0px 20px #333;
+  -webkit-box-shadow: 0px 0px 20px #333;
+  position: relative;
+  z-index: 100;
 }
-.workout-editor table.movements {
-  box-shadow: 0px 0px 1px #000;
+.workout-editor .movements,
+.workout-editor .results,
+.workout-editor .task {
+  width: 100%;
+}
+.workout-editor .task > .btn {
+  border-top: none;
+}
+.workout-editor .task:first-child > .btn {
+  border-top: 1px solid #bbb;
+}
+.workout-editor select.movement {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: inherit;
 }
 .workout-editor .metrics {
   width: 100%;
@@ -1341,6 +1355,9 @@ a {
 .workout-editor .metrics .metrics-container .metric {
   width: 50%;
   float: left;
+}
+table.table-bordered {
+  border: 1px solid #333;
 }
 nav#topnav > ul {
   top: 0;
@@ -1467,6 +1484,12 @@ section:not(:first-child) {
   border-top: #fdfdfd 1px solid;
   padding: 10px;
 }
+a.movement,
+a.record,
+a.remove,
+a.workout {
+  color: inherit;
+}
 h2 {
   padding: 0;
   margin: 0;
@@ -1484,8 +1507,17 @@ p {
 .pull-right {
   float: right;
 }
-section > .pull-right {
-  padding: 0;
+.muted,
+a.muted {
   color: #888;
   font-size: 14px;
+}
+.clear {
+  clear: both;
+}
+.remove-border-top {
+  border-top: none;
+}
+i {
+  pointer-events: none;
 }

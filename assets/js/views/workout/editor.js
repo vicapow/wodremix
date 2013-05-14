@@ -47,7 +47,7 @@ var WorkoutEditor = Backbone.View.extend({
       return view.model.get('order')
     })
     _.each(this.taskViews, function(view){
-      this.$('table.movements tbody').append(view.el)
+      this.$('.movements').append(view.el)
     }, this)
   }
   , onRemove : function(task){
@@ -70,7 +70,7 @@ var WorkoutEditor = Backbone.View.extend({
   , onTaskAdded : function(task){
     var view = new TaskView({model : task, workout : this.workout})
     this.taskViews.push(view)
-    this.$('table.movements tbody').append(view.el)
+    this.$('.movements').append(view.el)
     this.workout.tasks.each(function(model){
       if(model !== view.model) model.set('open', false)
     });

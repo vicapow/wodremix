@@ -19,28 +19,29 @@ mixin result(workout)
   else
     !{JSON.stringify(workout.type)}
   if(workout.date)
-    span.pull-right !{moment(workout.date).fromNow()} &nbsp;
+    span.muted.pull-right 
+      i.icon.icon-calendar
+      |  !{moment(workout.date).fromNow()} &nbsp;
 
 block body
   mixin nav('wod')
-  .container.page-container
-    .row-fluid
-      h3 WOD: !{wodtype.label} of
-      table.table.table-striped.movements
-        tbody
-          for task in workout.tasks
-            tr
-              td
-                a(href="/movements/" + task.name.replace(/ /g, '-'))
-                  div
-                    mixin task(task)
-      
-      h3 Recent Results
-      table.table.table-striped
-        tbody
-          for workout in workouts
-            tr
-              td
-                mixin result(workout)
-                a.badge.badge-important.pull-right.prompt-confirm(href="/wod/result/remove/" + workout.id, data-message = "are you sure you want to delete this workout?")
-                  .remove remove
+  .main-container
+    .main.wrapper.clearfix
+      article
+        header
+          h1 !{wodtype.label} of
+        for task in workout.tasks
+          a.movement(href="/movements/" + task.name.replace(/ /g, '-'))
+            section.clearfix
+              mixin task(task)
+      article
+        header
+          h1 Recent Results
+        for workout in workouts
+          section.clearfix
+            mixin result(workout)
+            .clearfix
+            a.remove.pull-right.prompt-confirm.muted(href="/wod/result/remove/" + workout.id, data-message = "are you sure you want to delete this result?")
+              i.icon.icon-trash
+              |  remove
+            .clear
