@@ -30,24 +30,25 @@ form.login{
     box-sizing: border-box;
   }
 }
-section{
+section, .select{
   position: relative;
   &.clickable{
     padding-right: 40px;
   }
-  .right-icon-container{
-    font-size: 30px;
+}
+
+.right-icon-container{
+  font-size: 30px;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  width: 0px;
+  height: 0px;
+  > *{
     position: absolute;
-    right: 30px;
-    top: 50%;
-    width: 0px;
-    height: 0px;
-    > *{
-      position: absolute;
-      top: -15px;
-      line-height: 30px;
-      color: #ccc;
-    }
+    top: -15px;
+    line-height: 30px;
+    color: #ccc;
   }
 }
 
@@ -68,13 +69,12 @@ select{
 
 .select.btn{
   padding: 0;
-  i{
-    font-size: 30px;
-    line-height: 41px;
-    margin-right: 4px;
-  }
+  overflow: hidden;
   select{
     margin-left: 0px;
+  }
+  i {
+    color: black;
   }
 }
 

@@ -1,14 +1,16 @@
 mixin duration(minutes, seconds)
   .duration
-    .select.btn
-      i.icon-sort.pull-right
+    .select.btn.clickable
+      .right-icon-container
+        i.icon-sort
       .select-container
         select(name="minutes")
           for num in _.range(0, 60)
             option(value=num, selected = (minutes === num)) !{num} minutes
     .clear
-    .select.btn.remove-border-top
-      i.icon-sort.pull-right
+    .select.btn.clickable.remove-border-top
+      .right-icon-container
+        i.icon-sort
       .select-container
         select(name="seconds")
           for num in _.range(0, 60)

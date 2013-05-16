@@ -1533,13 +1533,15 @@ form.login input {
   width: 100%;
   box-sizing: border-box;
 }
-section {
+section,
+.select {
   position: relative;
 }
-section.clickable {
+section.clickable,
+.select.clickable {
   padding-right: 40px;
 }
-section .right-icon-container {
+.right-icon-container {
   font-size: 30px;
   position: absolute;
   right: 30px;
@@ -1547,7 +1549,7 @@ section .right-icon-container {
   width: 0px;
   height: 0px;
 }
-section .right-icon-container > * {
+.right-icon-container > * {
   position: absolute;
   top: -15px;
   line-height: 30px;
@@ -1568,14 +1570,13 @@ select {
 }
 .select.btn {
   padding: 0;
-}
-.select.btn i {
-  font-size: 30px;
-  line-height: 41px;
-  margin-right: 4px;
+  overflow: hidden;
 }
 .select.btn select {
   margin-left: 0px;
+}
+.select.btn i {
+  color: black;
 }
 input {
   line-height: 34px;

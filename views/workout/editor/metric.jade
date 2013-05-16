@@ -11,8 +11,9 @@ if(type === 'duration')
   mixin duration(minutes, seconds)
 else if(type === 'rounds')
   label(for="rounds") rounds
-  .select.btn
-    i.icon-sort.pull-right
+  .select.btn.clickable
+    .right-icon-container
+      i.icon-sort
     .select-container
       select
         for num in _.range(1,100)
@@ -23,8 +24,9 @@ else if(type === 'rounds')
               | !{num} round
 else if(type === 'reps')
   label(for="reps") rounds
-  .select.btn
-    i.icon-sort.pull-right
+  .select.btn.clickable
+    .right-icon-container
+      i.icon-sort
     .select-container
       select.reps
         for num in _.range(1,201)

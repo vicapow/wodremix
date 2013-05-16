@@ -1,6 +1,7 @@
 .rounds
-  .select.btn
-    i.icon-sort.pull-right
+  .select.btn.clickable
+    .right-icon-container
+      i.icon-sort
     .select-container
       select(name="rounds")
         for num in _.range(0, 59)
@@ -10,7 +11,8 @@
             else
               !{num} rounds
   .clear
-  .select.btn
-    i.icon-sort.pull-right
+  .select.btn.clickable
+    .right-icon-container
+      i.icon-sort
     .select-container
       select(name="reps")

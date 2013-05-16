@@ -4,8 +4,9 @@ article
   section
     br
     label(for="type") workout type
-    .select.btn
-      i.icon-sort.pull-right
+    .select.btn.clickable
+      .right-icon-container
+        i.icon-sort
       .select-container
         select.type(name="type")
           for type, key in wodtypes
@@ -13,8 +14,9 @@ article
     br
 
     label(for="date") date
-    .select.btn
-      i.icon-sort.pull-right
+    .select.btn.clickable
+      .right-icon-container
+        i.icon-sort
       .select-container
         select.date(name="date")
           option(value="today") Today

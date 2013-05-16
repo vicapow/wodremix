@@ -2,16 +2,20 @@
 .metric(class=metric.name)
   label(for=metric.name) !{metric.name}
   if(name === 'direction')
-    .select-container
-      select.input-small.metric-value(name=metric.name)
-        option(value="forward") forward
-        option(value="backward") backward
+    .select.btn.clickable
+      .right-icon-container
+        i.icon-sort
+      .select-container
+        select.input-small.metric-value(name=metric.name)
+          option(value="forward") forward
+          option(value="backward") backward
   else
     .input-append
       input.metric-value.pull-left(name=metric.name, type="number", min="1", max="1000", value=metric.value)
       if(metric.units)
-        .select.btn
-          i.icon-sort.pull-right
+        .select.btn.clickable
+          .right-icon-container
+            i.icon-sort
           .select-container
             select.units.metric-units(data-metric=metric.name)
               for unit in units[metric.name]
