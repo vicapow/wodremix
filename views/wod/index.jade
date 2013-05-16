@@ -1,4 +1,3 @@
-include ../layout
 include ../includes/nav
 include ../workout/partials/task
 
@@ -27,6 +26,7 @@ mixin result(workout)
       |  !{moment(workout.date).fromNow()} &nbsp;
     .clear
 
+extends ../layout
 block body
   mixin nav('wod')
   .main-container

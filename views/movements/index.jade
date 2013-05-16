@@ -1,9 +1,9 @@
-//- include the layout
-include ../layout
 //- include the nav mixin
 include ../includes/nav
 //- include the movement list item partial
 include ./partials/list
+//- include the layout
+extends ../layout
 block body
   mixin nav('movements')
   .container.page-container
