@@ -17,7 +17,7 @@ mixin single-weight(set, units)
             .select-container
               select.units(data-metric="weight", name="units", data-order = set.order)
                 for unit in units
-                  option(value="weight", selected = unit === weight.units ? 'select' : null) !{abbr(unit)}
+                  option(value=unit, selected = unit === weight.units ? 'select' : null) !{abbr(unit)}
     .clear
 
 .results

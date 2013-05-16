@@ -22,9 +22,18 @@ block body
         if(records.length)
           for record in records
             - record = record.value
-            a.record(href="/wod/" + record.hash)
-              section.clearfix
-                mixin task(record)
+            if(record.type == 'weight')
+            section.clearfix
+              a.record(href="/wod/" + record.hash)
+                div
+                  .right-icon-container
+                    i.icon-chevron-right
+                  h2 !{record.metrics.reps.value} rep at !{record.metrics.weight.value} !{unitAbbr(record.metrics.weight.units)}
+                  if record.date
+                    span.muted.pull-left
+                      i.icon.icon-calendar
+                      |  !{moment(record.date).fromNow()}
+                    .clear
         else
           section.clearfix.muted
             p No 
@@ -35,14 +44,18 @@ block body
           h1 Workouts
         if(workouts.length)
           each workout in workouts
-            a.workout(href="/wod/" + workout.hash)
-              section.clearfix
-                if workout.date
-                  span.muted.pull-right
-                    i.icon.icon-calendar
-                    |  !{moment(workout.date).fromNow()}
-                span !{workout.label}
-                p !{workout.description}
+            section.clearfix
+              a.workout(href="/wod/" + workout.hash)
+                div
+                  .right-icon-container
+                    i.icon-chevron-right
+                  span !{workout.label}
+                  p !{workout.description}
+                  if workout.date
+                    span.muted.pull-left
+                      i.icon.icon-calendar
+                      |  !{moment(workout.date).fromNow()}
+                    .clear
         else
           section.clearfix
             p No !{movement.label} workouts logged yet.

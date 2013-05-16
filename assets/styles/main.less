@@ -30,6 +30,26 @@ form.login{
     box-sizing: border-box;
   }
 }
+section{
+  position: relative;
+  &.clickable{
+    padding-right: 40px;
+  }
+  .right-icon-container{
+    font-size: 30px;
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    width: 0px;
+    height: 0px;
+    > *{
+      position: absolute;
+      top: -15px;
+      line-height: 30px;
+      color: #ccc;
+    }
+  }
+}
 
 select{
   -webkit-appearance: none;
@@ -72,7 +92,7 @@ input{
 }
 
 a {
-  //text-decoration: none;
+  text-decoration: none;
 }
 
 .buttons{
@@ -134,7 +154,6 @@ table {
     // TODO
   }
 }
-
 nav#topnav > ul {
   top: 0;
   border-bottom: #999 1px solid;
@@ -151,6 +170,7 @@ nav > ul {
   padding: 0;
   margin: 0;
   position: fixed;
+  z-index: 1000;
   width: 100%;
   background: #dedede;
   box-shadow: inset 0 -5px 7px rgba(0, 0, 0, 0.05);
@@ -251,7 +271,7 @@ section {
   padding: 10px;
 }
 
-section:not(:first-child) {
+section {
   border-top: #fdfdfd 1px solid;
   padding: 10px;
 }
@@ -266,7 +286,7 @@ a{
 h2 {
   padding: 0;
   margin: 0;
-  margin-bottom: 10px;
+  //margin-bottom: 10px;
   color: #444;
   font-weight: normal;
 }

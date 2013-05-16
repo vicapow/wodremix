@@ -17,3 +17,9 @@ mixin task(task)
     !{task.label}
   for name in metricNames
     mixin metricBadge(task.metrics[name], true)
+  //if workout.date
+  .clear
+  if(task.date)
+    span.muted.pull-right
+      i.icon.icon-calendar  !{moment(task.date).fromNow()}
+    .clear

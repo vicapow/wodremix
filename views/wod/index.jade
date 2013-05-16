@@ -21,9 +21,11 @@ mixin result(workout)
   else
     !{JSON.stringify(workout.type)}
   if(workout.date)
-    span.muted.pull-right 
+    .clear
+    span.muted.pull-left 
       i.icon.icon-calendar
       |  !{moment(workout.date).fromNow()} &nbsp;
+    .clear
 
 block body
   mixin nav('wod')
@@ -34,16 +36,17 @@ block body
           h1 !{wodtype.label} of
         for task in workout.tasks
           a.movement(href="/movements/" + task.name.replace(/ /g, '-'))
-            section.clearfix
+            section.clearfix.clickable
+              .right-icon-container
+                i.icon-chevron-right
               mixin task(task)
       article
         header
           h1 Recent Results
         for workout in workouts
-          section.clearfix
+          section.clearfix.clickable
+            .right-icon-container
+              a.remove.prompt-confirm(href="/wod/result/remove/" + workout.id, data-message = "are you sure you want to delete this result?")
+                i.icon-trash
             mixin result(workout)
-            .clearfix
-            a.remove.pull-right.prompt-confirm.muted(href="/wod/result/remove/" + workout.id, data-message = "are you sure you want to delete this result?")
-              i.icon.icon-trash
-              |  remove
             .clear

@@ -9,7 +9,10 @@ module.exports = function(app){
     .limit(5).exec(function(err, workouts){
       if(err) return next(err)
       Workout.getRecords({creator: req.user._id}, function(err, records){
-        if(err) records = []
+        if(err) return next(err)
+        records = _.chain(records).sortBy(function(record){ 
+          return - record.value.date 
+        }).first(10).value()
         return res.render('stats/index', {
           workouts : workouts
           , records : records

@@ -15,4 +15,4 @@
           .select-container
             select.units.metric-units(data-metric=metric.name)
               for unit in units[metric.name]
-                option(value=metric.unit, selected = unit === metric.units ? 'select' : null) !{abbr(unit)}
+                option(value=unit, selected = unit === metric.units ? 'select' : null) !{abbr(unit)}

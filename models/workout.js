@@ -139,6 +139,7 @@ WorkoutSchema.statics.getRecords = function(opts, cb){
         , metrics : set.metrics
         , date : this.date
         , name : this.tasks[i].name
+        , type : this.type
       })
      }
    }

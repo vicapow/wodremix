@@ -52,13 +52,16 @@ block body
         if(workouts.length)
           each workout in workouts
             a(href="/wod/" + workout.hash)
-              section.clearfix
-                if workout.date
-                  span.muted.pull-right
-                    i.icon.icon-calendar
-                    |  !{moment(workout.date).fromNow()}
+              section.clearfix.clickable
+                .right-icon-container
+                  i.icon-chevron-right
                 h2 !{workout.label}
                 p !{workout.description}
+                if workout.date
+                  span.muted.pull-left
+                    i.icon.icon-calendar
+                    |  !{moment(workout.date).fromNow()}
+                  .clear
           a.btn.btn-primary(href="/wod/list") all
         else
           section
