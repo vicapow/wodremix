@@ -13,13 +13,22 @@ var express = require('express')
 
 mongoose.connect(config.db.path)
 
+if(config.log.requests){
+  app.use(function(req, res, next){
+    console.log('----------------------------------------'
+      + '----------------------------------------') // x80
+    console.log(req.method + ' ' + req.url)
+    next()
+  })
+}
+
 // auto compile and bundle the jade templates at `/js/templates.js`
 app.use(new rack.JadeAsset({
     url: '/js/templates.js'
     , dirname: './views'
 }))
 
-// template
+// TODO: get this out of app.js
 app.set('view engine', 'jade')
 app.set('views', __dirname + '/views')
 

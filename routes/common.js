@@ -1,9 +1,12 @@
 
 var useragent = require('express-useragent')
+var config = require('../config')
 
 function isMobile(req){
   var source = req.headers['user-agent']
-  return useragent.parse(source).isMobile || req.headers.host.indexOf('localhost') !== -1;
+  return useragent.parse(source).isMobile 
+    || req.headers.host.indexOf('localhost') !== -1 
+    && config.allow.mobile.on.localhost;
 }
 
 function continueIfMobile(yes){

@@ -3,17 +3,33 @@ var passport = require('passport')
   , common = require('./common')
   , ensure = common.ensure
 
-module.exports = function(app){
-  app.get('/', function(req, res, next){
-    if(!common.isMobile(req)) return res.render('not-supported')
-    if(!req.isAuthenticated()) return res.render('login')
-    else return res.redirect('/wod/log')
+module.exports = function(app) {
+  app.get('/', function(req, res, next) {
+    if(req.isAuthenticated()) return res.redirect('/stats')
+    if(common.isMobile(req)) return res.redirect('/login')
+    else res.render('not-supported')
   })
   
-  app.post('/login', passport.authenticate('local', {
-    successRedirect : '/wod/log'
-    , failureRedirect : '/'
-  }))
+  app.get('/login', ensure.mobile, ensure.not.auth, function(req, res, next){
+    return res.render('login')
+  })
+  
+   app.post('/login', function(req, res, next) {
+     passport.authenticate('local', function(err, user, info) {
+       if (err) return next(err)
+       if (!user) return res.render('login', { error : 'invalid username or password' })
+       req.logIn(user, function(err){
+         if(err) return next(err)
+         return res.redirect('/wod/log')
+       })
+     })(req, res, next)
+   });
+  
+  // app.post('/login', passport.authenticate('local', {
+  //   successRedirect : '/wod/log'
+  //   , failureRedirect : '/'
+  //   , failureFlash : true
+  // }))
   
   app.get('/logout', function(req, res, next){
     req.logout()

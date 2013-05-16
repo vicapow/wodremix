@@ -1799,3 +1799,6 @@ i {
 h2.not-supported {
   text-align: center;
 }
+.error-message {
+  color: red;
+}
