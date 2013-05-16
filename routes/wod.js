@@ -11,7 +11,10 @@ module.exports = function(app){
   app.get('/wod/pr/list', function(req, res, next){
     if(!req.isAuthenticated()) return res.redirect('/')
     Workout.getRecords({userid : req.user._id}, function(err, records){
-      if(err) records = []
+      if(err) return next(err)
+      records = _.sortBy(records, function(record){
+        return - record.value.date
+      })
       return res.render('wod/pr/list', { records : records })
     })
   })

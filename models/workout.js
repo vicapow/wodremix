@@ -123,13 +123,10 @@ WorkoutSchema.statics.getRecords = function(opts, cb){
      for(var i = 0; i < this.result.sets.length; i++){
        var set = this.result.sets[i]
        if(movement && this.tasks[i].name !== movement) return
-       var sort = Number(this.date)
-       if(!sort) sort = Number.MAX_VALUE
        if(set.metrics.reps.value === 0) continue
        emit({
-         sorting : sort
-         , name : this.tasks[i].name
-         , reps : set.metrics.reps.value 
+         name : this.tasks[i].name
+         , reps : set.metrics.reps.value
       }
       , { 
         __data__ : unitConvert(set.metrics.weight, 'pounds')
