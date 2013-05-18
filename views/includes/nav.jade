@@ -6,11 +6,11 @@ mixin nav(current)
         ul
           for link, label in menu
             li
-              a(href=link, class = current.toLowerCase() === label.toLowerCase() ? 'active' : '' )
+              a.btn(href=link, class = current.toLowerCase() === label.toLowerCase() ? 'active' : '' )
                 if(label.toLowerCase() === 'stats') 
                   i.icon.icon-tasks
                 else(label.toLowerCase() === 'log') 
                   i.icon.icon-time
                 |  !{label}
           li
-            a(href="/logout") logout
+            a.btn(href="/logout") logout
