@@ -5,7 +5,11 @@ extends layout
 block body
   .main-container
     .main.wrapper.clearfix
-      h2.not-supported Apologies, but WOD ReMix is currently only supported on mobile devices.
-      p Just go to 
-        i wodremix.com 
-        | from your iPhone or Android device
+      .not-supported 
+        article
+          h1 WOD ReMix is currently only supported on mobile devices
+          section
+            p Just go to 
+              i wodremix.com 
+              | from your iPhone (Android support coming soon)
+        img.not-supported(src="/img/preview1.png")

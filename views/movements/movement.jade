@@ -23,18 +23,18 @@ block body
           for record in records
             - record = record.value
             if(record.type == 'weight')
-            section.clearfix
-              a.record(href="/wod/" + record.hash, style="display:block")
-                div
-                  .right-icon-container
-                    i.icon-chevron-right
-                  h2 !{record.metrics.reps.value} rep at !{record.metrics.weight.value} !{unitAbbr(record.metrics.weight.units)}
-                  if record.date
-                    span.muted.pull-left
-                      i.icon.icon-calendar
-                      |  !{moment(record.date).fromNow()}
-                    .clear
-                .clear
+              section.clearfix
+                a.record(href="/wod/" + record.hash, style="display:block")
+                  div
+                    .right-icon-container
+                      i.icon-chevron-right
+                    h2 !{record.metrics.reps.value} rep at !{record.metrics.weight.value} !{unitAbbr(record.metrics.weight.units)}
+                    if record.date
+                      span.muted.pull-left
+                        i.icon.icon-calendar
+                        |  !{moment(record.date).fromNow()}
+                      .clear
+                  .clear
         else
           section.clearfix.muted
             p No 

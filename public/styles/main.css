@@ -1767,6 +1767,9 @@ a.remove,
 a.workout {
   color: inherit;
 }
+a.record {
+  display: block;
+}
 h2 {
   padding: 0;
   margin: 0;
@@ -1797,7 +1800,7 @@ a.muted {
 i {
   pointer-events: none;
 }
-h2.not-supported {
+.not-supported {
   text-align: center;
 }
 .error-message {
